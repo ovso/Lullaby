@@ -50,7 +50,7 @@ data class PostAuthor(
  */
 object PostRepo {
     fun getPosts(): List<Post> = posts
-    fun getFeaturedPost(): Post = posts.random()
+    fun getFeaturedPost(): Post = topPost
 }
 
 /**
@@ -135,6 +135,21 @@ private val post5 = Post(
     imageId = R.drawable.post_5,
     imageThumbId = R.drawable.post_5_thumb,
     tags = setOf("Kotlin", "Collections", "Sequences")
+)
+
+private val topPost = Post(
+    id = 100L,
+    title = "A Little Thing about Android Module Paths",
+    subtitle = "How to configure your module paths, instead of using Gradle’s default.",
+    url = "https://medium.com/androiddevelopers/gradle-path-configuration-dc523f0ed25c",
+    metadata = Metadata(
+        author = pietro,
+        date = "August 02",
+        readTimeMinutes = 1
+    ),
+    imageId = R.drawable.white_noise_baby_sleep,
+    imageThumbId = R.drawable.white_noise_baby_sleep,
+    tags = setOf("Modularization", "Gradle")
 )
 
 private val posts = listOf(

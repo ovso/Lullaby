@@ -144,7 +144,8 @@ fun FeaturedPost(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .heightIn(min = 180.dp)
+//                    .heightIn(min = 180.dp)
+                    .height(100.dp)
                     .fillMaxWidth()
             )
             Spacer(Modifier.height(16.dp))
