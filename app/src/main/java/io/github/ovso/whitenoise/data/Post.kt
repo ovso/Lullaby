@@ -50,7 +50,6 @@ data class PostAuthor(
  */
 object PostRepo {
     fun getPosts(): List<Post> = posts
-    fun getFeaturedPost(): Post = topPost
 }
 
 /**

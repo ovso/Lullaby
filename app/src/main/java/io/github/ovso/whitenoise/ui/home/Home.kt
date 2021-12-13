@@ -50,7 +50,6 @@ import java.util.*
 
 @Composable
 fun Home() {
-    val featured = remember { PostRepo.getFeaturedPost() }
     val posts = remember { PostRepo.getPosts() }
     WhiteNoiseTheme {
         Scaffold(
@@ -192,17 +191,6 @@ fun PostItem(
             PostMetadata(post)
         }
     )
-}
-
-@Preview("Post Item")
-@Composable
-private fun PostItemPreview() {
-    val post = remember { PostRepo.getFeaturedPost() }
-    WhiteNoiseTheme {
-        Surface {
-            PostItem(post = post)
-        }
-    }
 }
 
 @Preview("Featured Post")
