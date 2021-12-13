@@ -19,28 +19,15 @@ package io.github.ovso.whitenoise.ui.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.ListItem
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
-import androidx.compose.material.primarySurface
+import androidx.compose.material.icons.rounded.BabyChangingStation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -59,7 +46,7 @@ import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.Post
 import io.github.ovso.whitenoise.data.PostRepo
 import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
-import java.util.Locale
+import java.util.*
 
 @Composable
 fun Home() {
@@ -71,16 +58,9 @@ fun Home() {
         ) { innerPadding ->
             LazyColumn(contentPadding = innerPadding) {
                 item {
-                    Header(stringResource(R.string.top))
-                }
-                item {
                     FeaturedPost(
-                        post = featured,
                         modifier = Modifier.padding(16.dp)
                     )
-                }
-                item {
-                    Header(stringResource(R.string.popular))
                 }
                 items(posts) { post ->
                     PostItem(post = post)
@@ -96,13 +76,15 @@ private fun AppBar() {
     TopAppBar(
         navigationIcon = {
             Icon(
-                imageVector = Icons.Rounded.PlayArrow,
+                imageVector = Icons.Rounded.BabyChangingStation,
                 contentDescription = null,
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
         },
         title = {
-            Text(text = stringResource(R.string.app_title))
+            Text(
+                text = stringResource(R.string.app_title)
+            )
         },
         backgroundColor = MaterialTheme.colors.primarySurface
     )
@@ -130,39 +112,25 @@ fun Header(
 
 @Composable
 fun FeaturedPost(
-    post: Post,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(8.dp)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { /* onClick */ }
         ) {
             Image(
-                painter = painterResource(post.imageId),
+                painter = painterResource(R.drawable.white_noise_baby_sleep),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-//                    .heightIn(min = 180.dp)
                     .height(100.dp)
                     .fillMaxWidth()
             )
-            Spacer(Modifier.height(16.dp))
-
-            val padding = Modifier.padding(horizontal = 16.dp)
-            Text(
-                text = post.title,
-                style = MaterialTheme.typography.h6,
-                modifier = padding
-            )
-            Text(
-                text = post.metadata.author.name,
-                style = MaterialTheme.typography.body2,
-                modifier = padding
-            )
-            PostMetadata(post, padding)
-            Spacer(Modifier.height(16.dp))
         }
     }
 }
@@ -240,18 +208,16 @@ private fun PostItemPreview() {
 @Preview("Featured Post")
 @Composable
 private fun FeaturedPostPreview() {
-    val post = remember { PostRepo.getFeaturedPost() }
     WhiteNoiseTheme {
-        FeaturedPost(post = post)
+        FeaturedPost()
     }
 }
 
 @Preview("Featured Post • Dark")
 @Composable
 private fun FeaturedPostDarkPreview() {
-    val post = remember { PostRepo.getFeaturedPost() }
     WhiteNoiseTheme(darkTheme = true) {
-        FeaturedPost(post = post)
+        FeaturedPost()
     }
 }
 
