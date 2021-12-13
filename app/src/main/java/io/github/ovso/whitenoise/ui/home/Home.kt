@@ -39,7 +39,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -96,7 +96,7 @@ private fun AppBar() {
     TopAppBar(
         navigationIcon = {
             Icon(
-                imageVector = Icons.Rounded.Palette,
+                imageVector = Icons.Rounded.PlayArrow,
                 contentDescription = null,
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
@@ -258,4 +258,10 @@ private fun FeaturedPostDarkPreview() {
 @Composable
 private fun HomePreview() {
     Home()
+}
+
+@Preview("AppBar")
+@Composable
+private fun AppBarPreview() {
+    AppBar()
 }
