@@ -58,14 +58,14 @@ import androidx.compose.ui.unit.dp
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.Post
 import io.github.ovso.whitenoise.data.PostRepo
-import io.github.ovso.whitenoise.ui.theme.JetnewsTheme
+import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
 import java.util.Locale
 
 @Composable
 fun Home() {
     val featured = remember { PostRepo.getFeaturedPost() }
     val posts = remember { PostRepo.getPosts() }
-    JetnewsTheme {
+    WhiteNoiseTheme {
         Scaffold(
             topBar = { AppBar() }
         ) { innerPadding ->
@@ -229,7 +229,7 @@ fun PostItem(
 @Composable
 private fun PostItemPreview() {
     val post = remember { PostRepo.getFeaturedPost() }
-    JetnewsTheme {
+    WhiteNoiseTheme {
         Surface {
             PostItem(post = post)
         }
@@ -240,7 +240,7 @@ private fun PostItemPreview() {
 @Composable
 private fun FeaturedPostPreview() {
     val post = remember { PostRepo.getFeaturedPost() }
-    JetnewsTheme {
+    WhiteNoiseTheme {
         FeaturedPost(post = post)
     }
 }
@@ -249,7 +249,7 @@ private fun FeaturedPostPreview() {
 @Composable
 private fun FeaturedPostDarkPreview() {
     val post = remember { PostRepo.getFeaturedPost() }
-    JetnewsTheme(darkTheme = true) {
+    WhiteNoiseTheme(darkTheme = true) {
         FeaturedPost(post = post)
     }
 }
