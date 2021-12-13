@@ -193,22 +193,6 @@ fun PostItem(
     )
 }
 
-@Preview("Featured Post")
-@Composable
-private fun FeaturedPostPreview() {
-    WhiteNoiseTheme {
-        Header()
-    }
-}
-
-@Preview("Featured Post • Dark")
-@Composable
-private fun FeaturedPostDarkPreview() {
-    WhiteNoiseTheme(darkTheme = true) {
-        Header()
-    }
-}
-
 @Preview("Home")
 @Composable
 private fun HomePreview() {
