@@ -58,7 +58,7 @@ fun Home() {
         ) { innerPadding ->
             LazyColumn(contentPadding = innerPadding) {
                 item {
-                    FeaturedPost(
+                    Header(
                         modifier = Modifier.padding(16.dp)
                     )
                 }
@@ -111,7 +111,7 @@ fun Header(
 }
 
 @Composable
-fun FeaturedPost(
+fun Header(
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -209,7 +209,7 @@ private fun PostItemPreview() {
 @Composable
 private fun FeaturedPostPreview() {
     WhiteNoiseTheme {
-        FeaturedPost()
+        Header()
     }
 }
 
@@ -217,7 +217,7 @@ private fun FeaturedPostPreview() {
 @Composable
 private fun FeaturedPostDarkPreview() {
     WhiteNoiseTheme(darkTheme = true) {
-        FeaturedPost()
+        Header()
     }
 }
 
