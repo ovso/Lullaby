@@ -21,7 +21,7 @@ import androidx.compose.runtime.Immutable
 import io.github.ovso.whitenoise.R
 
 @Immutable
-data class Sound(
+data class Lullaby(
     val id: Long,
     val title: String,
     val subtitle: String? = null,
@@ -34,13 +34,13 @@ data class Sound(
 
 @Immutable
 data class Metadata(
-    val author: SoundAuthor,
+    val author: LullabyAuthor,
     val date: String,
     val readTimeMinutes: Int
 )
 
 @Immutable
-data class SoundAuthor(
+data class LullabyAuthor(
     val name: String,
     val url: String? = null
 )
@@ -49,19 +49,19 @@ data class SoundAuthor(
  * A fake repo returning sample data
  */
 object PostRepo {
-    fun getPosts(): List<Sound> = posts
+    fun getPosts(): List<Lullaby> = posts
 }
 
 /**
  * Sample Data
  */
 
-private val pietro = SoundAuthor("Pietro Maggi", "https://medium.com/@pmaggi")
-private val manuel = SoundAuthor("Manuel Vivo", "https://medium.com/@manuelvicnt")
-private val florina = SoundAuthor("Florina Muntenescu", "https://medium.com/@florina.muntenescu")
-private val jose = SoundAuthor("Jose Alcérreca", "https://medium.com/@JoseAlcerreca")
+private val pietro = LullabyAuthor("Pietro Maggi", "https://medium.com/@pmaggi")
+private val manuel = LullabyAuthor("Manuel Vivo", "https://medium.com/@manuelvicnt")
+private val florina = LullabyAuthor("Florina Muntenescu", "https://medium.com/@florina.muntenescu")
+private val jose = LullabyAuthor("Jose Alcérreca", "https://medium.com/@JoseAlcerreca")
 
-private val sound1 = Sound(
+private val lullaby1 = Lullaby(
     id = 1L,
     title = "A Little Thing about Android Module Paths",
     subtitle = "How to configure your module paths, instead of using Gradle’s default.",
@@ -76,7 +76,7 @@ private val sound1 = Sound(
     tags = setOf("Modularization", "Gradle")
 )
 
-private val sound2 = Sound(
+private val lullaby2 = Lullaby(
     id = 2L,
     title = "Dagger in Kotlin: Gotchas and Optimizations",
     subtitle = "Use Dagger in Kotlin! This article includes best practices to optimize your build time and gotchas you might encounter.",
@@ -91,7 +91,7 @@ private val sound2 = Sound(
     tags = setOf("Dagger", "Kotlin")
 )
 
-private val sound3 = Sound(
+private val lullaby3 = Lullaby(
     id = 3L,
     title = "From Java Programming Language to Kotlin — the idiomatic way",
     subtitle = "Learn how to get started converting Java Programming Language code to Kotlin, making it more idiomatic and avoid common pitfalls, by…",
@@ -106,7 +106,7 @@ private val sound3 = Sound(
     tags = setOf("Kotlin")
 )
 
-private val sound4 = Sound(
+private val lullaby4 = Lullaby(
     id = 4L,
     title = "Locale changes and the AndroidViewModel antipattern",
     subtitle = "TL;DR: Expose resource IDs from ViewModels to avoid showing obsolete data.",
@@ -121,7 +121,7 @@ private val sound4 = Sound(
     tags = setOf("ViewModel", "Locale")
 )
 
-private val sound5 = Sound(
+private val lullaby5 = Lullaby(
     id = 5L,
     title = "Collections and sequences in Kotlin",
     subtitle = "Working with collections is a common task and the Kotlin Standard Library offers many great utility functions. It also offers two ways of…",
@@ -137,14 +137,14 @@ private val sound5 = Sound(
 )
 
 private val posts = listOf(
-    sound1,
-    sound2,
-    sound3,
-    sound4,
-    sound5,
-    sound1.copy(id = 6L),
-    sound2.copy(id = 7L),
-    sound3.copy(id = 8L),
-    sound4.copy(id = 9L),
-    sound5.copy(id = 10L)
+    lullaby1,
+    lullaby2,
+    lullaby3,
+    lullaby4,
+    lullaby5,
+    lullaby1.copy(id = 6L),
+    lullaby2.copy(id = 7L),
+    lullaby3.copy(id = 8L),
+    lullaby4.copy(id = 9L),
+    lullaby5.copy(id = 10L)
 )

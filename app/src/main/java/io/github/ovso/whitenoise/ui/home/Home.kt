@@ -43,7 +43,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ovso.whitenoise.R
-import io.github.ovso.whitenoise.data.Sound
+import io.github.ovso.whitenoise.data.Lullaby
 import io.github.ovso.whitenoise.data.PostRepo
 import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
 import java.util.*
@@ -135,7 +135,7 @@ fun Header(
 
 @Composable
 private fun PostMetadata(
-    post: Sound,
+    post: Lullaby,
     modifier: Modifier = Modifier
 ) {
     val divider = "  •  "
@@ -169,7 +169,7 @@ private fun PostMetadata(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SoundItem(
-    sound: Sound,
+    sound: Lullaby,
     modifier: Modifier = Modifier
 ) {
     ListItem(
