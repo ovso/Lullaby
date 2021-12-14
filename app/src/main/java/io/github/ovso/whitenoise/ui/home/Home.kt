@@ -120,7 +120,6 @@ fun Header(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { /* onClick */ }
         ) {
             Image(
                 painter = painterResource(R.drawable.white_noise_baby_sleep),
