@@ -21,7 +21,7 @@ import androidx.compose.runtime.Immutable
 import io.github.ovso.whitenoise.R
 
 @Immutable
-data class Post(
+data class Sound(
     val id: Long,
     val title: String,
     val subtitle: String? = null,
@@ -34,13 +34,13 @@ data class Post(
 
 @Immutable
 data class Metadata(
-    val author: PostAuthor,
+    val author: SoundAuthor,
     val date: String,
     val readTimeMinutes: Int
 )
 
 @Immutable
-data class PostAuthor(
+data class SoundAuthor(
     val name: String,
     val url: String? = null
 )
@@ -49,19 +49,19 @@ data class PostAuthor(
  * A fake repo returning sample data
  */
 object PostRepo {
-    fun getPosts(): List<Post> = posts
+    fun getPosts(): List<Sound> = posts
 }
 
 /**
  * Sample Data
  */
 
-private val pietro = PostAuthor("Pietro Maggi", "https://medium.com/@pmaggi")
-private val manuel = PostAuthor("Manuel Vivo", "https://medium.com/@manuelvicnt")
-private val florina = PostAuthor("Florina Muntenescu", "https://medium.com/@florina.muntenescu")
-private val jose = PostAuthor("Jose Alcérreca", "https://medium.com/@JoseAlcerreca")
+private val pietro = SoundAuthor("Pietro Maggi", "https://medium.com/@pmaggi")
+private val manuel = SoundAuthor("Manuel Vivo", "https://medium.com/@manuelvicnt")
+private val florina = SoundAuthor("Florina Muntenescu", "https://medium.com/@florina.muntenescu")
+private val jose = SoundAuthor("Jose Alcérreca", "https://medium.com/@JoseAlcerreca")
 
-private val post1 = Post(
+private val sound1 = Sound(
     id = 1L,
     title = "A Little Thing about Android Module Paths",
     subtitle = "How to configure your module paths, instead of using Gradle’s default.",
@@ -76,7 +76,7 @@ private val post1 = Post(
     tags = setOf("Modularization", "Gradle")
 )
 
-private val post2 = Post(
+private val sound2 = Sound(
     id = 2L,
     title = "Dagger in Kotlin: Gotchas and Optimizations",
     subtitle = "Use Dagger in Kotlin! This article includes best practices to optimize your build time and gotchas you might encounter.",
@@ -91,7 +91,7 @@ private val post2 = Post(
     tags = setOf("Dagger", "Kotlin")
 )
 
-private val post3 = Post(
+private val sound3 = Sound(
     id = 3L,
     title = "From Java Programming Language to Kotlin — the idiomatic way",
     subtitle = "Learn how to get started converting Java Programming Language code to Kotlin, making it more idiomatic and avoid common pitfalls, by…",
@@ -106,7 +106,7 @@ private val post3 = Post(
     tags = setOf("Kotlin")
 )
 
-private val post4 = Post(
+private val sound4 = Sound(
     id = 4L,
     title = "Locale changes and the AndroidViewModel antipattern",
     subtitle = "TL;DR: Expose resource IDs from ViewModels to avoid showing obsolete data.",
@@ -121,7 +121,7 @@ private val post4 = Post(
     tags = setOf("ViewModel", "Locale")
 )
 
-private val post5 = Post(
+private val sound5 = Sound(
     id = 5L,
     title = "Collections and sequences in Kotlin",
     subtitle = "Working with collections is a common task and the Kotlin Standard Library offers many great utility functions. It also offers two ways of…",
@@ -136,30 +136,15 @@ private val post5 = Post(
     tags = setOf("Kotlin", "Collections", "Sequences")
 )
 
-private val topPost = Post(
-    id = 100L,
-    title = "A Little Thing about Android Module Paths",
-    subtitle = "How to configure your module paths, instead of using Gradle’s default.",
-    url = "https://medium.com/androiddevelopers/gradle-path-configuration-dc523f0ed25c",
-    metadata = Metadata(
-        author = pietro,
-        date = "August 02",
-        readTimeMinutes = 1
-    ),
-    imageId = R.drawable.white_noise_baby_sleep,
-    imageThumbId = R.drawable.white_noise_baby_sleep,
-    tags = setOf("Modularization", "Gradle")
-)
-
 private val posts = listOf(
-    post1,
-    post2,
-    post3,
-    post4,
-    post5,
-    post1.copy(id = 6L),
-    post2.copy(id = 7L),
-    post3.copy(id = 8L),
-    post4.copy(id = 9L),
-    post5.copy(id = 10L)
+    sound1,
+    sound2,
+    sound3,
+    sound4,
+    sound5,
+    sound1.copy(id = 6L),
+    sound2.copy(id = 7L),
+    sound3.copy(id = 8L),
+    sound4.copy(id = 9L),
+    sound5.copy(id = 10L)
 )

@@ -43,7 +43,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ovso.whitenoise.R
-import io.github.ovso.whitenoise.data.Post
+import io.github.ovso.whitenoise.data.Sound
 import io.github.ovso.whitenoise.data.PostRepo
 import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
 import java.util.*
@@ -62,7 +62,7 @@ fun Home() {
                     )
                 }
                 items(posts) { post ->
-                    PostItem(post = post)
+                    SoundItem(sound = post)
                     Divider(startIndent = 72.dp)
                 }
             }
@@ -135,7 +135,7 @@ fun Header(
 
 @Composable
 private fun PostMetadata(
-    post: Post,
+    post: Sound,
     modifier: Modifier = Modifier
 ) {
     val divider = "  •  "
@@ -168,8 +168,8 @@ private fun PostMetadata(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PostItem(
-    post: Post,
+fun SoundItem(
+    sound: Sound,
     modifier: Modifier = Modifier
 ) {
     ListItem(
@@ -178,16 +178,16 @@ fun PostItem(
             .padding(vertical = 8.dp),
         icon = {
             Image(
-                painter = painterResource(post.imageThumbId),
+                painter = painterResource(sound.imageThumbId),
                 contentDescription = null,
                 modifier = Modifier.clip(shape = MaterialTheme.shapes.small)
             )
         },
         text = {
-            Text(text = post.title)
+            Text(text = sound.title)
         },
         secondaryText = {
-            PostMetadata(post)
+            PostMetadata(sound)
         }
     )
 }
