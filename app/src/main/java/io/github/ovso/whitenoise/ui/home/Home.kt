@@ -31,7 +31,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -61,8 +60,7 @@ fun Home() {
                     )
                 }
                 items(lullabies) { item ->
-//                    LullabyItem(item = item)
-                    LullabyItem2(item = item)
+                    LullabyItem(item = item)
                     Divider(startIndent = 72.dp)
                 }
             }
@@ -164,34 +162,8 @@ private fun LullabyMetadata(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LullabyItem(
-    item: Lullaby,
-    modifier: Modifier = Modifier
-) {
-    ListItem(
-        modifier = modifier
-            .clickable { /* todo */ }
-            .padding(vertical = 8.dp),
-        icon = {
-            Image(
-                painter = painterResource(item.imageThumbId),
-                contentDescription = null,
-                modifier = Modifier.clip(shape = MaterialTheme.shapes.small).width(24.dp)
-            )
-        },
-        text = {
-            Text(text = item.title)
-        },
-        secondaryText = {
-            LullabyMetadata(item)
-        }
-    )
-}
-
-@Composable
-fun LullabyItem2(
     item: Lullaby,
     modifier: Modifier = Modifier
 ) {
@@ -218,7 +190,7 @@ fun LullabyItem2(
 @Preview("LullabyItem2")
 @Composable
 fun LullabyItem2Preview() {
-    LullabyItem2(
+    LullabyItem(
         Lullaby(
             1L, "브람스 자장가", "ㅋㅋ", "", R.drawable.ic__18_fish, setOf("aa")
         ),
