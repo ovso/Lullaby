@@ -60,24 +60,33 @@ fun Home() {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun HomeContent(
     innerPadding: PaddingValues,
     lullabies: List<Lullaby>
 ) {
     Column {
-        Header(
+        TopImage(
             modifier = Modifier.padding(20.dp)
         )
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(3),
-            contentPadding = innerPadding,
-        ) {
-            items(lullabies) { item ->
-                LullabyItem(item = item)
-                Divider(startIndent = 72.dp)
-            }
+        Header("자장가")
+        VerticalGrid(lullabies)
+        Header("자연")
+        VerticalGrid(lullabies)
+        Header("백색소음")
+        VerticalGrid(lullabies)
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun VerticalGrid(lullabies: List<Lullaby>) {
+    LazyVerticalGrid(
+        cells = GridCells.Fixed(3),
+    ) {
+        items(lullabies) { item ->
+            LullabyItem(item = item)
+            Divider(startIndent = 72.dp)
         }
     }
 }
@@ -122,7 +131,7 @@ fun Header(
 }
 
 @Composable
-fun Header(
+fun TopImage(
     modifier: Modifier = Modifier
 ) {
     Card(
