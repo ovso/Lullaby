@@ -47,8 +47,8 @@ data class LullabyAuthor(
 /**
  * A fake repo returning sample data
  */
-object PostRepo {
-    fun getPosts(): List<Lullaby> = posts
+object LullabyRepo {
+    fun getLullabies(): List<Lullaby> = lullabies
 }
 
 /**
@@ -130,7 +130,7 @@ private val lullaby5 = Lullaby(
     tags = setOf("Kotlin", "Collections", "Sequences")
 )
 
-private val posts = listOf(
+private val lullabies = listOf(
     lullaby1,
     lullaby2,
     lullaby3,

@@ -41,13 +41,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.Lullaby
-import io.github.ovso.whitenoise.data.PostRepo
+import io.github.ovso.whitenoise.data.LullabyRepo
 import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
 import java.util.*
 
 @Composable
 fun Home() {
-    val posts = remember { PostRepo.getPosts() }
+    val lullabies = remember { LullabyRepo.getLullabies() }
     WhiteNoiseTheme {
         Scaffold(
             topBar = { AppBar() }
@@ -58,8 +58,8 @@ fun Home() {
                         modifier = Modifier.padding(16.dp)
                     )
                 }
-                items(posts) { post ->
-                    LullabyItem(item = post)
+                items(lullabies) { item ->
+                    LullabyItem(item = item)
                     Divider(startIndent = 72.dp)
                 }
             }
@@ -131,21 +131,21 @@ fun Header(
 }
 
 @Composable
-private fun PostMetadata(
-    post: Lullaby,
+private fun LullabyMetadata(
+    lullaby: Lullaby,
     modifier: Modifier = Modifier
 ) {
     val divider = "  •  "
     val tagDivider = "  "
     val text = buildAnnotatedString {
-        append(post.metadata.date)
+        append(lullaby.metadata.date)
         append(divider)
-        append(stringResource(R.string.read_time, post.metadata.readTimeMinutes))
+        append(stringResource(R.string.read_time, lullaby.metadata.readTimeMinutes))
         append(divider)
         val tagStyle = MaterialTheme.typography.overline.toSpanStyle().copy(
             background = MaterialTheme.colors.primary.copy(alpha = 0.1f)
         )
-        post.tags.forEachIndexed { index, tag ->
+        lullaby.tags.forEachIndexed { index, tag ->
             if (index != 0) {
                 append(tagDivider)
             }
@@ -184,7 +184,7 @@ fun LullabyItem(
             Text(text = item.title)
         },
         secondaryText = {
-            PostMetadata(item)
+            LullabyMetadata(item)
         }
     )
 }
