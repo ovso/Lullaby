@@ -16,6 +16,7 @@
 
 package io.github.ovso.whitenoise.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -60,7 +61,8 @@ fun Home() {
                     )
                 }
                 items(lullabies) { item ->
-                    LullabyItem(item = item)
+//                    LullabyItem(item = item)
+                    LullabyItem2(item = item)
                     Divider(startIndent = 72.dp)
                 }
             }
@@ -194,13 +196,15 @@ fun LullabyItem2(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.clickable(onClick = {
+            Log.d("LullabyItem2", "onClick()")
+        }),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
-            painter = painterResource(R.drawable.ic__18_fish),
+            painter = painterResource(item.imageThumbId),
             contentDescription = null,
-            modifier = modifier.size(50.dp)
+            modifier = modifier.size(50.dp),
         )
         Text(
             text = item.title
@@ -227,8 +231,10 @@ private fun HomePreview() {
 }
 */
 
+/*
 @Preview("AppBar")
 @Composable
 private fun AppBarPreview() {
     AppBar()
 }
+*/
