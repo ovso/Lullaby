@@ -17,10 +17,12 @@
 package io.github.ovso.whitenoise.ui.home
 
 import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -46,6 +48,7 @@ import io.github.ovso.whitenoise.data.LullabyRepo
 import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
 import java.util.*
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Home() {
     val lullabies = remember { LullabyRepo.getLullabies() }
@@ -53,15 +56,18 @@ fun Home() {
         Scaffold(
             topBar = { AppBar() }
         ) { innerPadding ->
-            LazyColumn(contentPadding = innerPadding) {
-                item {
-                    Header(
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
-                items(lullabies) { item ->
-                    LullabyItem(item = item)
-                    Divider(startIndent = 72.dp)
+            Column {
+                Header(
+                    modifier = Modifier.padding(16.dp)
+                )
+                LazyVerticalGrid(
+                    cells = GridCells.Adaptive(minSize = 128.dp),
+                    contentPadding = innerPadding
+                ) {
+                    items(lullabies) { item ->
+                        LullabyItem(item = item)
+                        Divider(startIndent = 72.dp)
+                    }
                 }
             }
         }
@@ -189,7 +195,7 @@ fun LullabyItem(
 
 @Preview("LullabyItem2")
 @Composable
-fun LullabyItem2Preview() {
+fun LullabyItemPreview() {
     LullabyItem(
         Lullaby(
             1L, "브람스 자장가", "ㅋㅋ", "", R.drawable.ic__18_fish, setOf("aa")
@@ -198,13 +204,11 @@ fun LullabyItem2Preview() {
     )
 }
 
-/*
 @Preview("Home")
 @Composable
 private fun HomePreview() {
     Home()
 }
-*/
 
 /*
 @Preview("AppBar")
