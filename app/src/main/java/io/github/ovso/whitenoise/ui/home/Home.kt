@@ -196,9 +196,12 @@ fun LullabyItem2(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.clickable(onClick = {
-            Log.d("LullabyItem2", "onClick()")
-        }),
+        modifier = Modifier
+            .clickable(
+                onClick = {
+                    Log.d("LullabyItem2", "onClick()")
+                }
+            ).fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
