@@ -62,7 +62,7 @@ fun Home() {
                     )
                 }
                 items(posts) { post ->
-                    SoundItem(sound = post)
+                    LullabyItem(item = post)
                     Divider(startIndent = 72.dp)
                 }
             }
@@ -168,8 +168,8 @@ private fun PostMetadata(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SoundItem(
-    sound: Lullaby,
+fun LullabyItem(
+    item: Lullaby,
     modifier: Modifier = Modifier
 ) {
     ListItem(
@@ -178,16 +178,16 @@ fun SoundItem(
             .padding(vertical = 8.dp),
         icon = {
             Image(
-                painter = painterResource(sound.imageThumbId),
+                painter = painterResource(item.imageThumbId),
                 contentDescription = null,
                 modifier = Modifier.clip(shape = MaterialTheme.shapes.small)
             )
         },
         text = {
-            Text(text = sound.title)
+            Text(text = item.title)
         },
         secondaryText = {
-            PostMetadata(sound)
+            PostMetadata(item)
         }
     )
 }
