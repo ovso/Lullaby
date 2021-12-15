@@ -26,22 +26,8 @@ data class Lullaby(
     val title: String,
     val subtitle: String? = null,
     val url: String,
-    val metadata: Metadata,
     @DrawableRes val imageThumbId: Int,
     val tags: Set<String>
-)
-
-@Immutable
-data class Metadata(
-    val author: LullabyAuthor,
-    val date: String,
-    val readTimeMinutes: Int
-)
-
-@Immutable
-data class LullabyAuthor(
-    val name: String,
-    val url: String? = null
 )
 
 /**
@@ -51,25 +37,12 @@ object LullabyRepo {
     fun getLullabies(): List<Lullaby> = lullabies
 }
 
-/**
- * Sample Data
- */
-
-private val pietro = LullabyAuthor("Pietro Maggi", "https://medium.com/@pmaggi")
-private val manuel = LullabyAuthor("Manuel Vivo", "https://medium.com/@manuelvicnt")
-private val florina = LullabyAuthor("Florina Muntenescu", "https://medium.com/@florina.muntenescu")
-private val jose = LullabyAuthor("Jose Alcérreca", "https://medium.com/@JoseAlcerreca")
 
 private val lullaby1 = Lullaby(
     id = 1L,
     title = "A Little Thing about Android Module Paths",
     subtitle = "How to configure your module paths, instead of using Gradle’s default.",
     url = "https://medium.com/androiddevelopers/gradle-path-configuration-dc523f0ed25c",
-    metadata = Metadata(
-        author = pietro,
-        date = "August 02",
-        readTimeMinutes = 1
-    ),
     imageThumbId = R.drawable.ic__03_rhino,
     tags = setOf("Modularization", "Gradle")
 )
@@ -79,11 +52,6 @@ private val lullaby2 = Lullaby(
     title = "Dagger in Kotlin: Gotchas and Optimizations",
     subtitle = "Use Dagger in Kotlin! This article includes best practices to optimize your build time and gotchas you might encounter.",
     url = "https://medium.com/androiddevelopers/dagger-in-kotlin-gotchas-and-optimizations-7446d8dfd7dc",
-    metadata = Metadata(
-        author = manuel,
-        date = "July 30",
-        readTimeMinutes = 3
-    ),
     imageThumbId = R.drawable.ic__04_flamingo,
     tags = setOf("Dagger", "Kotlin")
 )
@@ -93,11 +61,6 @@ private val lullaby3 = Lullaby(
     title = "From Java Programming Language to Kotlin — the idiomatic way",
     subtitle = "Learn how to get started converting Java Programming Language code to Kotlin, making it more idiomatic and avoid common pitfalls, by…",
     url = "https://medium.com/androiddevelopers/from-java-programming-language-to-kotlin-the-idiomatic-way-ac552dcc1741",
-    metadata = Metadata(
-        author = florina,
-        date = "July 09",
-        readTimeMinutes = 1
-    ),
     imageThumbId = R.drawable.ic__06_hyena,
     tags = setOf("Kotlin")
 )
@@ -107,11 +70,6 @@ private val lullaby4 = Lullaby(
     title = "Locale changes and the AndroidViewModel antipattern",
     subtitle = "TL;DR: Expose resource IDs from ViewModels to avoid showing obsolete data.",
     url = "https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9",
-    metadata = Metadata(
-        author = jose,
-        date = "April 02",
-        readTimeMinutes = 1
-    ),
     imageThumbId = R.drawable.ic__07_fruit,
     tags = setOf("ViewModel", "Locale")
 )
@@ -121,11 +79,6 @@ private val lullaby5 = Lullaby(
     title = "Collections and sequences in Kotlin",
     subtitle = "Working with collections is a common task and the Kotlin Standard Library offers many great utility functions. It also offers two ways of…",
     url = "https://medium.com/androiddevelopers/collections-and-sequences-in-kotlin-55db18283aca",
-    metadata = Metadata(
-        author = florina,
-        date = "July 24",
-        readTimeMinutes = 4
-    ),
     imageThumbId = R.drawable.ic__18_fish,
     tags = setOf("Kotlin", "Collections", "Sequences")
 )

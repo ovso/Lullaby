@@ -28,6 +28,7 @@ import androidx.compose.material.icons.rounded.BabyChangingStation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -138,9 +139,7 @@ private fun LullabyMetadata(
     val divider = "  •  "
     val tagDivider = "  "
     val text = buildAnnotatedString {
-        append(lullaby.metadata.date)
         append(divider)
-        append(stringResource(R.string.read_time, lullaby.metadata.readTimeMinutes))
         append(divider)
         val tagStyle = MaterialTheme.typography.overline.toSpanStyle().copy(
             background = MaterialTheme.colors.primary.copy(alpha = 0.1f)
@@ -189,11 +188,44 @@ fun LullabyItem(
     )
 }
 
+@Composable
+fun LullabyItem2(
+    item: Lullaby,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = Modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(R.drawable.ic__18_fish),
+            contentDescription = null,
+            modifier = modifier.size(50.dp)
+        )
+        Text(
+            text = item.title
+        )
+    }
+}
+
+@Preview("LullabyItem2")
+@Composable
+fun LullabyItem2Preview() {
+    LullabyItem2(
+        Lullaby(
+            1L, "브람스 자장가", "ㅋㅋ", "", R.drawable.ic__18_fish, setOf("aa")
+        ),
+        modifier = Modifier
+    )
+}
+
+/*
 @Preview("Home")
 @Composable
 private fun HomePreview() {
     Home()
 }
+*/
 
 @Preview("AppBar")
 @Composable
