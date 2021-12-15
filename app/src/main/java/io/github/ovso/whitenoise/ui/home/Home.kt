@@ -18,10 +18,7 @@ package io.github.ovso.whitenoise.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -180,7 +177,7 @@ fun LullabyItem(
             Image(
                 painter = painterResource(item.imageThumbId),
                 contentDescription = null,
-                modifier = Modifier.clip(shape = MaterialTheme.shapes.small)
+                modifier = Modifier.clip(shape = MaterialTheme.shapes.small).width(24.dp)
             )
         },
         text = {

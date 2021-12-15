@@ -27,7 +27,6 @@ data class Lullaby(
     val subtitle: String? = null,
     val url: String,
     val metadata: Metadata,
-    @DrawableRes val imageId: Int,
     @DrawableRes val imageThumbId: Int,
     val tags: Set<String>
 )
@@ -71,8 +70,7 @@ private val lullaby1 = Lullaby(
         date = "August 02",
         readTimeMinutes = 1
     ),
-    imageId = R.drawable.post_1,
-    imageThumbId = R.drawable.post_1_thumb,
+    imageThumbId = R.drawable.ic__03_rhino,
     tags = setOf("Modularization", "Gradle")
 )
 
@@ -86,8 +84,7 @@ private val lullaby2 = Lullaby(
         date = "July 30",
         readTimeMinutes = 3
     ),
-    imageId = R.drawable.post_2,
-    imageThumbId = R.drawable.post_2_thumb,
+    imageThumbId = R.drawable.ic__04_flamingo,
     tags = setOf("Dagger", "Kotlin")
 )
 
@@ -101,8 +98,7 @@ private val lullaby3 = Lullaby(
         date = "July 09",
         readTimeMinutes = 1
     ),
-    imageId = R.drawable.post_3,
-    imageThumbId = R.drawable.post_3_thumb,
+    imageThumbId = R.drawable.ic__06_hyena,
     tags = setOf("Kotlin")
 )
 
@@ -116,8 +112,7 @@ private val lullaby4 = Lullaby(
         date = "April 02",
         readTimeMinutes = 1
     ),
-    imageId = R.drawable.post_4,
-    imageThumbId = R.drawable.post_4_thumb,
+    imageThumbId = R.drawable.ic__07_fruit,
     tags = setOf("ViewModel", "Locale")
 )
 
@@ -131,8 +126,7 @@ private val lullaby5 = Lullaby(
         date = "July 24",
         readTimeMinutes = 4
     ),
-    imageId = R.drawable.post_5,
-    imageThumbId = R.drawable.post_5_thumb,
+    imageThumbId = R.drawable.ic__18_fish,
     tags = setOf("Kotlin", "Collections", "Sequences")
 )
 
