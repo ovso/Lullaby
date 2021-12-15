@@ -40,7 +40,7 @@ object LullabyRepo {
 
 private val lullaby1 = Lullaby(
     id = 1L,
-    title = "A Little Thing about Android Module Paths",
+    title = "무슨 자장가",
     subtitle = "How to configure your module paths, instead of using Gradle’s default.",
     url = "https://medium.com/androiddevelopers/gradle-path-configuration-dc523f0ed25c",
     imageThumbId = R.drawable.ic__03_rhino,
@@ -49,7 +49,7 @@ private val lullaby1 = Lullaby(
 
 private val lullaby2 = Lullaby(
     id = 2L,
-    title = "Dagger in Kotlin: Gotchas and Optimizations",
+    title = "브람스 자장가",
     subtitle = "Use Dagger in Kotlin! This article includes best practices to optimize your build time and gotchas you might encounter.",
     url = "https://medium.com/androiddevelopers/dagger-in-kotlin-gotchas-and-optimizations-7446d8dfd7dc",
     imageThumbId = R.drawable.ic__04_flamingo,
@@ -58,7 +58,7 @@ private val lullaby2 = Lullaby(
 
 private val lullaby3 = Lullaby(
     id = 3L,
-    title = "From Java Programming Language to Kotlin — the idiomatic way",
+    title = "모짜르트 자장가",
     subtitle = "Learn how to get started converting Java Programming Language code to Kotlin, making it more idiomatic and avoid common pitfalls, by…",
     url = "https://medium.com/androiddevelopers/from-java-programming-language-to-kotlin-the-idiomatic-way-ac552dcc1741",
     imageThumbId = R.drawable.ic__06_hyena,
@@ -67,7 +67,7 @@ private val lullaby3 = Lullaby(
 
 private val lullaby4 = Lullaby(
     id = 4L,
-    title = "Locale changes and the AndroidViewModel antipattern",
+    title = "바흐 자장가",
     subtitle = "TL;DR: Expose resource IDs from ViewModels to avoid showing obsolete data.",
     url = "https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9",
     imageThumbId = R.drawable.ic__07_fruit,
@@ -76,7 +76,7 @@ private val lullaby4 = Lullaby(
 
 private val lullaby5 = Lullaby(
     id = 5L,
-    title = "Collections and sequences in Kotlin",
+    title = "클래식 자장가",
     subtitle = "Working with collections is a common task and the Kotlin Standard Library offers many great utility functions. It also offers two ways of…",
     url = "https://medium.com/androiddevelopers/collections-and-sequences-in-kotlin-55db18283aca",
     imageThumbId = R.drawable.ic__18_fish,

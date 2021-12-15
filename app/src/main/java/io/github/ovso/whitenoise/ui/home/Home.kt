@@ -48,7 +48,6 @@ import io.github.ovso.whitenoise.data.LullabyRepo
 import io.github.ovso.whitenoise.ui.theme.WhiteNoiseTheme
 import java.util.*
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Home() {
     val lullabies = remember { LullabyRepo.getLullabies() }
@@ -56,19 +55,28 @@ fun Home() {
         Scaffold(
             topBar = { AppBar() }
         ) { innerPadding ->
-            Column {
-                Header(
-                    modifier = Modifier.padding(16.dp)
-                )
-                LazyVerticalGrid(
-                    cells = GridCells.Adaptive(minSize = 128.dp),
-                    contentPadding = innerPadding
-                ) {
-                    items(lullabies) { item ->
-                        LullabyItem(item = item)
-                        Divider(startIndent = 72.dp)
-                    }
-                }
+            HomeContent(innerPadding, lullabies)
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun HomeContent(
+    innerPadding: PaddingValues,
+    lullabies: List<Lullaby>
+) {
+    Column {
+        Header(
+            modifier = Modifier.padding(20.dp)
+        )
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(3),
+            contentPadding = innerPadding,
+        ) {
+            items(lullabies) { item ->
+                LullabyItem(item = item)
+                Divider(startIndent = 72.dp)
             }
         }
     }
@@ -179,8 +187,10 @@ fun LullabyItem(
                 onClick = {
                     Log.d("LullabyItem2", "onClick()")
                 }
-            ).fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+            )
+            .fillMaxWidth()
+            .padding(bottom = 15.dp, top = 15.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(item.imageThumbId),
@@ -193,6 +203,7 @@ fun LullabyItem(
     }
 }
 
+/*
 @Preview("LullabyItem2")
 @Composable
 fun LullabyItemPreview() {
@@ -203,6 +214,7 @@ fun LullabyItemPreview() {
         modifier = Modifier
     )
 }
+*/
 
 @Preview("Home")
 @Composable
