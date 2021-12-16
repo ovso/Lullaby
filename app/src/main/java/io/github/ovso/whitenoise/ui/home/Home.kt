@@ -17,9 +17,7 @@
 package io.github.ovso.whitenoise.ui.home
 
 import android.util.Log
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -60,22 +58,37 @@ fun Home() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun HomeContent(
     innerPadding: PaddingValues,
     lullabies: List<Lullaby>
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+    ) {
         TopImage(
             modifier = Modifier.padding(20.dp)
         )
         Header("자장가")
-        VerticalGrid(lullabies)
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(3),
+        ) {
+            items(lullabies) { item ->
+                LullabyItem(item = item)
+//                Divider(startIndent = 72.dp)
+            }
+        }
+
+//        VerticalGrid(lullabies)
+/*
         Header("자연")
         VerticalGrid(lullabies)
         Header("백색소음")
         VerticalGrid(lullabies)
+*/
     }
+
 }
 
 @OptIn(ExperimentalFoundationApi::class)
