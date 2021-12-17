@@ -20,16 +20,15 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BabyChangingStation
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -68,29 +67,20 @@ private fun HomeContent(
     innerPadding: PaddingValues,
     lullabies: List<Lullaby>
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier
     ) {
-        TopImage(
-            modifier = Modifier.padding(20.dp)
-        )
-        Header("자장가")
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(3),
-        ) {
-            items(lullabies) { item ->
-                LullabyItem(item = item)
-//                Divider(startIndent = 72.dp)
-            }
+        item {
+            TopImage(
+                modifier = Modifier.padding(20.dp)
+            )
         }
-
-//        VerticalGrid(lullabies)
-/*
-        Header("자연")
-        VerticalGrid(lullabies)
-        Header("백색소음")
-        VerticalGrid(lullabies)
-*/
+        item {
+            Header("자장가")
+        }
+        items(lullabies) { item ->
+            LullabyItem(item = item)
+        }
     }
 
 }
@@ -210,8 +200,6 @@ fun LullabyItem(
     Column(
         modifier = Modifier
             .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple(bounded = false),
                 onClick = {
                     Log.d("LullabyItem2", "onClick()")
                 },
@@ -230,19 +218,6 @@ fun LullabyItem(
         )
     }
 }
-
-/*
-@Preview("LullabyItem2")
-@Composable
-fun LullabyItemPreview() {
-    LullabyItem(
-        Lullaby(
-            1L, "브람스 자장가", "ㅋㅋ", "", R.drawable.ic__18_fish, setOf("aa")
-        ),
-        modifier = Modifier
-    )
-}
-*/
 
 @Preview("Home")
 @Composable
