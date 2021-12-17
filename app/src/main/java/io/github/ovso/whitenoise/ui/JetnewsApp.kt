@@ -23,17 +23,12 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnews.ui.interests.InterestsViewModel
 import com.example.jetnews.ui.theme.LullabyTheme
-import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.whitenoise.data.AppContainer
-import io.github.ovso.whitenoise.ui.interests.InterestsRoute
 import io.github.ovso.whitenoise.ui.interests.InterestsScreen
 import io.github.ovso.whitenoise.ui.interests.rememberTabContent
 
@@ -65,24 +60,6 @@ fun JetnewsApp(
                 currentSection = currentSection,
                 scaffoldState = scaffoldState
             )
-
-
-            InterestsRoute(
-                interestsViewModel = interestsViewModel
-            )
         }
     }
 }
-
-/**
- * Determine the content padding to apply to the different screens of the app
- */
-@Composable
-fun rememberContentPaddingForScreen(additionalTop: Dp = 0.dp) =
-    rememberInsetsPaddingValues(
-        insets = LocalWindowInsets.current.systemBars,
-        applyTop = false,
-        applyEnd = false,
-        applyStart = false,
-        additionalTop = additionalTop
-    )
