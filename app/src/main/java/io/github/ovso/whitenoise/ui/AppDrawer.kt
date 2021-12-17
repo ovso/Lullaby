@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.JetnewsDestinations
 import io.github.ovso.whitenoise.ui.components.JetnewsIcon
 import io.github.ovso.whitenoise.ui.components.NavigationIcon
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 import io.github.ovso.whitenoise.R
 
 @Composable
@@ -154,7 +154,7 @@ private fun DrawerButton(
 @Preview("Drawer contents (dark)", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewAppDrawer() {
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             AppDrawer(
                 currentRoute = JetnewsDestinations.HOME_ROUTE,

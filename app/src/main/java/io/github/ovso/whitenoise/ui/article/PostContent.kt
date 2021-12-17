@@ -77,7 +77,7 @@ import com.example.jetnews.model.Metadata
 import com.example.jetnews.model.Paragraph
 import com.example.jetnews.model.ParagraphType
 import com.example.jetnews.model.Post
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 import io.github.ovso.whitenoise.R
 
 private val defaultSpacerSize = 16.dp
@@ -367,7 +367,7 @@ private val Colors.codeBlockBackground: Color
 @Preview("Post content (dark)", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewPost() {
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             PostContent(post = post3)
         }

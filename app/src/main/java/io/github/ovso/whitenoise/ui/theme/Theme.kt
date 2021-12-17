@@ -47,7 +47,7 @@ private val DarkThemeColors = darkColors(
 )
 
 @Composable
-fun JetnewsTheme(
+fun LullabyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

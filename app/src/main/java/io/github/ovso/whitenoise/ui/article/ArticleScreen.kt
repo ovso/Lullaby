@@ -60,7 +60,7 @@ import androidx.compose.ui.unit.dp
 import io.github.ovso.whitenoise.data.posts.impl.BlockingFakePostsRepository
 import io.github.ovso.whitenoise.data.posts.impl.post3
 import com.example.jetnews.model.Post
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 import io.github.ovso.whitenoise.ui.utils.BookmarkButton
 import io.github.ovso.whitenoise.ui.utils.FavoriteButton
 import io.github.ovso.whitenoise.ui.utils.ShareButton
@@ -264,7 +264,7 @@ fun sharePost(post: Post, context: Context) {
 @Preview("Article screen (big font)", fontScale = 1.5f)
 @Composable
 fun PreviewArticleDrawer() {
-    JetnewsTheme {
+    LullabyTheme {
         val post = runBlocking {
             (BlockingFakePostsRepository().getPost(post3.id) as io.github.ovso.whitenoise.data.Result.Success).data
         }
@@ -281,7 +281,7 @@ fun PreviewArticleDrawer() {
 @Preview("Article screen navrail (big font)", fontScale = 1.5f, device = Devices.PIXEL_C)
 @Composable
 fun PreviewArticleNavRail() {
-    JetnewsTheme {
+    LullabyTheme {
         val post = runBlocking {
             (BlockingFakePostsRepository().getPost(post3.id) as io.github.ovso.whitenoise.data.Result.Success).data
         }

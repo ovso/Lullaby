@@ -27,8 +27,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnews.ui.interests.InterestsViewModel
-import com.example.jetnews.ui.theme.JetnewsTheme
-import com.example.jetnews.utils.WindowSize
+import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
@@ -42,7 +41,7 @@ import io.github.ovso.whitenoise.ui.interests.rememberTabContent
 fun JetnewsApp(
     appContainer: AppContainer,
 ) {
-    JetnewsTheme {
+    LullabyTheme {
         ProvideWindowInsets {
             val systemUiController = rememberSystemUiController()
             val darkIcons = MaterialTheme.colors.isLight

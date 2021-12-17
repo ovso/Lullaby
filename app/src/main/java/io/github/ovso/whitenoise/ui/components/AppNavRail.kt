@@ -44,7 +44,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.JetnewsDestinations
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 import io.github.ovso.whitenoise.R
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -137,7 +137,7 @@ private fun NavRailIcon(
 @Preview("Drawer contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewAppNavRail() {
-    JetnewsTheme {
+    LullabyTheme {
         AppNavRail(
             currentRoute = JetnewsDestinations.HOME_ROUTE,
             navigateToHome = {},

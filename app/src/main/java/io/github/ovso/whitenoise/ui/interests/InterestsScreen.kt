@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.interests.InterestsViewModel
 import com.example.jetnews.ui.interests.SelectTopicButton
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.Result
@@ -429,7 +429,7 @@ private fun InterestsAdaptiveContentLayout(
 @Preview("Interests screen (big font)", "Interests", fontScale = 1.5f)
 @Composable
 fun PreviewInterestsScreenDrawer() {
-    JetnewsTheme {
+    LullabyTheme {
         val tabContent = getFakeTabsContent()
         val (currentSection, updateSection) = rememberSaveable {
             mutableStateOf(tabContent.first().section)
@@ -454,7 +454,7 @@ fun PreviewInterestsScreenDrawer() {
 )
 @Composable
 fun PreviewInterestsScreenNavRail() {
-    JetnewsTheme {
+    LullabyTheme {
         val tabContent = getFakeTabsContent()
         val (currentSection, updateSection) = rememberSaveable {
             mutableStateOf(tabContent.first().section)
@@ -475,7 +475,7 @@ fun PreviewTopicsTab() {
     val topics = runBlocking {
         (FakeInterestsRepository().getTopics() as Result.Success).data
     }
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             TabWithSections(topics, setOf()) { }
         }
@@ -489,7 +489,7 @@ fun PreviewPeopleTab() {
     val people = runBlocking {
         (FakeInterestsRepository().getPeople() as Result.Success).data
     }
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             TabWithTopics(people, setOf()) { }
         }
@@ -503,7 +503,7 @@ fun PreviewPublicationsTab() {
     val publications = runBlocking {
         (FakeInterestsRepository().getPublications() as Result.Success).data
     }
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             TabWithTopics(publications, setOf()) { }
         }

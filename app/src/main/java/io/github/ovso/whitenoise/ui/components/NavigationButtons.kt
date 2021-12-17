@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 import io.github.ovso.whitenoise.R
 
 @Composable
@@ -77,7 +77,7 @@ fun NavigationIcon(
 @Preview("Jetnews icon (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewJetnewsIcon() {
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             JetnewsIcon()
         }
@@ -88,7 +88,7 @@ fun PreviewJetnewsIcon() {
 @Preview("Navigation (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewNavigationIcon() {
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             NavigationIcon(icon = Icons.Filled.Home, isSelected = true)
         }

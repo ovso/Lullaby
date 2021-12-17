@@ -32,7 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetnews.ui.theme.JetnewsTheme
+import com.example.jetnews.ui.theme.LullabyTheme
 
 @Composable
 fun SelectTopicButton(
@@ -84,7 +84,7 @@ fun SelectTopicButtonPreviewOn() {
 private fun SelectTopicButtonPreviewTemplate(
     selected: Boolean
 ) {
-    JetnewsTheme {
+    LullabyTheme {
         Surface {
             SelectTopicButton(
                 modifier = Modifier.padding(32.dp),
