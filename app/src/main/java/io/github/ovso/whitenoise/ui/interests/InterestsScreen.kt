@@ -88,7 +88,7 @@ class TabContent(val section: Sections, val content: @Composable () -> Unit)
  */
 @Composable
 fun InterestsScreen(
-    tabContent: List<TabContent>,
+    tabContent: TabContent,
     currentSection: Sections,
     scaffoldState: ScaffoldState
 ) {
@@ -110,7 +110,6 @@ fun InterestsScreen(
     ) { innerPadding ->
         val screenModifier = Modifier.padding(innerPadding)
         InterestScreenContent(
-            currentSection = currentSection,
             tabContent = tabContent,
             modifier = screenModifier
         )
@@ -122,7 +121,7 @@ fun InterestsScreen(
  * gathering application data from [InterestsViewModel]
  */
 @Composable
-fun rememberTabContent(interestsViewModel: InterestsViewModel): List<TabContent> {
+fun rememberTabContent(interestsViewModel: InterestsViewModel): TabContent {
     // UiState of the InterestsScreen
     val uiState by interestsViewModel.uiState.collectAsState()
 
@@ -137,7 +136,7 @@ fun rememberTabContent(interestsViewModel: InterestsViewModel): List<TabContent>
         )
     }
 
-    return listOf(topicsSection)
+    return topicsSection
 }
 
 /**
@@ -151,18 +150,16 @@ fun rememberTabContent(interestsViewModel: InterestsViewModel): List<TabContent>
  */
 @Composable
 private fun InterestScreenContent(
-    currentSection: Sections,
-    tabContent: List<TabContent>,
+    tabContent: TabContent,
     modifier: Modifier = Modifier
 ) {
-    val selectedTabIndex = tabContent.indexOfFirst { it.section == currentSection }
     Column(modifier) {
         Divider(
             color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
         )
         Box(modifier = Modifier.weight(1f)) {
             // display the current tab content which is a @Composable () -> Unit
-            tabContent[selectedTabIndex].content()
+            tabContent.content()
         }
     }
 }
@@ -432,7 +429,7 @@ fun PreviewInterestsScreenDrawer() {
     LullabyTheme {
         val tabContent = getFakeTabsContent()
         val (currentSection, updateSection) = rememberSaveable {
-            mutableStateOf(tabContent.first().section)
+            mutableStateOf(tabContent.section)
         }
 
         InterestsScreen(
@@ -457,7 +454,7 @@ fun PreviewInterestsScreenNavRail() {
     LullabyTheme {
         val tabContent = getFakeTabsContent()
         val (currentSection, updateSection) = rememberSaveable {
-            mutableStateOf(tabContent.first().section)
+            mutableStateOf(tabContent.section)
         }
 
         InterestsScreen(
@@ -510,26 +507,8 @@ fun PreviewPublicationsTab() {
     }
 }
 
-private fun getFakeTabsContent(): List<TabContent> {
+private fun getFakeTabsContent(): TabContent {
     val interestsRepository = FakeInterestsRepository()
-    val topicsSection = TabContent(Sections.Topics) {
-        TabWithSections(
-            runBlocking { (interestsRepository.getTopics() as Result.Success).data },
-            emptySet()
-        ) { }
-    }
-    val peopleSection = TabContent(Sections.People) {
-        TabWithTopics(
-            runBlocking { (interestsRepository.getPeople() as Result.Success).data },
-            emptySet()
-        ) { }
-    }
-    val publicationSection = TabContent(Sections.Publications) {
-        TabWithTopics(
-            runBlocking { (interestsRepository.getPublications() as Result.Success).data },
-            emptySet()
-        ) { }
-    }
 
-    return listOf(topicsSection, peopleSection, publicationSection)
+    return TabContent(Sections.Topics) {}
 }

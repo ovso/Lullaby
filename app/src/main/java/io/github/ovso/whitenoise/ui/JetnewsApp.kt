@@ -49,8 +49,8 @@ fun JetnewsApp(
             )
 
             val tabContent = rememberTabContent(interestsViewModel)
-            val (currentSection, updateSection) = rememberSaveable {
-                mutableStateOf(tabContent.first().section)
+            val (currentSection, _) = rememberSaveable {
+                mutableStateOf(tabContent.section)
             }
 
             val scaffoldState = rememberScaffoldState()

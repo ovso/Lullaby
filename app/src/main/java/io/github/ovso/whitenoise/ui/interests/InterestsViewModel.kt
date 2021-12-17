@@ -57,19 +57,6 @@ class InterestsViewModel(
             emptySet()
         )
 
-    val selectedPeople =
-        interestsRepository.observePeopleSelected().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptySet()
-        )
-
-    val selectedPublications =
-        interestsRepository.observePublicationSelected().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptySet()
-        )
 
     init {
         refreshAll()
