@@ -59,8 +59,6 @@ import kotlin.math.max
 
 enum class Sections(@StringRes val titleResId: Int) {
     Topics(R.string.interests_section_topics),
-    People(R.string.interests_section_people),
-    Publications(R.string.interests_section_publications)
 }
 
 /**
@@ -89,7 +87,6 @@ class TabContent(val section: Sections, val content: @Composable () -> Unit)
 @Composable
 fun InterestsScreen(
     tabContent: TabContent,
-    currentSection: Sections,
     scaffoldState: ScaffoldState
 ) {
     Scaffold(
@@ -171,33 +168,6 @@ private val tabContainerModifier = Modifier
     .fillMaxWidth()
     .wrapContentWidth(Alignment.CenterHorizontally)
     .navigationBarsPadding(start = false, end = false)
-
-/**
- * Display a simple list of topics
- *
- * @param topics (state) topics to display
- * @param selectedTopics (state) currently selected topics
- * @param onTopicSelect (event) request a topic selection be changed
- */
-@Composable
-private fun TabWithTopics(
-    topics: List<String>,
-    selectedTopics: Set<String>,
-    onTopicSelect: (String) -> Unit
-) {
-    InterestsAdaptiveContentLayout(
-        topPadding = 16.dp,
-        modifier = tabContainerModifier.verticalScroll(rememberScrollState())
-    ) {
-        topics.forEach { topic ->
-            TopicItem(
-                itemTitle = topic,
-                selected = selectedTopics.contains(topic),
-                onToggle = { onTopicSelect(topic) },
-            )
-        }
-    }
-}
 
 /**
  * Display a sectioned list of topics
@@ -282,72 +252,6 @@ private fun TopicItem(
 }
 
 /**
- * TabRow for the InterestsScreen
- */
-@Composable
-private fun InterestsTabRow(
-    selectedTabIndex: Int,
-    updateSection: (Sections) -> Unit,
-    tabContent: List<TabContent>,
-    isExpandedScreen: Boolean
-) {
-    when (isExpandedScreen) {
-        false -> {
-            TabRow(
-                selectedTabIndex = selectedTabIndex,
-                backgroundColor = MaterialTheme.colors.onPrimary,
-                contentColor = MaterialTheme.colors.primary
-            ) {
-                InterestsTabRowContent(selectedTabIndex, updateSection, tabContent)
-            }
-        }
-        true -> {
-            ScrollableTabRow(
-                selectedTabIndex = selectedTabIndex,
-                backgroundColor = MaterialTheme.colors.onPrimary,
-                contentColor = MaterialTheme.colors.primary,
-                edgePadding = 0.dp
-            ) {
-                InterestsTabRowContent(
-                    selectedTabIndex = selectedTabIndex,
-                    updateSection = updateSection,
-                    tabContent = tabContent,
-                    modifier = Modifier.padding(horizontal = 8.dp)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun InterestsTabRowContent(
-    selectedTabIndex: Int,
-    updateSection: (Sections) -> Unit,
-    tabContent: List<TabContent>,
-    modifier: Modifier = Modifier
-) {
-    tabContent.forEachIndexed { index, content ->
-        val colorText = if (selectedTabIndex == index) {
-            MaterialTheme.colors.primary
-        } else {
-            MaterialTheme.colors.onSurface.copy(alpha = 0.8f)
-        }
-        Tab(
-            selected = selectedTabIndex == index,
-            onClick = { updateSection(content.section) },
-            modifier = Modifier.heightIn(min = 48.dp)
-        ) {
-            Text(
-                text = stringResource(id = content.section.titleResId),
-                color = colorText,
-                style = MaterialTheme.typography.subtitle2,
-                modifier = modifier.paddingFromBaseline(top = 20.dp)
-            )
-        }
-    }
-}
-
-/**
  * Custom layout for the Interests screen that places items on the screen given the available size.
  *
  * For example: Given a list of items (A, B, C, D, E) and a screen size that allows 2 columns,
@@ -428,13 +332,12 @@ private fun InterestsAdaptiveContentLayout(
 fun PreviewInterestsScreenDrawer() {
     LullabyTheme {
         val tabContent = getFakeTabsContent()
-        val (currentSection, updateSection) = rememberSaveable {
+        val (_, _) = rememberSaveable {
             mutableStateOf(tabContent.section)
         }
 
         InterestsScreen(
             tabContent = tabContent,
-            currentSection = currentSection,
             scaffoldState = rememberScaffoldState()
         )
     }
@@ -453,13 +356,12 @@ fun PreviewInterestsScreenDrawer() {
 fun PreviewInterestsScreenNavRail() {
     LullabyTheme {
         val tabContent = getFakeTabsContent()
-        val (currentSection, updateSection) = rememberSaveable {
+        val (_, _) = rememberSaveable {
             mutableStateOf(tabContent.section)
         }
 
         InterestsScreen(
             tabContent = tabContent,
-            currentSection = currentSection,
             scaffoldState = rememberScaffoldState()
         )
     }
@@ -479,36 +381,6 @@ fun PreviewTopicsTab() {
     }
 }
 
-@Preview("Interests screen people tab", "People")
-@Preview("Interests screen people tab (dark)", "People", uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun PreviewPeopleTab() {
-    val people = runBlocking {
-        (FakeInterestsRepository().getPeople() as Result.Success).data
-    }
-    LullabyTheme {
-        Surface {
-            TabWithTopics(people, setOf()) { }
-        }
-    }
-}
-
-@Preview("Interests screen publications tab", "Publications")
-@Preview("Interests screen publications tab (dark)", "Publications", uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun PreviewPublicationsTab() {
-    val publications = runBlocking {
-        (FakeInterestsRepository().getPublications() as Result.Success).data
-    }
-    LullabyTheme {
-        Surface {
-            TabWithTopics(publications, setOf()) { }
-        }
-    }
-}
-
 private fun getFakeTabsContent(): TabContent {
-    val interestsRepository = FakeInterestsRepository()
-
     return TabContent(Sections.Topics) {}
 }

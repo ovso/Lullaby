@@ -20,8 +20,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnews.ui.interests.InterestsViewModel
@@ -49,15 +47,11 @@ fun JetnewsApp(
             )
 
             val tabContent = rememberTabContent(interestsViewModel)
-            val (currentSection, _) = rememberSaveable {
-                mutableStateOf(tabContent.section)
-            }
 
             val scaffoldState = rememberScaffoldState()
 
             InterestsScreen(
                 tabContent = tabContent,
-                currentSection = currentSection,
                 scaffoldState = scaffoldState
             )
         }
