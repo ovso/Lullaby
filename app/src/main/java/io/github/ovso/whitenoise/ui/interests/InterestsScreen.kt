@@ -19,31 +19,12 @@ package io.github.ovso.whitenoise.ui.interests
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Surface
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -66,13 +47,13 @@ import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.interests.InterestsViewModel
 import com.example.jetnews.ui.interests.SelectTopicButton
+import com.example.jetnews.ui.theme.JetnewsTheme
+import com.google.accompanist.insets.navigationBarsPadding
+import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.Result
 import io.github.ovso.whitenoise.data.interests.InterestSection
 import io.github.ovso.whitenoise.data.interests.TopicSelection
 import io.github.ovso.whitenoise.data.interests.impl.FakeInterestsRepository
-import com.example.jetnews.ui.theme.JetnewsTheme
-import com.google.accompanist.insets.navigationBarsPadding
-import io.github.ovso.whitenoise.R
 import kotlinx.coroutines.runBlocking
 import kotlin.math.max
 
@@ -103,15 +84,12 @@ class TabContent(val section: Sections, val content: @Composable () -> Unit)
  * @param currentSection (state) the current tab to display, must be in [tabContent]
  * @param isExpandedScreen (state) true if the screen is expanded
  * @param onTabChange (event) request a change in [currentSection] to another tab from [tabContent]
- * @param openDrawer (event) request opening the app drawer
  * @param scaffoldState (state) the state for the screen's [Scaffold]
  */
 @Composable
 fun InterestsScreen(
     tabContent: List<TabContent>,
     currentSection: Sections,
-    isExpandedScreen: Boolean,
-    onTabChange: (Sections) -> Unit,
     scaffoldState: ScaffoldState
 ) {
     Scaffold(
@@ -131,7 +109,11 @@ fun InterestsScreen(
         }
     ) { innerPadding ->
         val screenModifier = Modifier.padding(innerPadding)
-        InterestScreenContent(currentSection, isExpandedScreen, onTabChange, tabContent, screenModifier)
+        InterestScreenContent(
+            currentSection = currentSection,
+            tabContent = tabContent,
+            modifier = screenModifier
+        )
     }
 }
 
@@ -155,25 +137,7 @@ fun rememberTabContent(interestsViewModel: InterestsViewModel): List<TabContent>
         )
     }
 
-    val peopleSection = TabContent(Sections.People) {
-        val selectedPeople by interestsViewModel.selectedPeople.collectAsState()
-        TabWithTopics(
-            topics = uiState.people,
-            selectedTopics = selectedPeople,
-            onTopicSelect = { interestsViewModel.togglePersonSelected(it) }
-        )
-    }
-
-    val publicationSection = TabContent(Sections.Publications) {
-        val selectedPublications by interestsViewModel.selectedPublications.collectAsState()
-        TabWithTopics(
-            topics = uiState.publications,
-            selectedTopics = selectedPublications,
-            onTopicSelect = { interestsViewModel.togglePublicationSelected(it) }
-        )
-    }
-
-    return listOf(topicsSection, peopleSection, publicationSection)
+    return listOf(topicsSection)
 }
 
 /**
@@ -188,14 +152,11 @@ fun rememberTabContent(interestsViewModel: InterestsViewModel): List<TabContent>
 @Composable
 private fun InterestScreenContent(
     currentSection: Sections,
-    isExpandedScreen: Boolean,
-    updateSection: (Sections) -> Unit,
     tabContent: List<TabContent>,
     modifier: Modifier = Modifier
 ) {
     val selectedTabIndex = tabContent.indexOfFirst { it.section == currentSection }
     Column(modifier) {
-        InterestsTabRow(selectedTabIndex, updateSection, tabContent, isExpandedScreen)
         Divider(
             color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
         )
@@ -477,8 +438,6 @@ fun PreviewInterestsScreenDrawer() {
         InterestsScreen(
             tabContent = tabContent,
             currentSection = currentSection,
-            isExpandedScreen = false,
-            onTabChange = updateSection,
             scaffoldState = rememberScaffoldState()
         )
     }
@@ -504,8 +463,6 @@ fun PreviewInterestsScreenNavRail() {
         InterestsScreen(
             tabContent = tabContent,
             currentSection = currentSection,
-            isExpandedScreen = true,
-            onTabChange = updateSection,
             scaffoldState = rememberScaffoldState()
         )
     }

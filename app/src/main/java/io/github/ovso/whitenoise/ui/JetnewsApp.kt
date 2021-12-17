@@ -26,22 +26,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import io.github.ovso.whitenoise.data.AppContainer
-import com.example.jetnews.ui.interests.InterestsRoute
-import io.github.ovso.whitenoise.ui.interests.InterestsScreen
 import com.example.jetnews.ui.interests.InterestsViewModel
-import io.github.ovso.whitenoise.ui.interests.rememberTabContent
 import com.example.jetnews.ui.theme.JetnewsTheme
 import com.example.jetnews.utils.WindowSize
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import io.github.ovso.whitenoise.data.AppContainer
+import io.github.ovso.whitenoise.ui.interests.InterestsRoute
+import io.github.ovso.whitenoise.ui.interests.InterestsScreen
+import io.github.ovso.whitenoise.ui.interests.rememberTabContent
 
 @Composable
 fun JetnewsApp(
     appContainer: AppContainer,
-    windowSize: WindowSize
 ) {
     JetnewsTheme {
         ProvideWindowInsets {
@@ -50,8 +49,6 @@ fun JetnewsApp(
             SideEffect {
                 systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = darkIcons)
             }
-
-            val isExpandedScreen = windowSize == WindowSize.Expanded
 
             val interestsViewModel: InterestsViewModel = viewModel(
                 factory = InterestsViewModel.provideFactory(appContainer.interestsRepository)
@@ -67,15 +64,12 @@ fun JetnewsApp(
             InterestsScreen(
                 tabContent = tabContent,
                 currentSection = currentSection,
-                isExpandedScreen = isExpandedScreen,
-                onTabChange = updateSection,
                 scaffoldState = scaffoldState
             )
 
 
             InterestsRoute(
-                interestsViewModel = interestsViewModel,
-                isExpandedScreen = isExpandedScreen,
+                interestsViewModel = interestsViewModel
             )
         }
     }

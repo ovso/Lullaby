@@ -27,7 +27,7 @@ import io.github.ovso.whitenoise.data.AppContainer
 import com.example.jetnews.ui.JetnewsDestinations
 import com.example.jetnews.ui.home.HomeRoute
 import io.github.ovso.whitenoise.ui.home.HomeViewModel
-import com.example.jetnews.ui.interests.InterestsRoute
+import io.github.ovso.whitenoise.ui.interests.InterestsRoute
 import com.example.jetnews.ui.interests.InterestsViewModel
 
 @Composable
@@ -60,7 +60,6 @@ fun JetnewsNavGraph(
             )
             InterestsRoute(
                 interestsViewModel = interestsViewModel,
-                isExpandedScreen = isExpandedScreen,
             )
         }
     }

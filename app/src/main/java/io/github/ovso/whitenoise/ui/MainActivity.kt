@@ -20,7 +20,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.example.jetnews.utils.rememberWindowSizeClass
 import io.github.ovso.whitenoise.LullabyApplication
 
 class MainActivity : AppCompatActivity() {
@@ -31,8 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val appContainer = (application as LullabyApplication).container
         setContent {
-            val windowSizeClass = rememberWindowSizeClass()
-            JetnewsApp(appContainer, windowSizeClass)
+            JetnewsApp(appContainer)
         }
     }
 }
