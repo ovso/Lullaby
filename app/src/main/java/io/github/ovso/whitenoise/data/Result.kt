@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.ui.theme
+package io.github.ovso.whitenoise.data
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
-import androidx.compose.ui.unit.dp
+/**
+ * A generic class that holds a value or an exception
+ */
+sealed class Result<out R> {
+    data class Success<out T>(val data: T) : Result<T>()
+    data class Error(val exception: Exception) : Result<Nothing>()
+}
 
-val JetnewsShapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(8.dp)
-)
+fun <T> Result<T>.successOr(fallback: T): T {
+    return (this as? Result.Success<T>)?.data ?: fallback
+}

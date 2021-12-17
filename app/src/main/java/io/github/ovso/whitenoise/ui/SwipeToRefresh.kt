@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.ui.theme
+package com.example.jetnews.ui
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
-import androidx.compose.ui.unit.dp
-
-val JetnewsShapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(8.dp)
-)
+/**
+ * Replaced with: https://google.github.io/accompanist/swiperefresh
+ */
