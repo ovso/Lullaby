@@ -40,7 +40,7 @@ data class LullabiesUiState(
     val loading: Boolean = false,
 )
 
-class InterestsViewModel(
+class HomeViewModel(
     private val lullabyRepository: LullabyRepository
 ) : ViewModel() {
 
@@ -97,7 +97,7 @@ class InterestsViewModel(
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return InterestsViewModel(interestsRepository) as T
+                return HomeViewModel(interestsRepository) as T
             }
         }
     }

@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
-import io.github.ovso.whitenoise.ui.home.InterestsViewModel
+import io.github.ovso.whitenoise.ui.home.HomeViewModel
 import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -42,8 +42,8 @@ fun LullabyApp(
                 systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = darkIcons)
             }
 
-            val interestsViewModel: InterestsViewModel = viewModel(
-                factory = InterestsViewModel.provideFactory(appContainer.lullabyRepository)
+            val interestsViewModel: HomeViewModel = viewModel(
+                factory = HomeViewModel.provideFactory(appContainer.lullabyRepository)
             )
 
             val tabContent = rememberHomeContent(interestsViewModel)

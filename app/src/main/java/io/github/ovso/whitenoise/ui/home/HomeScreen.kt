@@ -95,10 +95,10 @@ fun InterestsScreen(
 
 /**
  * Remembers the content for each tab on the Interests screen
- * gathering application data from [InterestsViewModel]
+ * gathering application data from [HomeViewModel]
  */
 @Composable
-fun rememberHomeContent(interestsViewModel: InterestsViewModel): HomeContent {
+fun rememberHomeContent(interestsViewModel: HomeViewModel): HomeContent {
     // UiState of the InterestsScreen
     val uiState by interestsViewModel.uiState.collectAsState()
 
