@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.ui.interests
+package io.github.ovso.whitenoise.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -35,23 +35,21 @@ import kotlinx.coroutines.launch
 /**
  * UI state for the Interests screen
  */
-data class InterestsUiState(
-    val topics: List<LullabySection> = emptyList(),
-    val people: List<String> = emptyList(),
-    val publications: List<String> = emptyList(),
+data class LullabiesUiState(
+    val lullabies: List<LullabySection> = emptyList(),
     val loading: Boolean = false,
 )
 
 class InterestsViewModel(
-    private val interestsRepository: LullabyRepository
+    private val lullabyRepository: LullabyRepository
 ) : ViewModel() {
 
     // UI state exposed to the UI
-    private val _uiState = MutableStateFlow(InterestsUiState(loading = true))
-    val uiState: StateFlow<InterestsUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
+    val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
-    val selectedTopics =
-        interestsRepository.observeSelected().stateIn(
+    val selectedLullaby =
+        lullabyRepository.observeSelected().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
             emptySet()
@@ -64,19 +62,7 @@ class InterestsViewModel(
 
     fun toggleTopicSelection(topic: Selection) {
         viewModelScope.launch {
-            interestsRepository.toggleSelection(topic)
-        }
-    }
-
-    fun togglePersonSelected(person: String) {
-        viewModelScope.launch {
-            interestsRepository.togglePersonSelected(person)
-        }
-    }
-
-    fun togglePublicationSelected(publication: String) {
-        viewModelScope.launch {
-            interestsRepository.togglePublicationSelected(publication)
+            lullabyRepository.toggleSelection(topic)
         }
     }
 
@@ -88,21 +74,15 @@ class InterestsViewModel(
 
         viewModelScope.launch {
             // Trigger repository requests in parallel
-            val topicsDeferred = async { interestsRepository.getLullabies() }
-            val peopleDeferred = async { interestsRepository.getPeople() }
-            val publicationsDeferred = async { interestsRepository.getPublications() }
+            val topicsDeferred = async { lullabyRepository.getLullabies() }
 
             // Wait for all requests to finish
-            val topics = topicsDeferred.await().successOr(emptyList())
-            val people = peopleDeferred.await().successOr(emptyList())
-            val publications = publicationsDeferred.await().successOr(emptyList())
+            val lullabies = topicsDeferred.await().successOr(emptyList())
 
             _uiState.update {
                 it.copy(
                     loading = false,
-                    topics = topics,
-                    people = people,
-                    publications = publications
+                    lullabies = lullabies,
                 )
             }
         }

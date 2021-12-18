@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
-import com.example.jetnews.ui.interests.InterestsViewModel
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.lullaby.LullabySection
@@ -106,11 +105,11 @@ fun rememberHomeContent(interestsViewModel: InterestsViewModel): HomeContent {
     // Describe the screen sections here since each section needs 2 states and 1 event.
     // Pass them to the stateless InterestsScreen using a tabContent.
     val topicsSection = HomeContent {
-        val selectedTopics by interestsViewModel.selectedTopics.collectAsState()
+        val selectedTopics by interestsViewModel.selectedLullaby.collectAsState()
         TabWithSections(
-            sections = uiState.topics,
-            selectedTopics = selectedTopics,
-            onTopicSelect = { interestsViewModel.toggleTopicSelection(it) }
+            sections = uiState.lullabies,
+            selectedLullabies = selectedTopics,
+            onLullabySelect = { interestsViewModel.toggleTopicSelection(it) }
         )
     }
 
@@ -149,17 +148,17 @@ private val homeContainerModifier = Modifier
  * Display a sectioned list of topics
  *
  * @param sections (state) topics to display, grouped by sections
- * @param selectedTopics (state) currently selected topics
- * @param onTopicSelect (event) request a topic+section selection be changed
+ * @param selectedLullabies (state) currently selected topics
+ * @param onLullabySelect (event) request a topic+section selection be changed
  */
 @Composable
 private fun TabWithSections(
     sections: List<LullabySection>,
-    selectedTopics: Set<Selection>,
-    onTopicSelect: (Selection) -> Unit
+    selectedLullabies: Set<Selection>,
+    onLullabySelect: (Selection) -> Unit
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
-        sections.forEach { (section, topics) ->
+        sections.forEach { (section, lullabies) ->
             Text(
                 text = section,
                 modifier = Modifier
@@ -168,11 +167,11 @@ private fun TabWithSections(
                 style = MaterialTheme.typography.subtitle1
             )
             HomeAdaptiveContentLayout {
-                topics.forEach { topic ->
+                lullabies.forEach { topic ->
                     LullabyItem(
                         itemTitle = topic,
-                        selected = selectedTopics.contains(Selection(section, topic)),
-                        onToggle = { onTopicSelect(Selection(section, topic)) },
+                        selected = selectedLullabies.contains(Selection(section, topic)),
+                        onToggle = { onLullabySelect(Selection(section, topic)) },
                     )
                 }
             }
@@ -300,19 +299,3 @@ private fun HomeAdaptiveContentLayout(
         }
     }
 }
-
-/*
-@Preview("Interests screen topics tab", "Topics")
-@Preview("Interests screen topics tab (dark)", "Topics", uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun PreviewTopicsTab() {
-    val topics = runBlocking {
-        (FakeInterestsRepository().getTopics() as Result.Success).data
-    }
-    LullabyTheme {
-        Surface {
-            TabWithSections(topics, setOf()) { }
-        }
-    }
-}
-*/
