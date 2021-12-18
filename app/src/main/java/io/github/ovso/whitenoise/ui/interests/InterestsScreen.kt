@@ -325,48 +325,6 @@ private fun InterestsAdaptiveContentLayout(
     }
 }
 
-@Preview("Interests screen", "Interests")
-@Preview("Interests screen (dark)", "Interests", uiMode = UI_MODE_NIGHT_YES)
-@Preview("Interests screen (big font)", "Interests", fontScale = 1.5f)
-@Composable
-fun PreviewInterestsScreenDrawer() {
-    LullabyTheme {
-        val tabContent = getFakeTabsContent()
-        val (_, _) = rememberSaveable {
-            mutableStateOf(tabContent.section)
-        }
-
-        InterestsScreen(
-            tabContent = tabContent,
-            scaffoldState = rememberScaffoldState()
-        )
-    }
-}
-
-@Preview("Interests screen navrail", "Interests", device = Devices.PIXEL_C)
-@Preview(
-    "Interests screen navrail (dark)", "Interests",
-    uiMode = UI_MODE_NIGHT_YES, device = Devices.PIXEL_C
-)
-@Preview(
-    "Interests screen navrail (big font)", "Interests",
-    fontScale = 1.5f, device = Devices.PIXEL_C
-)
-@Composable
-fun PreviewInterestsScreenNavRail() {
-    LullabyTheme {
-        val tabContent = getFakeTabsContent()
-        val (_, _) = rememberSaveable {
-            mutableStateOf(tabContent.section)
-        }
-
-        InterestsScreen(
-            tabContent = tabContent,
-            scaffoldState = rememberScaffoldState()
-        )
-    }
-}
-
 @Preview("Interests screen topics tab", "Topics")
 @Preview("Interests screen topics tab (dark)", "Topics", uiMode = UI_MODE_NIGHT_YES)
 @Composable
