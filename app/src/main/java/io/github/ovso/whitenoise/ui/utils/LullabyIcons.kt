@@ -18,17 +18,14 @@ package io.github.ovso.whitenoise.ui.utils
 
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.IconToggleButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
@@ -59,25 +56,5 @@ fun BookmarkButton(
                 contentDescription = null // handled by click label of parent
             )
         }
-    }
-}
-
-@Composable
-fun ShareButton(onClick: () -> Unit) {
-    IconButton(onClick) {
-        Icon(
-            imageVector = Icons.Filled.Share,
-            contentDescription = stringResource(R.string.cd_share)
-        )
-    }
-}
-
-@Composable
-fun TextSettingsButton(onClick: () -> Unit) {
-    IconButton(onClick) {
-        Icon(
-            painter = painterResource(R.drawable.ic__18_fish),
-            contentDescription = stringResource(R.string.cd_text_settings)
-        )
     }
 }

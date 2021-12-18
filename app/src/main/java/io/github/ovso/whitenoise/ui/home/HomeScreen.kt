@@ -20,7 +20,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -203,8 +201,8 @@ private fun LullabyItem(
                 painter = image,
                 contentDescription = null, // decorative
                 modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(4.dp))
+                    .size(72.dp)
+                    .padding(8.dp)
             )
             Text(
                 text = itemTitle,
@@ -217,7 +215,7 @@ private fun LullabyItem(
             SelectButton(selected = selected)
         }
         Divider(
-            modifier = modifier.padding(start = 72.dp, top = 8.dp, bottom = 8.dp),
+            modifier = modifier.padding(start = 90.dp),
             color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
         )
     }
