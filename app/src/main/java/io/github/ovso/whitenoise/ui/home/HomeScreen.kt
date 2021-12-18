@@ -198,7 +198,7 @@ private fun LullabyItem(
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val image = painterResource(R.drawable.xylophone)
+            val image = painterResource(R.drawable.lullaby)
             Image(
                 painter = image,
                 contentDescription = null, // decorative
