@@ -79,9 +79,6 @@ class TabContent(val section: Sections, val content: @Composable () -> Unit)
  *
  * @param tabContent (slot) the tabs and their content to display on this screen, must be a
  * non-empty list, tabs are displayed in the order specified by this list
- * @param currentSection (state) the current tab to display, must be in [tabContent]
- * @param isExpandedScreen (state) true if the screen is expanded
- * @param onTabChange (event) request a change in [currentSection] to another tab from [tabContent]
  * @param scaffoldState (state) the state for the screen's [Scaffold]
  */
 @Composable
@@ -139,9 +136,6 @@ fun rememberTabContent(interestsViewModel: InterestsViewModel): TabContent {
 /**
  * Displays a tab row with [currentSection] selected and the body of the corresponding [tabContent].
  *
- * @param currentSection (state) the tab that is currently selected
- * @param isExpandedScreen (state) whether or not the screen is expanded
- * @param updateSection (event) request a change in tab selection
  * @param tabContent (slot) tabs and their content to display, must be a non-empty list, tabs are
  * displayed in the order of this list
  */
