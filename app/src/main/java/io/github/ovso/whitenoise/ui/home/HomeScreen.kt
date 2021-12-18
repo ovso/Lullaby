@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.ovso.whitenoise.ui.interests
+package io.github.ovso.whitenoise.ui.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
@@ -42,7 +42,6 @@ import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.interests.InterestsViewModel
-import com.example.jetnews.ui.interests.SelectTopicButton
 import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
@@ -60,8 +59,7 @@ import kotlin.math.max
  * passing several parameters per-tab from the stateful composable to the composable that displays
  * the current tab.
  *
- * @param section the tab that this content is for
- * @param section content of the tab, a composable that describes the content
+ * @param content content of the tab, a composable that describes the content
  */
 class HomeContent(val content: @Composable () -> Unit)
 
@@ -95,8 +93,8 @@ fun InterestsScreen(
         }
     ) { innerPadding ->
         val screenModifier = Modifier.padding(innerPadding)
-        InterestScreenContent(
-            tabContent = tabContent,
+        HomeScreenContent(
+            homeContent = tabContent,
             modifier = screenModifier
         )
     }
@@ -126,12 +124,12 @@ fun rememberHomeContent(interestsViewModel: InterestsViewModel): HomeContent {
 }
 
 /**
- * @param tabContent (slot) tabs and their content to display, must be a non-empty list, tabs are
+ * @param homeContent (slot) tabs and their content to display, must be a non-empty list, tabs are
  * displayed in the order of this list
  */
 @Composable
-private fun InterestScreenContent(
-    tabContent: HomeContent,
+private fun HomeScreenContent(
+    homeContent: HomeContent,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -140,7 +138,7 @@ private fun InterestScreenContent(
         )
         Box(modifier = Modifier.weight(1f)) {
             // display the current tab content which is a @Composable () -> Unit
-            tabContent.content()
+            homeContent.content()
         }
     }
 }
@@ -148,7 +146,7 @@ private fun InterestScreenContent(
 /**
  * Modifier for UI containers that show interests items
  */
-private val tabContainerModifier = Modifier
+private val homeContainerModifier = Modifier
     .fillMaxWidth()
     .wrapContentWidth(Alignment.CenterHorizontally)
     .navigationBarsPadding(start = false, end = false)
@@ -166,7 +164,7 @@ private fun TabWithSections(
     selectedTopics: Set<TopicSelection>,
     onTopicSelect: (TopicSelection) -> Unit
 ) {
-    Column(tabContainerModifier.verticalScroll(rememberScrollState())) {
+    Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
         sections.forEach { (section, topics) ->
             Text(
                 text = section,
@@ -177,7 +175,7 @@ private fun TabWithSections(
             )
             InterestsAdaptiveContentLayout {
                 topics.forEach { topic ->
-                    TopicItem(
+                    LullabyItem(
                         itemTitle = topic,
                         selected = selectedTopics.contains(TopicSelection(section, topic)),
                         onToggle = { onTopicSelect(TopicSelection(section, topic)) },
@@ -196,7 +194,7 @@ private fun TabWithSections(
  * @param onToggle (event) toggle selection for topic
  */
 @Composable
-private fun TopicItem(
+private fun LullabyItem(
     itemTitle: String,
     selected: Boolean,
     onToggle: () -> Unit,

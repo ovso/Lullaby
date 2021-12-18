@@ -27,11 +27,11 @@ import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.whitenoise.data.AppContainer
-import io.github.ovso.whitenoise.ui.interests.InterestsScreen
-import io.github.ovso.whitenoise.ui.interests.rememberHomeContent
+import io.github.ovso.whitenoise.ui.home.InterestsScreen
+import io.github.ovso.whitenoise.ui.home.rememberHomeContent
 
 @Composable
-fun JetnewsApp(
+fun LullabyApp(
     appContainer: AppContainer,
 ) {
     LullabyTheme {

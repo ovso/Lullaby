@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.ui.interests
+package io.github.ovso.whitenoise.ui.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.BorderStroke
