@@ -60,9 +60,9 @@ class InterestsViewModel(
         refreshAll()
     }
 
-    fun toggleTopicSelection(topic: Selection) {
+    fun toggleSelection(lullaby: Selection) {
         viewModelScope.launch {
-            lullabyRepository.toggleSelection(topic)
+            lullabyRepository.toggleSelection(lullaby)
         }
     }
 

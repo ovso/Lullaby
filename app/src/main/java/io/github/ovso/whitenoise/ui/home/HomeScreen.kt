@@ -104,16 +104,16 @@ fun rememberHomeContent(interestsViewModel: InterestsViewModel): HomeContent {
 
     // Describe the screen sections here since each section needs 2 states and 1 event.
     // Pass them to the stateless InterestsScreen using a tabContent.
-    val topicsSection = HomeContent {
-        val selectedTopics by interestsViewModel.selectedLullaby.collectAsState()
+    val homeContent = HomeContent {
+        val selectedLullabies by interestsViewModel.selectedLullaby.collectAsState()
         TabWithSections(
             sections = uiState.lullabies,
-            selectedLullabies = selectedTopics,
-            onLullabySelect = { interestsViewModel.toggleTopicSelection(it) }
+            selectedLullabies = selectedLullabies,
+            onLullabySelect = { interestsViewModel.toggleSelection(it) }
         )
     }
 
-    return topicsSection
+    return homeContent
 }
 
 /**
