@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.ui.modifiers
+package io.github.ovso.whitenoise.ui.modifiers
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
