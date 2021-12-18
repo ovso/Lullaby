@@ -35,13 +35,14 @@ import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.theme.LullabyTheme
 
 @Composable
-fun SelectTopicButton(
+fun SelectButton(
     modifier: Modifier = Modifier,
     selected: Boolean = false
 ) {
     val icon = if (selected) Icons.Filled.Done else Icons.Filled.Add
     val iconColor = if (selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
-    val borderColor = if (selected) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
+    val borderColor =
+        if (selected) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
     val backgroundColor = if (selected) {
         MaterialTheme.colors.primary
     } else {
@@ -86,7 +87,7 @@ private fun SelectTopicButtonPreviewTemplate(
 ) {
     LullabyTheme {
         Surface {
-            SelectTopicButton(
+            SelectButton(
                 modifier = Modifier.padding(32.dp),
                 selected = selected
             )

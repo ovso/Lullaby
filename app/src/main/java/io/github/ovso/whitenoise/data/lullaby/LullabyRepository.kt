@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.ovso.whitenoise.data.interests
+package io.github.ovso.whitenoise.data.lullaby
 
 import io.github.ovso.whitenoise.data.Result
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +24,7 @@ data class InterestSection(val title: String, val interests: List<String>)
 /**
  * Interface to the Interests data layer.
  */
-interface InterestsRepository {
+interface LullabyRepository {
 
     /**
      * Get relevant topics to the user.

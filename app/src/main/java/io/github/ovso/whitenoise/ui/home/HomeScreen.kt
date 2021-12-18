@@ -16,7 +16,6 @@
 
 package io.github.ovso.whitenoise.ui.home
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -36,20 +35,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.interests.InterestsViewModel
-import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
-import io.github.ovso.whitenoise.data.Result
-import io.github.ovso.whitenoise.data.interests.InterestSection
-import io.github.ovso.whitenoise.data.interests.TopicSelection
-import io.github.ovso.whitenoise.data.interests.impl.FakeInterestsRepository
-import kotlinx.coroutines.runBlocking
+import io.github.ovso.whitenoise.data.lullaby.InterestSection
+import io.github.ovso.whitenoise.data.lullaby.TopicSelection
 import kotlin.math.max
 
 /**
@@ -173,7 +167,7 @@ private fun TabWithSections(
                     .semantics { heading() },
                 style = MaterialTheme.typography.subtitle1
             )
-            InterestsAdaptiveContentLayout {
+            HomeAdaptiveContentLayout {
                 topics.forEach { topic ->
                     LullabyItem(
                         itemTitle = topic,
@@ -224,7 +218,7 @@ private fun LullabyItem(
                 style = MaterialTheme.typography.subtitle1
             )
             Spacer(Modifier.weight(0.01f))
-            SelectTopicButton(selected = selected)
+            SelectButton(selected = selected)
         }
         Divider(
             modifier = modifier.padding(start = 72.dp, top = 8.dp, bottom = 8.dp),
@@ -243,7 +237,7 @@ private fun LullabyItem(
  *     E
  */
 @Composable
-private fun InterestsAdaptiveContentLayout(
+private fun HomeAdaptiveContentLayout(
     modifier: Modifier = Modifier,
     topPadding: Dp = 0.dp,
     itemSpacing: Dp = 4.dp,
@@ -307,6 +301,7 @@ private fun InterestsAdaptiveContentLayout(
     }
 }
 
+/*
 @Preview("Interests screen topics tab", "Topics")
 @Preview("Interests screen topics tab (dark)", "Topics", uiMode = UI_MODE_NIGHT_YES)
 @Composable
@@ -320,3 +315,4 @@ fun PreviewTopicsTab() {
         }
     }
 }
+*/

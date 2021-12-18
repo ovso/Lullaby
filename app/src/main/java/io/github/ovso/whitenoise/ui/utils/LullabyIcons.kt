@@ -25,7 +25,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.ThumbUpOffAlt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -34,16 +33,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import io.github.ovso.whitenoise.R
-
-@Composable
-fun FavoriteButton(onClick: () -> Unit) {
-    IconButton(onClick) {
-        Icon(
-            imageVector = Icons.Filled.ThumbUpOffAlt,
-            contentDescription = stringResource(R.string.cd_add_to_favorites)
-        )
-    }
-}
 
 @Composable
 fun BookmarkButton(

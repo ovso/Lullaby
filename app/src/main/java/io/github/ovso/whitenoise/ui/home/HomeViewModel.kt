@@ -19,9 +19,9 @@ package com.example.jetnews.ui.interests
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import io.github.ovso.whitenoise.data.interests.InterestSection
-import io.github.ovso.whitenoise.data.interests.InterestsRepository
-import io.github.ovso.whitenoise.data.interests.TopicSelection
+import io.github.ovso.whitenoise.data.lullaby.InterestSection
+import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
+import io.github.ovso.whitenoise.data.lullaby.TopicSelection
 import io.github.ovso.whitenoise.data.successOr
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,7 +43,7 @@ data class InterestsUiState(
 )
 
 class InterestsViewModel(
-    private val interestsRepository: InterestsRepository
+    private val interestsRepository: LullabyRepository
 ) : ViewModel() {
 
     // UI state exposed to the UI
@@ -113,7 +113,7 @@ class InterestsViewModel(
      */
     companion object {
         fun provideFactory(
-            interestsRepository: InterestsRepository,
+            interestsRepository: LullabyRepository,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {

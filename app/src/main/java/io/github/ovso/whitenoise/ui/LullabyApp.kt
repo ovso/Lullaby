@@ -43,7 +43,7 @@ fun LullabyApp(
             }
 
             val interestsViewModel: InterestsViewModel = viewModel(
-                factory = InterestsViewModel.provideFactory(appContainer.interestsRepository)
+                factory = InterestsViewModel.provideFactory(appContainer.lullabyRepository)
             )
 
             val tabContent = rememberHomeContent(interestsViewModel)

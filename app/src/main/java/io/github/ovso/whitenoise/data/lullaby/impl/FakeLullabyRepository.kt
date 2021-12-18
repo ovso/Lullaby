@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.ovso.whitenoise.data.interests.impl
+package io.github.ovso.whitenoise.data.lullaby.impl
 
 import io.github.ovso.whitenoise.data.Result
-import io.github.ovso.whitenoise.data.interests.InterestSection
-import io.github.ovso.whitenoise.data.interests.InterestsRepository
-import io.github.ovso.whitenoise.data.interests.TopicSelection
+import io.github.ovso.whitenoise.data.lullaby.InterestSection
+import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
+import io.github.ovso.whitenoise.data.lullaby.TopicSelection
 import com.example.jetnews.utils.addOrRemove
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +32,7 @@ import kotlinx.coroutines.sync.withLock
  * topics, people and publications synchronously.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
-class FakeInterestsRepository : InterestsRepository {
+class FakeLullabyRepository : LullabyRepository {
 
     private val topics by lazy {
         listOf(

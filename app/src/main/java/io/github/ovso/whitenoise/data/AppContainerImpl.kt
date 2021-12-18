@@ -17,17 +17,14 @@
 package io.github.ovso.whitenoise.data
 
 import android.content.Context
-import io.github.ovso.whitenoise.data.interests.InterestsRepository
-import io.github.ovso.whitenoise.data.interests.impl.FakeInterestsRepository
-import io.github.ovso.whitenoise.data.posts.PostsRepository
-import io.github.ovso.whitenoise.data.posts.impl.FakePostsRepository
+import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
+import io.github.ovso.whitenoise.data.lullaby.impl.FakeLullabyRepository
 
 /**
  * Dependency Injection container at the application level.
  */
 interface AppContainer {
-    val postsRepository: PostsRepository
-    val interestsRepository: InterestsRepository
+    val lullabyRepository: LullabyRepository
 }
 
 /**
@@ -37,11 +34,7 @@ interface AppContainer {
  */
 class AppContainerImpl(private val applicationContext: Context) : AppContainer {
 
-    override val postsRepository: PostsRepository by lazy {
-        FakePostsRepository()
-    }
-
-    override val interestsRepository: InterestsRepository by lazy {
-        FakeInterestsRepository()
+    override val lullabyRepository: LullabyRepository by lazy {
+        FakeLullabyRepository()
     }
 }
