@@ -19,17 +19,12 @@ package io.github.ovso.whitenoise.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
+import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.Selection
 import io.github.ovso.whitenoise.data.successOr
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 /**
@@ -50,9 +45,9 @@ class HomeViewModel(
 
     val selectedLullaby =
         lullabyRepository.observeSelected().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptySet()
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptySet()
         )
 
 
@@ -93,11 +88,11 @@ class HomeViewModel(
      */
     companion object {
         fun provideFactory(
-            interestsRepository: LullabyRepository,
+            lullabyRepository: LullabyRepository,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(interestsRepository) as T
+                return HomeViewModel(lullabyRepository) as T
             }
         }
     }

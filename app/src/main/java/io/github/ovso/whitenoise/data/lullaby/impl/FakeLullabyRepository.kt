@@ -17,8 +17,8 @@
 package io.github.ovso.whitenoise.data.lullaby.impl
 
 import io.github.ovso.whitenoise.data.Result
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
+import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.Selection
 import io.github.ovso.whitenoise.utils.addOrRemove
 import kotlinx.coroutines.flow.Flow
@@ -48,7 +48,7 @@ class FakeLullabyRepository : LullabyRepository {
             ),
             LullabySection(
                 "Hum",
-                listOf("1", "2")
+                listOf("Hum1", "Hum2")
             )
         )
     }

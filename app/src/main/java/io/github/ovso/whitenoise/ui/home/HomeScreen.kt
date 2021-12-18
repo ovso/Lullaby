@@ -164,11 +164,11 @@ private fun Sections(
                 style = MaterialTheme.typography.subtitle1
             )
             HomeAdaptiveContentLayout {
-                lullabies.forEach { topic ->
+                lullabies.forEach { lullaby ->
                     LullabyItem(
-                        itemTitle = topic,
-                        selected = selectedLullabies.contains(Selection(section, topic)),
-                        onToggle = { onLullabySelect(Selection(section, topic)) },
+                        itemTitle = lullaby,
+                        selected = selectedLullabies.contains(Selection(section, lullaby)),
+                        onToggle = { onLullabySelect(Selection(section, lullaby)) },
                     )
                 }
             }
