@@ -74,10 +74,10 @@ class HomeViewModel(
 
         viewModelScope.launch {
             // Trigger repository requests in parallel
-            val topicsDeferred = async { lullabyRepository.getLullabies() }
+            val lullabiesDeferred = async { lullabyRepository.getLullabies() }
 
             // Wait for all requests to finish
-            val lullabies = topicsDeferred.await().successOr(emptyList())
+            val lullabies = lullabiesDeferred.await().successOr(emptyList())
 
             _uiState.update {
                 it.copy(

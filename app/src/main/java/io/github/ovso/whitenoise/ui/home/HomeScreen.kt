@@ -57,25 +57,22 @@ import kotlin.math.max
 class HomeContent(val content: @Composable () -> Unit)
 
 /**
- * Stateless interest screen displays the tabs specified in [tabContent] adapting the UI to
+ * Stateless interest screen displays the tabs specified in [content] adapting the UI to
  * different screen sizes.
  *
- * @param tabContent (slot) the tabs and their content to display on this screen, must be a
+ * @param content (slot) the tabs and their content to display on this screen, must be a
  * non-empty list, tabs are displayed in the order specified by this list
- * @param scaffoldState (state) the state for the screen's [Scaffold]
  */
 @Composable
-fun InterestsScreen(
-    tabContent: HomeContent,
-    scaffoldState: ScaffoldState
+fun HomeScreen(
+    content: HomeContent
 ) {
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.cd_interests),
+                        text = stringResource(R.string.app_name),
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
@@ -87,7 +84,7 @@ fun InterestsScreen(
     ) { innerPadding ->
         val screenModifier = Modifier.padding(innerPadding)
         HomeScreenContent(
-            homeContent = tabContent,
+            homeContent = content,
             modifier = screenModifier
         )
     }
@@ -98,18 +95,18 @@ fun InterestsScreen(
  * gathering application data from [HomeViewModel]
  */
 @Composable
-fun rememberHomeContent(interestsViewModel: HomeViewModel): HomeContent {
+fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
     // UiState of the InterestsScreen
-    val uiState by interestsViewModel.uiState.collectAsState()
+    val uiState by homeViewModel.uiState.collectAsState()
 
     // Describe the screen sections here since each section needs 2 states and 1 event.
     // Pass them to the stateless InterestsScreen using a tabContent.
     val homeContent = HomeContent {
-        val selectedLullabies by interestsViewModel.selectedLullaby.collectAsState()
-        TabWithSections(
+        val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
+        Sections(
             sections = uiState.lullabies,
             selectedLullabies = selectedLullabies,
-            onLullabySelect = { interestsViewModel.toggleSelection(it) }
+            onLullabySelect = { homeViewModel.toggleSelection(it) }
         )
     }
 
@@ -152,7 +149,7 @@ private val homeContainerModifier = Modifier
  * @param onLullabySelect (event) request a topic+section selection be changed
  */
 @Composable
-private fun TabWithSections(
+private fun Sections(
     sections: List<LullabySection>,
     selectedLullabies: Set<Selection>,
     onLullabySelect: (Selection) -> Unit
@@ -201,7 +198,7 @@ private fun LullabyItem(
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val image = painterResource(R.drawable.placeholder_1_1)
+            val image = painterResource(R.drawable.xylophone)
             Image(
                 painter = image,
                 contentDescription = null, // decorative

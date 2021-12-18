@@ -27,7 +27,7 @@ import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.whitenoise.data.AppContainer
-import io.github.ovso.whitenoise.ui.home.InterestsScreen
+import io.github.ovso.whitenoise.ui.home.HomeScreen
 import io.github.ovso.whitenoise.ui.home.rememberHomeContent
 
 @Composable
@@ -42,17 +42,14 @@ fun LullabyApp(
                 systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = darkIcons)
             }
 
-            val interestsViewModel: HomeViewModel = viewModel(
+            val homeViewModel: HomeViewModel = viewModel(
                 factory = HomeViewModel.provideFactory(appContainer.lullabyRepository)
             )
 
-            val tabContent = rememberHomeContent(interestsViewModel)
+            val content = rememberHomeContent(homeViewModel)
 
-            val scaffoldState = rememberScaffoldState()
-
-            InterestsScreen(
-                tabContent = tabContent,
-                scaffoldState = scaffoldState
+            HomeScreen(
+                content = content,
             )
         }
     }
