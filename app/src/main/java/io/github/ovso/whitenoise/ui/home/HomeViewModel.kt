@@ -19,9 +19,9 @@ package com.example.jetnews.ui.interests
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import io.github.ovso.whitenoise.data.lullaby.InterestSection
+import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
-import io.github.ovso.whitenoise.data.lullaby.TopicSelection
+import io.github.ovso.whitenoise.data.lullaby.Selection
 import io.github.ovso.whitenoise.data.successOr
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
  * UI state for the Interests screen
  */
 data class InterestsUiState(
-    val topics: List<InterestSection> = emptyList(),
+    val topics: List<LullabySection> = emptyList(),
     val people: List<String> = emptyList(),
     val publications: List<String> = emptyList(),
     val loading: Boolean = false,
@@ -51,7 +51,7 @@ class InterestsViewModel(
     val uiState: StateFlow<InterestsUiState> = _uiState.asStateFlow()
 
     val selectedTopics =
-        interestsRepository.observeTopicsSelected().stateIn(
+        interestsRepository.observeSelected().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
             emptySet()
@@ -62,9 +62,9 @@ class InterestsViewModel(
         refreshAll()
     }
 
-    fun toggleTopicSelection(topic: TopicSelection) {
+    fun toggleTopicSelection(topic: Selection) {
         viewModelScope.launch {
-            interestsRepository.toggleTopicSelection(topic)
+            interestsRepository.toggleSelection(topic)
         }
     }
 
@@ -88,7 +88,7 @@ class InterestsViewModel(
 
         viewModelScope.launch {
             // Trigger repository requests in parallel
-            val topicsDeferred = async { interestsRepository.getTopics() }
+            val topicsDeferred = async { interestsRepository.getLullabies() }
             val peopleDeferred = async { interestsRepository.getPeople() }
             val publicationsDeferred = async { interestsRepository.getPublications() }
 

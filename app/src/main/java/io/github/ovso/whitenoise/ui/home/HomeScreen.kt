@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.dp
 import com.example.jetnews.ui.interests.InterestsViewModel
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
-import io.github.ovso.whitenoise.data.lullaby.InterestSection
-import io.github.ovso.whitenoise.data.lullaby.TopicSelection
+import io.github.ovso.whitenoise.data.lullaby.LullabySection
+import io.github.ovso.whitenoise.data.lullaby.Selection
 import kotlin.math.max
 
 /**
@@ -154,9 +154,9 @@ private val homeContainerModifier = Modifier
  */
 @Composable
 private fun TabWithSections(
-    sections: List<InterestSection>,
-    selectedTopics: Set<TopicSelection>,
-    onTopicSelect: (TopicSelection) -> Unit
+    sections: List<LullabySection>,
+    selectedTopics: Set<Selection>,
+    onTopicSelect: (Selection) -> Unit
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
         sections.forEach { (section, topics) ->
@@ -171,8 +171,8 @@ private fun TabWithSections(
                 topics.forEach { topic ->
                     LullabyItem(
                         itemTitle = topic,
-                        selected = selectedTopics.contains(TopicSelection(section, topic)),
-                        onToggle = { onTopicSelect(TopicSelection(section, topic)) },
+                        selected = selectedTopics.contains(Selection(section, topic)),
+                        onToggle = { onTopicSelect(Selection(section, topic)) },
                     )
                 }
             }

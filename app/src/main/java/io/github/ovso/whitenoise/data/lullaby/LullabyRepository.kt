@@ -19,7 +19,7 @@ package io.github.ovso.whitenoise.data.lullaby
 import io.github.ovso.whitenoise.data.Result
 import kotlinx.coroutines.flow.Flow
 
-data class InterestSection(val title: String, val interests: List<String>)
+data class LullabySection(val title: String, val interests: List<String>)
 
 /**
  * Interface to the Interests data layer.
@@ -29,47 +29,17 @@ interface LullabyRepository {
     /**
      * Get relevant topics to the user.
      */
-    suspend fun getTopics(): Result<List<InterestSection>>
-
-    /**
-     * Get list of people.
-     */
-    suspend fun getPeople(): Result<List<String>>
-
-    /**
-     * Get list of publications.
-     */
-    suspend fun getPublications(): Result<List<String>>
+    suspend fun getLullabies(): Result<List<LullabySection>>
 
     /**
      * Toggle between selected and unselected
      */
-    suspend fun toggleTopicSelection(topic: TopicSelection)
-
-    /**
-     * Toggle between selected and unselected
-     */
-    suspend fun togglePersonSelected(person: String)
-
-    /**
-     * Toggle between selected and unselected
-     */
-    suspend fun togglePublicationSelected(publication: String)
-
+    suspend fun toggleSelection(topic: Selection)
     /**
      * Currently selected topics
      */
-    fun observeTopicsSelected(): Flow<Set<TopicSelection>>
+    fun observeSelected(): Flow<Set<Selection>>
 
-    /**
-     * Currently selected people
-     */
-    fun observePeopleSelected(): Flow<Set<String>>
-
-    /**
-     * Currently selected publications
-     */
-    fun observePublicationSelected(): Flow<Set<String>>
 }
 
-data class TopicSelection(val section: String, val topic: String)
+data class Selection(val section: String, val topic: String)
