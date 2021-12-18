@@ -28,7 +28,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.whitenoise.data.AppContainer
 import io.github.ovso.whitenoise.ui.interests.InterestsScreen
-import io.github.ovso.whitenoise.ui.interests.rememberTabContent
+import io.github.ovso.whitenoise.ui.interests.rememberHomeContent
 
 @Composable
 fun JetnewsApp(
@@ -46,7 +46,7 @@ fun JetnewsApp(
                 factory = InterestsViewModel.provideFactory(appContainer.interestsRepository)
             )
 
-            val tabContent = rememberTabContent(interestsViewModel)
+            val tabContent = rememberHomeContent(interestsViewModel)
 
             val scaffoldState = rememberScaffoldState()
 

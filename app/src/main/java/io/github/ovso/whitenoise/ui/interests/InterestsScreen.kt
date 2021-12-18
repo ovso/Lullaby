@@ -17,7 +17,6 @@
 package io.github.ovso.whitenoise.ui.interests
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -28,8 +27,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,7 +36,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.constrainHeight
@@ -57,10 +53,6 @@ import io.github.ovso.whitenoise.data.interests.impl.FakeInterestsRepository
 import kotlinx.coroutines.runBlocking
 import kotlin.math.max
 
-enum class Sections(@StringRes val titleResId: Int) {
-    Topics(R.string.interests_section_topics),
-}
-
 /**
  * TabContent for a single tab of the screen.
  *
@@ -71,7 +63,7 @@ enum class Sections(@StringRes val titleResId: Int) {
  * @param section the tab that this content is for
  * @param section content of the tab, a composable that describes the content
  */
-class TabContent(val section: Sections, val content: @Composable () -> Unit)
+class HomeContent(val content: @Composable () -> Unit)
 
 /**
  * Stateless interest screen displays the tabs specified in [tabContent] adapting the UI to
@@ -83,7 +75,7 @@ class TabContent(val section: Sections, val content: @Composable () -> Unit)
  */
 @Composable
 fun InterestsScreen(
-    tabContent: TabContent,
+    tabContent: HomeContent,
     scaffoldState: ScaffoldState
 ) {
     Scaffold(
@@ -115,13 +107,13 @@ fun InterestsScreen(
  * gathering application data from [InterestsViewModel]
  */
 @Composable
-fun rememberTabContent(interestsViewModel: InterestsViewModel): TabContent {
+fun rememberHomeContent(interestsViewModel: InterestsViewModel): HomeContent {
     // UiState of the InterestsScreen
     val uiState by interestsViewModel.uiState.collectAsState()
 
     // Describe the screen sections here since each section needs 2 states and 1 event.
     // Pass them to the stateless InterestsScreen using a tabContent.
-    val topicsSection = TabContent(Sections.Topics) {
+    val topicsSection = HomeContent {
         val selectedTopics by interestsViewModel.selectedTopics.collectAsState()
         TabWithSections(
             sections = uiState.topics,
@@ -134,14 +126,12 @@ fun rememberTabContent(interestsViewModel: InterestsViewModel): TabContent {
 }
 
 /**
- * Displays a tab row with [currentSection] selected and the body of the corresponding [tabContent].
- *
  * @param tabContent (slot) tabs and their content to display, must be a non-empty list, tabs are
  * displayed in the order of this list
  */
 @Composable
 private fun InterestScreenContent(
-    tabContent: TabContent,
+    tabContent: HomeContent,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -331,8 +321,4 @@ fun PreviewTopicsTab() {
             TabWithSections(topics, setOf()) { }
         }
     }
-}
-
-private fun getFakeTabsContent(): TabContent {
-    return TabContent(Sections.Topics) {}
 }
