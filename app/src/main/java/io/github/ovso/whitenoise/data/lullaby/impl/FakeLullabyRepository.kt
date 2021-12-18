@@ -20,7 +20,7 @@ import io.github.ovso.whitenoise.data.Result
 import io.github.ovso.whitenoise.data.lullaby.InterestSection
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
 import io.github.ovso.whitenoise.data.lullaby.TopicSelection
-import com.example.jetnews.utils.addOrRemove
+import io.github.ovso.whitenoise.utils.addOrRemove
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

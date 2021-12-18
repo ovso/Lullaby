@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.utils
+package io.github.ovso.whitenoise.utils
 
 import androidx.annotation.StringRes
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.jetnews.utils
+package io.github.ovso.whitenoise.utils
 
 internal fun <E> MutableSet<E>.addOrRemove(element: E) {
     if (!add(element)) {
