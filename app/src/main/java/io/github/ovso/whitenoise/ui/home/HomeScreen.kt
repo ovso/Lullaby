@@ -192,13 +192,14 @@ private fun LullabyItem(
         Row(
             modifier = modifier.toggleable(
                 value = selected,
-                onValueChange = { onToggle() }
+                onValueChange = {
+                    onToggle()
+                }
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val image = painterResource(R.drawable.lullaby)
             Image(
-                painter = image,
+                painter = painterResource(R.drawable.lullaby),
                 contentDescription = null, // decorative
                 modifier = Modifier
                     .size(72.dp)
