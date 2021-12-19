@@ -27,6 +27,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -39,7 +40,7 @@ fun SelectButton(
     modifier: Modifier = Modifier,
     selected: Boolean = false
 ) {
-    val icon = if (selected) Icons.Filled.Pause else Icons.Filled.PlayArrow
+    val icon = if (selected) Icons.Filled.Stop else Icons.Filled.PlayArrow
     val iconColor = if (selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
     val borderColor =
         if (selected) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
