@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
-import io.github.ovso.whitenoise.LullabyApplication
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.Selection
@@ -195,11 +194,6 @@ private fun LullabyItem(
                 value = selected,
                 onValueChange = {
                     onToggle()
-                    when(it) {
-                        true -> LullabyApplication.player.play()
-                        else -> LullabyApplication.player.stop()
-                    }
-
                 }
             ),
             verticalAlignment = Alignment.CenterVertically
