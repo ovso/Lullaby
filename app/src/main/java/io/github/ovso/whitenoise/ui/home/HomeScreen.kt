@@ -153,7 +153,7 @@ private fun Sections(
     onLullabySelect: (Selection) -> Unit
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
-        sections.forEach { (section, titles) ->
+        sections.forEach { (section, names) ->
             Text(
                 text = section,
                 modifier = Modifier
@@ -162,11 +162,11 @@ private fun Sections(
                 style = MaterialTheme.typography.subtitle1
             )
             HomeAdaptiveContentLayout {
-                titles.forEach { lullaby ->
+                names.forEach { name ->
                     LullabyItem(
-                        itemTitle = lullaby,
-                        selected = selectedLullabies.contains(Selection(section, lullaby)),
-                        onToggle = { onLullabySelect(Selection(section, lullaby)) },
+                        itemTitle = name,
+                        selected = selectedLullabies.contains(Selection(section, name)),
+                        onToggle = { onLullabySelect(Selection(section, name)) },
                     )
                 }
             }

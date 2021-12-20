@@ -19,7 +19,7 @@ package io.github.ovso.whitenoise.data.lullaby
 import io.github.ovso.whitenoise.data.Result
 import kotlinx.coroutines.flow.Flow
 
-data class LullabySection(val title: String, val interests: List<String>)
+data class LullabySection(val title: String, val names: List<String>)
 
 /**
  * Interface to the Interests data layer.

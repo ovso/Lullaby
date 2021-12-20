@@ -35,20 +35,20 @@ class FakeLullabyRepository : LullabyRepository {
     private val lullabies by lazy {
         listOf(
             LullabySection(
-                "자장가",
-                listOf("브람스 자장가", "모짜르트 자장가", "바흐 자장가")
+                title = "자장가",
+                names = listOf("브람스 자장가", "모짜르트 자장가", "바흐 자장가")
             ),
             LullabySection(
-                "자연의 소리",
-                listOf("파도소리", "냇물 소리", "빗소리", "천둥소리", "바람소리")
+                title = "자연의 소리",
+                names = listOf("파도소리", "냇물 소리", "빗소리", "천둥소리", "바람소리")
             ),
             LullabySection(
-                "도시",
-                listOf("카페", "자동차", "라디오")
+                title = "도시",
+                names = listOf("카페", "자동차", "라디오")
             ),
             LullabySection(
-                "Hum",
-                listOf("Hum1", "Hum2")
+                title = "Hum",
+                names = listOf("Hum1", "Hum2")
             )
         )
     }
