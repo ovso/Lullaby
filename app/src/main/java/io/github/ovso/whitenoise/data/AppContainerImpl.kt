@@ -35,6 +35,6 @@ interface AppContainer {
 class AppContainerImpl(private val applicationContext: Context) : AppContainer {
 
     override val lullabyRepository: LullabyRepository by lazy {
-        FakeLullabyRepository()
+        FakeLullabyRepository(applicationContext)
     }
 }

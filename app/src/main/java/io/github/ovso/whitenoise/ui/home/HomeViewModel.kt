@@ -20,18 +20,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
-import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.data.lullaby.LullabySection2
+import io.github.ovso.whitenoise.data.lullaby.Selection2
 import io.github.ovso.whitenoise.data.successOr
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-/**
- * UI state for the Interests screen
- */
 data class LullabiesUiState(
-    val lullabies: List<LullabySection> = emptyList(),
+    val lullabies: List<LullabySection2> = emptyList(),
     val loading: Boolean = false,
 )
 
@@ -42,6 +39,9 @@ class HomeViewModel(
     // UI state exposed to the UI
     private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
     val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
+
+    private val _uiState2 = MutableStateFlow(LullabiesUiState(loading = true))
+    val uiState2: StateFlow<LullabiesUiState> = _uiState2.asStateFlow()
 
     val selectedLullaby =
         lullabyRepository.observeSelected().stateIn(
@@ -55,7 +55,7 @@ class HomeViewModel(
         refreshAll()
     }
 
-    fun toggleSelection(lullaby: Selection) {
+    fun toggleSelection(lullaby: Selection2) {
         viewModelScope.launch {
             lullabyRepository.toggleSelection(lullaby)
         }
@@ -65,16 +65,16 @@ class HomeViewModel(
      * Refresh topics, people, and publications
      */
     private fun refreshAll() {
-        _uiState.update { it.copy(loading = true) }
+        _uiState2.update { it.copy(loading = true) }
 
         viewModelScope.launch {
             // Trigger repository requests in parallel
-            val lullabiesDeferred = async { lullabyRepository.getLullabies() }
+            val lullabiesDeferred = async { lullabyRepository.getLullabies2() }
 
             // Wait for all requests to finish
             val lullabies = lullabiesDeferred.await().successOr(emptyList())
 
-            _uiState.update {
+            _uiState2.update {
                 it.copy(
                     loading = false,
                     lullabies = lullabies,

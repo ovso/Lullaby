@@ -16,10 +16,14 @@
 
 package io.github.ovso.whitenoise.data.lullaby.impl
 
+import android.content.Context
+import io.github.ovso.whitenoise.R
+import io.github.ovso.whitenoise.data.LullabyModel
 import io.github.ovso.whitenoise.data.Result
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
 import io.github.ovso.whitenoise.data.lullaby.LullabySection
-import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.data.lullaby.LullabySection2
+import io.github.ovso.whitenoise.data.lullaby.Selection2
 import io.github.ovso.whitenoise.utils.addOrRemove
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +34,7 @@ import kotlinx.coroutines.sync.withLock
  * Implementation of InterestRepository that returns a hardcoded list of
  * topics, people and publications synchronously.
  */
-class FakeLullabyRepository : LullabyRepository {
+class FakeLullabyRepository(private val context: Context) : LullabyRepository {
 
     private val lullabies by lazy {
         listOf(
@@ -53,8 +57,37 @@ class FakeLullabyRepository : LullabyRepository {
         )
     }
 
+    private val lullabies2 by lazy {
+        listOf(
+            LullabySection2(
+                title = "자장가",
+                names = listOf("브람스 자장가", "모짜르트 자장가", "바흐 자장가").map {
+                    LullabyModel(it, R.raw.white_noise_10m)
+                }
+            ),
+            LullabySection2(
+                title = "자연의 소리",
+                names = listOf("파도소리", "냇물 소리", "빗소리", "천둥소리", "바람소리").map {
+                    LullabyModel(it, R.raw.white_noise_10m)
+                }
+            ),
+            LullabySection2(
+                title = "도시",
+                names = listOf("카페", "자동차", "라디오").map {
+                    LullabyModel(it, R.raw.white_noise_10m)
+                }
+            ),
+            LullabySection2(
+                title = "Hum",
+                names = listOf("Hum1", "Hum2").map {
+                    LullabyModel(it, R.raw.white_noise_10m)
+                }
+            )
+        )
+    }
+
     // for now, keep the selections in memory
-    private val selected = MutableStateFlow(setOf<Selection>())
+    private val selected = MutableStateFlow(setOf<Selection2>())
 
     // Used to make suspend functions that read and update state safe to call from any thread
     private val mutex = Mutex()
@@ -63,7 +96,11 @@ class FakeLullabyRepository : LullabyRepository {
         return Result.Success(lullabies)
     }
 
-    override suspend fun toggleSelection(topic: Selection) {
+    override suspend fun getLullabies2(): Result<List<LullabySection2>> {
+        return Result.Success(lullabies2)
+    }
+
+    override suspend fun toggleSelection(topic: Selection2) {
         mutex.withLock {
             val set = selected.value.toMutableSet()
             set.addOrRemove(topic)
@@ -71,5 +108,5 @@ class FakeLullabyRepository : LullabyRepository {
         }
     }
 
-    override fun observeSelected(): Flow<Set<Selection>> = selected
+    override fun observeSelected(): Flow<Set<Selection2>> = selected
 }

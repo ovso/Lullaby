@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
-import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.data.lullaby.LullabySection2
+import io.github.ovso.whitenoise.data.lullaby.Selection2
 import kotlin.math.max
 
 /**
@@ -95,7 +95,7 @@ fun HomeScreen(
 @Composable
 fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
     // UiState of the InterestsScreen
-    val uiState by homeViewModel.uiState.collectAsState()
+    val uiState by homeViewModel.uiState2.collectAsState()
 
     // Describe the screen sections here since each section needs 2 states and 1 event.
     // Pass them to the stateless InterestsScreen using a tabContent.
@@ -148,12 +148,12 @@ private val homeContainerModifier = Modifier
  */
 @Composable
 private fun Sections(
-    sections: List<LullabySection>,
-    selectedLullabies: Set<Selection>,
-    onLullabySelect: (Selection) -> Unit
+    sections: List<LullabySection2>,
+    selectedLullabies: Set<Selection2>,
+    onLullabySelect: (Selection2) -> Unit
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
-        sections.forEach { (section, names) ->
+        sections.forEach { (section, models) ->
             Text(
                 text = section,
                 modifier = Modifier
@@ -162,11 +162,11 @@ private fun Sections(
                 style = MaterialTheme.typography.subtitle1
             )
             HomeAdaptiveContentLayout {
-                names.forEach { name ->
+                models.forEach { model ->
                     LullabyItem(
-                        itemTitle = name,
-                        selected = selectedLullabies.contains(Selection(section, name)),
-                        onToggle = { onLullabySelect(Selection(section, name)) },
+                        itemTitle = model.name,
+                        selected = selectedLullabies.contains(Selection2(section, model)),
+                        onToggle = { onLullabySelect(Selection2(section, model)) },
                     )
                 }
             }
