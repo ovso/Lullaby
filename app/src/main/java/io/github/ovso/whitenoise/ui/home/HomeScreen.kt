@@ -41,7 +41,6 @@ import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.Selection
-import io.github.ovso.whitenoise.player.LullabyPlayer
 import kotlin.math.max
 
 /**
@@ -94,7 +93,7 @@ fun HomeScreen(
  * gathering application data from [HomeViewModel]
  */
 @Composable
-fun rememberHomeContent(homeViewModel: HomeViewModel, player: LullabyPlayer): HomeContent {
+fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
     // UiState of the InterestsScreen
     val uiState by homeViewModel.uiState.collectAsState()
 
@@ -106,10 +105,8 @@ fun rememberHomeContent(homeViewModel: HomeViewModel, player: LullabyPlayer): Ho
             sections = uiState.lullabies,
             selectedLullabies = selectedLullabies,
             onLullabySelect = { homeViewModel.toggleSelection(it) },
-            player = player
         )
     }
-
     return homeContent
 }
 
@@ -153,7 +150,6 @@ private fun Sections(
     sections: List<LullabySection>,
     selectedLullabies: Set<Selection>,
     onLullabySelect: (Selection) -> Unit,
-    player: LullabyPlayer,
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
         sections.forEach { (section, models) ->
@@ -167,10 +163,11 @@ private fun Sections(
             HomeAdaptiveContentLayout {
                 models.forEach { model ->
                     LullabyItem(
-                        itemTitle = model.name,
+                        name = model.name,
                         selected = selectedLullabies.contains(Selection(section, model)),
-                        onToggle = { onLullabySelect(Selection(section, model)) },
-                        player = player
+                        onToggle = {
+                            onLullabySelect(Selection(section, model))
+                        },
                     )
                 }
             }
@@ -178,31 +175,19 @@ private fun Sections(
     }
 }
 
-/**
- * Display a full-width topic item
- *
- * @param itemTitle (state) topic title
- * @param selected (state) is topic currently selected
- * @param onToggle (event) toggle selection for topic
- */
 @Composable
 private fun LullabyItem(
-    itemTitle: String,
+    name: String,
     selected: Boolean,
-    onToggle: () -> Unit,
+    onToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    player: LullabyPlayer,
 ) {
     Column(Modifier.padding(horizontal = 16.dp)) {
         Row(
             modifier = modifier.toggleable(
                 value = selected,
                 onValueChange = {
-                    when(it) {
-                        true -> player.play()
-                        false -> player.stop()
-                    }
-                    onToggle()
+                    onToggle(it)
                 }
             ),
             verticalAlignment = Alignment.CenterVertically
@@ -215,7 +200,7 @@ private fun LullabyItem(
                     .padding(8.dp)
             )
             Text(
-                text = itemTitle,
+                text = name,
                 modifier = Modifier
                     .padding(16.dp)
                     .weight(1f), // Break line if the title is too long

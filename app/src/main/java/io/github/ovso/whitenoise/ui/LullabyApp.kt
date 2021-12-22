@@ -25,7 +25,6 @@ import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.whitenoise.data.AppContainer
-import io.github.ovso.whitenoise.player.LullabyPlayer
 import io.github.ovso.whitenoise.ui.home.HomeScreen
 import io.github.ovso.whitenoise.ui.home.HomeViewModel
 import io.github.ovso.whitenoise.ui.home.rememberHomeContent
@@ -33,7 +32,6 @@ import io.github.ovso.whitenoise.ui.home.rememberHomeContent
 @Composable
 fun LullabyApp(
     appContainer: AppContainer,
-    player: LullabyPlayer
 ) {
     LullabyTheme {
         ProvideWindowInsets {
@@ -49,7 +47,7 @@ fun LullabyApp(
                 )
             )
 
-            val content = rememberHomeContent(homeViewModel, player)
+            val content = rememberHomeContent(homeViewModel)
 
             HomeScreen(
                 content = content,
