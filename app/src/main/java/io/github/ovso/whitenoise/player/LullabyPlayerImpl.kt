@@ -1,8 +1,8 @@
-package io.github.ovso.whitenoise.data
+package io.github.ovso.whitenoise.player
 
 import android.content.Context
 import android.media.MediaPlayer
-import androidx.annotation.RawRes
+import io.github.ovso.whitenoise.R
 
 
 interface LullabyPlayer {
@@ -12,11 +12,10 @@ interface LullabyPlayer {
 
 class LullabyPlayerImpl(
     private val context: Context,
-    @RawRes private val resId: Int,
 ) : LullabyPlayer {
     private var player: MediaPlayer? = null
     override fun play() {
-        player = MediaPlayer.create(context, resId)
+        player = MediaPlayer.create(context, R.raw.white_noise_10m)
         player?.start()
     }
 

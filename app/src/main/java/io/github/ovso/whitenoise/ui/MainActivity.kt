@@ -28,9 +28,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        val appContainer = (application as LullabyApplication).container
+        val app = application as LullabyApplication
+        val appContainer = app.container
         setContent {
-            LullabyApp(appContainer)
+            LullabyApp(app.container, app.player)
         }
     }
 }

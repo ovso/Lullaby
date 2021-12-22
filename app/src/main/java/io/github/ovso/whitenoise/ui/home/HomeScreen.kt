@@ -41,6 +41,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.player.LullabyPlayer
 import kotlin.math.max
 
 /**
@@ -93,7 +94,7 @@ fun HomeScreen(
  * gathering application data from [HomeViewModel]
  */
 @Composable
-fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
+fun rememberHomeContent(homeViewModel: HomeViewModel, player: LullabyPlayer): HomeContent {
     // UiState of the InterestsScreen
     val uiState by homeViewModel.uiState.collectAsState()
 
@@ -104,7 +105,8 @@ fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
         Sections(
             sections = uiState.lullabies,
             selectedLullabies = selectedLullabies,
-            onLullabySelect = { homeViewModel.toggleSelection(it) }
+            onLullabySelect = { homeViewModel.toggleSelection(it) },
+            player = player
         )
     }
 
@@ -150,7 +152,8 @@ private val homeContainerModifier = Modifier
 private fun Sections(
     sections: List<LullabySection>,
     selectedLullabies: Set<Selection>,
-    onLullabySelect: (Selection) -> Unit
+    onLullabySelect: (Selection) -> Unit,
+    player: LullabyPlayer,
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
         sections.forEach { (section, models) ->
@@ -167,6 +170,7 @@ private fun Sections(
                         itemTitle = model.name,
                         selected = selectedLullabies.contains(Selection(section, model)),
                         onToggle = { onLullabySelect(Selection(section, model)) },
+                        player = player
                     )
                 }
             }
@@ -186,13 +190,18 @@ private fun LullabyItem(
     itemTitle: String,
     selected: Boolean,
     onToggle: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    player: LullabyPlayer,
 ) {
     Column(Modifier.padding(horizontal = 16.dp)) {
         Row(
             modifier = modifier.toggleable(
                 value = selected,
                 onValueChange = {
+                    when(it) {
+                        true -> player.play()
+                        false -> player.stop()
+                    }
                     onToggle()
                 }
             ),
