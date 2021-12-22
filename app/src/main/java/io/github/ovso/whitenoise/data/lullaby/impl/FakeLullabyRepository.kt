@@ -17,6 +17,8 @@
 package io.github.ovso.whitenoise.data.lullaby.impl
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.LullabyModel
 import io.github.ovso.whitenoise.data.Result
@@ -74,9 +76,14 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
         return Result.Success(lullabies)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun toggleSelection(selection: Selection) {
         mutex.withLock {
-            val set = selected.value.toMutableSet()
+            val set = selected.value.toMutableSet().apply {
+                removeAll {
+                    selection != it
+                }
+            }
             set.addOrRemove(selection)
             selected.value = set
         }
