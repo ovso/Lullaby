@@ -70,7 +70,7 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
     // Used to make suspend functions that read and update state safe to call from any thread
     private val mutex = Mutex()
 
-    override suspend fun getLullabies2(): Result<List<LullabySection>> {
+    override suspend fun getLullabies(): Result<List<LullabySection>> {
         return Result.Success(lullabies)
     }
 

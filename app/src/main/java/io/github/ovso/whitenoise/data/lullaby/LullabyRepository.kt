@@ -30,7 +30,7 @@ interface LullabyRepository {
     /**
      * Get relevant topics to the user.
      */
-    suspend fun getLullabies2(): Result<List<LullabySection>>
+    suspend fun getLullabies(): Result<List<LullabySection>>
 
     /**
      * Toggle between selected and unselected
