@@ -35,7 +35,7 @@ interface LullabyRepository {
     /**
      * Toggle between selected and unselected
      */
-    suspend fun toggleSelection(topic: Selection)
+    suspend fun toggleSelection(selection: Selection)
 
     /**
      * Currently selected topics

@@ -95,7 +95,7 @@ fun HomeScreen(
 @Composable
 fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
     // UiState of the InterestsScreen
-    val uiState by homeViewModel.uiState2.collectAsState()
+    val uiState by homeViewModel.uiState.collectAsState()
 
     // Describe the screen sections here since each section needs 2 states and 1 event.
     // Pass them to the stateless InterestsScreen using a tabContent.

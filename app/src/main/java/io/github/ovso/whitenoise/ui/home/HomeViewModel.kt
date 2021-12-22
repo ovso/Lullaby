@@ -37,8 +37,8 @@ class HomeViewModel(
 ) : ViewModel() {
 
     // UI state exposed to the UI
-    private val _uiState2 = MutableStateFlow(LullabiesUiState(loading = true))
-    val uiState2: StateFlow<LullabiesUiState> = _uiState2.asStateFlow()
+    private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
+    val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
     val selectedLullaby =
         lullabyRepository.observeSelected().stateIn(
@@ -52,9 +52,9 @@ class HomeViewModel(
         refreshAll()
     }
 
-    fun toggleSelection(lullaby: Selection) {
+    fun toggleSelection(selection: Selection) {
         viewModelScope.launch {
-            lullabyRepository.toggleSelection(lullaby)
+            lullabyRepository.toggleSelection(selection)
         }
     }
 
@@ -62,7 +62,7 @@ class HomeViewModel(
      * Refresh topics, people, and publications
      */
     private fun refreshAll() {
-        _uiState2.update { it.copy(loading = true) }
+        _uiState.update { it.copy(loading = true) }
 
         viewModelScope.launch {
             // Trigger repository requests in parallel
@@ -71,7 +71,7 @@ class HomeViewModel(
             // Wait for all requests to finish
             val lullabies = lullabiesDeferred.await().successOr(emptyList())
 
-            _uiState2.update {
+            _uiState.update {
                 it.copy(
                     loading = false,
                     lullabies = lullabies,

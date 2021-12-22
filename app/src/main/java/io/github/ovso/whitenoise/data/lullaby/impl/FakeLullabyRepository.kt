@@ -74,10 +74,10 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
         return Result.Success(lullabies)
     }
 
-    override suspend fun toggleSelection(topic: Selection) {
+    override suspend fun toggleSelection(selection: Selection) {
         mutex.withLock {
             val set = selected.value.toMutableSet()
-            set.addOrRemove(topic)
+            set.addOrRemove(selection)
             selected.value = set
         }
     }
