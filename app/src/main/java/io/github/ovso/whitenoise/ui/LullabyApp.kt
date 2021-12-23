@@ -19,6 +19,8 @@ package io.github.ovso.whitenoise.ui
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnews.ui.theme.LullabyTheme
@@ -52,6 +54,8 @@ fun LullabyApp(
             HomeScreen(
                 content = content,
             )
+
+            val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
         }
     }
 }
