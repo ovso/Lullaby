@@ -25,11 +25,18 @@ import io.github.ovso.whitenoise.data.Result
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
 import io.github.ovso.whitenoise.data.lullaby.LullabySection
 import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.data.response.LullabiesResponse
 import io.github.ovso.whitenoise.utils.addOrRemove
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.nio.charset.Charset
 
 /**
  * Implementation of InterestRepository that returns a hardcoded list of
@@ -72,7 +79,11 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
     // Used to make suspend functions that read and update state safe to call from any thread
     private val mutex = Mutex()
 
+    @OptIn(ExperimentalSerializationApi::class)
     override suspend fun getLullabies(): Result<List<LullabySection>> {
+        val inputStream = context.assets.open("lullabies/lullabies.json")
+        val use = inputStream.bufferedReader().use(BufferedReader::readText)
+        val decodeFromString = Json.decodeFromString<LullabiesResponse>(use)
         return Result.Success(lullabies)
     }
 
