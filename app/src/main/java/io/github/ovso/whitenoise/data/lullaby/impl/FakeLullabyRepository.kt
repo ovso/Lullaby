@@ -42,25 +42,25 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
             LullabySection(
                 title = "자장가",
                 models = listOf("브람스 자장가", "모짜르트 자장가", "바흐 자장가").map {
-                    LullabyModel(name = it, id = R.raw.white_noise_10m)
+                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
                 }
             ),
             LullabySection(
                 title = "자연의 소리",
                 models = listOf("파도소리", "냇물 소리", "빗소리", "천둥소리", "바람소리").map {
-                    LullabyModel(name = it, id = R.raw.white_noise_10m)
+                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
                 }
             ),
             LullabySection(
                 title = "도시",
                 models = listOf("카페", "자동차", "라디오").map {
-                    LullabyModel(name = it, id = R.raw.white_noise_10m)
+                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
                 }
             ),
             LullabySection(
                 title = "Hum",
                 models = listOf("Hum1", "Hum2").map {
-                    LullabyModel(name = it, id = R.raw.white_noise_10m)
+                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
                 }
             )
         )

@@ -70,7 +70,6 @@ class HomeViewModel(
 
             // Wait for all requests to finish
             val lullabies = lullabiesDeferred.await().successOr(emptyList())
-
             _uiState.update {
                 it.copy(
                     loading = false,

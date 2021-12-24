@@ -2,5 +2,6 @@ package io.github.ovso.whitenoise.data
 
 data class LullabyModel(
     val name: String,
-    val id: Int,
+    val lullabyId: Int,
+    val selected:Boolean = false
 )
