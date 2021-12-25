@@ -51,6 +51,7 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
     @OptIn(ExperimentalSerializationApi::class)
     override suspend fun getLullabies(): Result<List<LullabySectionModel>> =
         withContext(Dispatchers.Default) {
+            // 로컬라이제이션 할 부분이다.
             val inputStream = context.assets.open("lullabies/lullabies.json")
             val use = inputStream.bufferedReader().use(BufferedReader::readText)
             val lullabiesResponse = Json.decodeFromString<Response>(use)
