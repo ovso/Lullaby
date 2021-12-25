@@ -19,6 +19,7 @@ package io.github.ovso.whitenoise.data
 import android.content.Context
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
 import io.github.ovso.whitenoise.data.lullaby.impl.FakeLullabyRepository
+import io.github.ovso.whitenoise.data.mapper.LullabyMapper
 
 /**
  * Dependency Injection container at the application level.
@@ -35,6 +36,6 @@ interface AppContainer {
 class AppContainerImpl(private val applicationContext: Context) : AppContainer {
 
     override val lullabyRepository: LullabyRepository by lazy {
-        FakeLullabyRepository(applicationContext)
+        FakeLullabyRepository(context = applicationContext, mapper = LullabyMapper())
     }
 }

@@ -35,13 +35,11 @@ interface LullabyRepository {
     /**
      * Toggle between selected and unselected
      */
-    suspend fun toggleSelection(selection: SelectionModel)
+    suspend fun toggleSelection(model: LullabyModel)
 
     /**
      * Currently selected topics
      */
-    fun observeSelected(): Flow<Set<SelectionModel>>
+    fun observeSelected(): Flow<Set<LullabyModel>>
 
 }
-
-data class SelectionModel(val section: String, val model: LullabyModel)

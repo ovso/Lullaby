@@ -21,7 +21,7 @@ import io.github.ovso.whitenoise.data.LullabyModel
 import io.github.ovso.whitenoise.data.Result
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
 import io.github.ovso.whitenoise.data.lullaby.LullabySectionModel
-import io.github.ovso.whitenoise.data.lullaby.SelectionModel
+import io.github.ovso.whitenoise.data.mapper.LullabyMapper
 import io.github.ovso.whitenoise.data.response.Response
 import io.github.ovso.whitenoise.utils.addOrRemove
 import kotlinx.coroutines.Dispatchers
@@ -39,10 +39,13 @@ import java.io.BufferedReader
  * Implementation of InterestRepository that returns a hardcoded list of
  * topics, people and publications synchronously.
  */
-class FakeLullabyRepository(private val context: Context) : LullabyRepository {
+class FakeLullabyRepository(
+    private val context: Context,
+    private val mapper: LullabyMapper,
+) : LullabyRepository {
 
     // for now, keep the selections in memory
-    private val selected = MutableStateFlow(setOf<SelectionModel>())
+    private val selected = MutableStateFlow(setOf<LullabyModel>())
 
     // Used to make suspend functions that read and update state safe to call from any thread
     private val mutex = Mutex()
@@ -55,32 +58,22 @@ class FakeLullabyRepository(private val context: Context) : LullabyRepository {
             val inputStream = context.assets.open("lullabies/lullabies.json")
             val use = inputStream.bufferedReader().use(BufferedReader::readText)
             val lullabiesResponse = Json.decodeFromString<Response>(use)
-            val result = lullabiesResponse.lullabies.map {
-                LullabySectionModel(
-                    section = it.section,
-                    items = it.items.map { item ->
-                        LullabyModel(
-                            name = item.name,
-                            id = item.id,
-                        )
-                    }
-                )
-            }
+            val result = mapper.mapFromList(lullabiesResponse.lullabies)
             return@withContext Result.Success(result)
         }
 
-    override suspend fun toggleSelection(selection: SelectionModel) =
+    override suspend fun toggleSelection(model: LullabyModel) =
         withContext(Dispatchers.Default) {
             mutex.withLock {
                 val set = selected.value.toMutableSet().apply {
                     removeAll {
-                        selection != it
+                        model != it
                     }
                 }
-                set.addOrRemove(selection)
+                set.addOrRemove(model)
                 selected.value = set
             }
         }
 
-    override fun observeSelected(): Flow<Set<SelectionModel>> = selected
+    override fun observeSelected(): Flow<Set<LullabyModel>> = selected
 }

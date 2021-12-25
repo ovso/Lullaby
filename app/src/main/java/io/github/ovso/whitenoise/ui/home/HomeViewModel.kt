@@ -19,9 +19,9 @@ package io.github.ovso.whitenoise.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import io.github.ovso.whitenoise.data.LullabyModel
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
 import io.github.ovso.whitenoise.data.lullaby.LullabySectionModel
-import io.github.ovso.whitenoise.data.lullaby.SelectionModel
 import io.github.ovso.whitenoise.data.successOr
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
@@ -52,15 +52,12 @@ class HomeViewModel(
         refreshAll()
     }
 
-    fun toggleSelection(selection: SelectionModel) {
+    fun toggleSelection(model: LullabyModel) {
         viewModelScope.launch {
-            lullabyRepository.toggleSelection(selection)
+            lullabyRepository.toggleSelection(model)
         }
     }
 
-    /**
-     * Refresh topics, people, and publications
-     */
     private fun refreshAll() {
         _uiState.update { it.copy(loading = true) }
 
