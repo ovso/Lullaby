@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
-import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.data.lullaby.LullabySectionModel
+import io.github.ovso.whitenoise.data.lullaby.SelectionModel
 import kotlin.math.max
 
 /**
@@ -147,9 +147,9 @@ private val homeContainerModifier = Modifier
  */
 @Composable
 private fun Sections(
-    sections: List<LullabySection>,
-    selectedLullabies: Set<Selection>,
-    onLullabySelect: (Selection) -> Unit,
+    sections: List<LullabySectionModel>,
+    selectedLullabies: Set<SelectionModel>,
+    onLullabySelect: (SelectionModel) -> Unit,
 ) {
     Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
         sections.forEach { (section, models) ->
@@ -164,9 +164,9 @@ private fun Sections(
                 models.forEach { model ->
                     LullabyItem(
                         name = model.name,
-                        selected = selectedLullabies.contains(Selection(section, model)),
+                        selected = selectedLullabies.contains(SelectionModel(section, model)),
                         onToggle = {
-                            onLullabySelect(Selection(section, model))
+                            onLullabySelect(SelectionModel(section, model))
                         },
                     )
                 }

@@ -1,8 +1,8 @@
 {
   "lullabies": [
     {
-      "section": "lullaby",
-      "item": [
+      "section": "자장가",
+      "items": [
         {
           "name": "브람스",
           "id": "lu_1"
@@ -26,8 +26,8 @@
       ]
     },
     {
-      "section": "nature",
-      "item": [
+      "section": "자연",
+      "items": [
         {
           "name": "파도",
           "id": "na_1"
@@ -51,8 +51,8 @@
       ]
     },
     {
-      "section": "city",
-      "item": [
+      "section": "도시",
+      "items": [
         {
           "name": "자동차",
           "id": "ci_1"
@@ -64,8 +64,8 @@
       ]
     },
     {
-      "section": "home",
-      "item": [
+      "section": "가정",
+      "items": [
         {
           "name": "라디오",
           "id": "ho_1"

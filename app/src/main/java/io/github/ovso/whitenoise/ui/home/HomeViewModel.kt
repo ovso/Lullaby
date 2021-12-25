@@ -20,15 +20,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
-import io.github.ovso.whitenoise.data.lullaby.Selection
+import io.github.ovso.whitenoise.data.lullaby.LullabySectionModel
+import io.github.ovso.whitenoise.data.lullaby.SelectionModel
 import io.github.ovso.whitenoise.data.successOr
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 data class LullabiesUiState(
-    val lullabies: List<LullabySection> = emptyList(),
+    val lullabies: List<LullabySectionModel> = emptyList(),
     val loading: Boolean = false,
 )
 
@@ -52,7 +52,7 @@ class HomeViewModel(
         refreshAll()
     }
 
-    fun toggleSelection(selection: Selection) {
+    fun toggleSelection(selection: SelectionModel) {
         viewModelScope.launch {
             lullabyRepository.toggleSelection(selection)
         }

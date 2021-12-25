@@ -17,26 +17,23 @@
 package io.github.ovso.whitenoise.data.lullaby.impl
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
-import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.LullabyModel
 import io.github.ovso.whitenoise.data.Result
 import io.github.ovso.whitenoise.data.lullaby.LullabyRepository
-import io.github.ovso.whitenoise.data.lullaby.LullabySection
-import io.github.ovso.whitenoise.data.lullaby.Selection
-import io.github.ovso.whitenoise.data.response.LullabiesResponse
+import io.github.ovso.whitenoise.data.lullaby.LullabySectionModel
+import io.github.ovso.whitenoise.data.lullaby.SelectionModel
+import io.github.ovso.whitenoise.data.response.Response
 import io.github.ovso.whitenoise.utils.addOrRemove
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.nio.charset.Charset
 
 /**
  * Implementation of InterestRepository that returns a hardcoded list of
@@ -44,61 +41,45 @@ import java.nio.charset.Charset
  */
 class FakeLullabyRepository(private val context: Context) : LullabyRepository {
 
-    private val lullabies by lazy {
-        listOf(
-            LullabySection(
-                title = "자장가",
-                models = listOf("브람스 자장가", "모짜르트 자장가", "바흐 자장가").map {
-                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
-                }
-            ),
-            LullabySection(
-                title = "자연의 소리",
-                models = listOf("파도소리", "냇물 소리", "빗소리", "천둥소리", "바람소리").map {
-                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
-                }
-            ),
-            LullabySection(
-                title = "도시",
-                models = listOf("카페", "자동차", "라디오").map {
-                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
-                }
-            ),
-            LullabySection(
-                title = "Hum",
-                models = listOf("Hum1", "Hum2").map {
-                    LullabyModel(name = it, lullabyId = R.raw.white_noise_10m)
-                }
-            )
-        )
-    }
-
     // for now, keep the selections in memory
-    private val selected = MutableStateFlow(setOf<Selection>())
+    private val selected = MutableStateFlow(setOf<SelectionModel>())
 
     // Used to make suspend functions that read and update state safe to call from any thread
     private val mutex = Mutex()
 
+    @Suppress("BlockingMethodInNonBlockingContext")
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun getLullabies(): Result<List<LullabySection>> {
-        val inputStream = context.assets.open("lullabies/lullabies.json")
-        val use = inputStream.bufferedReader().use(BufferedReader::readText)
-        val decodeFromString = Json.decodeFromString<LullabiesResponse>(use)
-        return Result.Success(lullabies)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun toggleSelection(selection: Selection) {
-        mutex.withLock {
-            val set = selected.value.toMutableSet().apply {
-                removeAll {
-                    selection != it
-                }
+    override suspend fun getLullabies(): Result<List<LullabySectionModel>> =
+        withContext(Dispatchers.Default) {
+            val inputStream = context.assets.open("lullabies/lullabies.json")
+            val use = inputStream.bufferedReader().use(BufferedReader::readText)
+            val lullabiesResponse = Json.decodeFromString<Response>(use)
+            val result = lullabiesResponse.lullabies.map {
+                LullabySectionModel(
+                    section = it.section,
+                    items = it.items.map { item ->
+                        LullabyModel(
+                            name = item.name,
+                            id = item.id,
+                        )
+                    }
+                )
             }
-            set.addOrRemove(selection)
-            selected.value = set
+            return@withContext Result.Success(result)
         }
-    }
 
-    override fun observeSelected(): Flow<Set<Selection>> = selected
+    override suspend fun toggleSelection(selection: SelectionModel) =
+        withContext(Dispatchers.Default) {
+            mutex.withLock {
+                val set = selected.value.toMutableSet().apply {
+                    removeAll {
+                        selection != it
+                    }
+                }
+                set.addOrRemove(selection)
+                selected.value = set
+            }
+        }
+
+    override fun observeSelected(): Flow<Set<SelectionModel>> = selected
 }

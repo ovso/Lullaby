@@ -4,18 +4,18 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class LullabiesResponse(
-    val lullabies: List<Lullaby>,
+data class Response(
+    val lullabies: List<LullabySectionResponse>,
 )
 
 @Serializable
-data class Item(
+data class LullabyResponse(
     val id: String,
     val name: String,
 )
 
 @Serializable
-data class Lullaby(
-    val item: List<Item>,
+data class LullabySectionResponse(
     val section: String,
+    val items: List<LullabyResponse>,
 )
