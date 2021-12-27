@@ -54,12 +54,16 @@ class FakeLullabyRepository(
     @OptIn(ExperimentalSerializationApi::class)
     override suspend fun getLullabies(): Result<List<LullabySectionModel>> =
         withContext(Dispatchers.Default) {
-            // 로컬라이제이션 할 부분이다.
-            val inputStream = context.assets.open("lullabies/lullabies.json")
-            val use = inputStream.bufferedReader().use(BufferedReader::readText)
-            val lullabiesResponse = Json.decodeFromString<Response>(use)
-            val result = mapper.mapFromList(lullabiesResponse.lullabies)
-            return@withContext Result.Success(result)
+            try {
+                // 로컬라이제이션 할 부분이다.
+                val inputStream = context.assets.open("lullabies/lullabies.json")
+                val use = inputStream.bufferedReader().use(BufferedReader::readText)
+                val lullabiesResponse = Json.decodeFromString<Response>(use)
+                val result = mapper.mapFromList(lullabiesResponse.lullabies)
+                return@withContext Result.Success(result)
+            } catch (e: Exception) {
+                return@withContext Result.Error(Exception(""))
+            }
         }
 
     override suspend fun toggleSelection(model: LullabyModel) =
