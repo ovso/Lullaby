@@ -119,6 +119,7 @@ private fun handlePlay(
     selectedLullabies: Set<LullabyModel>,
     player: LullabyPlayer
 ) {
+    player.stop()
     if (selectedLullabies.isNotEmpty()) {
         player.play()
     } else {
