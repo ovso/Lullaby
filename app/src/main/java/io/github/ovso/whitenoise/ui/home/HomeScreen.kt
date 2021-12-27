@@ -41,6 +41,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.whitenoise.R
 import io.github.ovso.whitenoise.data.LullabyModel
 import io.github.ovso.whitenoise.data.lullaby.LullabySectionModel
+import io.github.ovso.whitenoise.player.LullabyPlayer
 import kotlin.math.max
 
 /**
@@ -93,7 +94,10 @@ fun HomeScreen(
  * gathering application data from [HomeViewModel]
  */
 @Composable
-fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
+fun rememberHomeContent(
+    homeViewModel: HomeViewModel,
+    player: LullabyPlayer,
+): HomeContent {
     // UiState of the InterestsScreen
     val uiState by homeViewModel.uiState.collectAsState()
 
@@ -106,8 +110,20 @@ fun rememberHomeContent(homeViewModel: HomeViewModel): HomeContent {
             selectedLullabies = selectedLullabies,
             onLullabySelect = { homeViewModel.toggleSelection(it) },
         )
+        handlePlay(selectedLullabies, player)
     }
     return homeContent
+}
+
+private fun handlePlay(
+    selectedLullabies: Set<LullabyModel>,
+    player: LullabyPlayer
+) {
+    if (selectedLullabies.isNotEmpty()) {
+        player.play()
+    } else {
+        player.stop()
+    }
 }
 
 /**

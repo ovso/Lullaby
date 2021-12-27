@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val app = application as LullabyApplication
         setContent {
-            LullabyApp(app.container)
+            LullabyApp(app.container, this)
         }
     }
 }

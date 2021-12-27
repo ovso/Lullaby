@@ -16,17 +16,19 @@
 
 package io.github.ovso.whitenoise.ui
 
+import android.content.Context
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.whitenoise.data.AppContainer
+import io.github.ovso.whitenoise.player.LullabyPlayer
+import io.github.ovso.whitenoise.player.LullabyPlayerImpl
 import io.github.ovso.whitenoise.ui.home.HomeScreen
 import io.github.ovso.whitenoise.ui.home.HomeViewModel
 import io.github.ovso.whitenoise.ui.home.rememberHomeContent
@@ -34,6 +36,7 @@ import io.github.ovso.whitenoise.ui.home.rememberHomeContent
 @Composable
 fun LullabyApp(
     appContainer: AppContainer,
+    context: Context,
 ) {
     LullabyTheme {
         ProvideWindowInsets {
@@ -49,8 +52,9 @@ fun LullabyApp(
                 )
             )
 
-            val content = rememberHomeContent(homeViewModel)
+            val player:LullabyPlayer = remember { LullabyPlayerImpl(context) }
 
+            val content = rememberHomeContent(homeViewModel, player)
             HomeScreen(
                 content = content,
             )

@@ -40,6 +40,9 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
     val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
+    private val _play = MutableStateFlow(false)
+    val play:StateFlow<Boolean> = _play
+
     val selectedLullaby =
         lullabyRepository.observeSelected().stateIn(
             scope = viewModelScope,
@@ -55,6 +58,7 @@ class HomeViewModel(
     fun toggleSelection(model: LullabyModel) {
         viewModelScope.launch {
             lullabyRepository.toggleSelection(model)
+            _play.emit(_play.value.not())
         }
     }
 
