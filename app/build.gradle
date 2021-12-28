@@ -8,7 +8,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "io.github.ovso.whitenoise"
+        applicationId "io.github.ovso.lullaby"
         minSdk 21
         targetSdk 31
         versionCode 1

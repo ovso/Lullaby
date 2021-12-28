@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.ovso.whitenoise">
+    package="io.github.ovso.lullaby">
 
     <application
-        android:name=".LullabyApplication"
+        android:name="io.github.ovso.lullaby.LullabyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhiteNoise">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="io.github.ovso.lullaby.ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WhiteNoise.NoActionBar">
