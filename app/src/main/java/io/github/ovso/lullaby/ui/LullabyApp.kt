@@ -60,13 +60,14 @@ fun LullabyApp(
 
             val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
             if (selectedLullabies.isNotEmpty()) {
-                context.startService(Intent(context, LullabyService::class.java).apply {
-                    putExtra("key", "ddd")
-                })
+                context.also {
+                    val intent = Intent(context, LullabyService::class.java)
+                    it.stopService(intent)
+                    it.startService(intent)
+                }
             } else {
-                context.startService(Intent(context, LullabyService::class.java))
+                context.stopService(Intent(context, LullabyService::class.java))
             }
-
         }
     }
 }

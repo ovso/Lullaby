@@ -16,9 +16,7 @@ class LullabyService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        intent?.getStringExtra("key")?.let {
-            mediaPlayer.play()
-        } ?: mediaPlayer.stop()
+        mediaPlayer.play()
         return super.onStartCommand(intent, flags, startId)
     }
 
