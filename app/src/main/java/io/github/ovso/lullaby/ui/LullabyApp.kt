@@ -17,16 +17,19 @@
 package io.github.ovso.lullaby.ui
 
 import android.content.Context
+import android.content.Intent
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnews.ui.theme.LullabyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.ovso.lullaby.data.AppContainer
-import io.github.ovso.lullaby.player.LullabyPlayer
-import io.github.ovso.lullaby.player.LullabyPlayerImpl
+import io.github.ovso.lullaby.service.LullabyService
 import io.github.ovso.lullaby.ui.home.HomeScreen
 import io.github.ovso.lullaby.ui.home.HomeViewModel
 import io.github.ovso.lullaby.ui.home.rememberHomeContent
@@ -50,19 +53,18 @@ fun LullabyApp(
                 )
             )
 
-            val player: LullabyPlayer = remember { LullabyPlayerImpl(context) }
-
             val content = rememberHomeContent(homeViewModel)
             HomeScreen(
                 content = content,
             )
 
             val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
-            player.stop()
             if (selectedLullabies.isNotEmpty()) {
-                player.play()
+                context.startService(Intent(context, LullabyService::class.java).apply {
+                    putExtra("key", "ddd")
+                })
             } else {
-                player.stop()
+                context.startService(Intent(context, LullabyService::class.java))
             }
 
         }
