@@ -10,12 +10,10 @@ import android.os.PowerManager
 class LullabyService : Service() {
     private var isPrepared: Boolean = false
     private val binder = AudioServiceBinder()
-    private lateinit var mediaPlayer: MediaPlayer
+    private var mediaPlayer: MediaPlayer? = null
 
     private class AudioServiceBinder : Binder() {
-        fun getService(): LullabyService {
-            return this
-        }
+
     }
 
     override fun onCreate() {
@@ -33,10 +31,28 @@ class LullabyService : Service() {
                 isPrepared = false
                 false
             }
+            setOnSeekCompleteListener {
+
+            }
         }
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return super.onStartCommand(intent, flags, startId)
+    }
+    override fun onBind(intent: Intent?): IBinder {
         return binder
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.let {
+            it.stop()
+            it.release()
+        }
+        mediaPlayer = null
+        mediaPlayer.takeIf {
+            it != null
+        } ?: {}
     }
 }
