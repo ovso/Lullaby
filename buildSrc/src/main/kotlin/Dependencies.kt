@@ -22,7 +22,7 @@ object Dependencies {
 
 
     object Kotlin{
-        const val VERSION = "1.5.31"
+        private const val VERSION = "1.5.31"
         const val STD_LIB = "org.jetbrains.kotlin:kotlin-stdlib:$VERSION"
         const val TEST = "org.jetbrains.kotlin:kotlin-test-junit:$VERSION"
 
@@ -59,7 +59,7 @@ object Dependencies {
     }
 
     object Retrofit2{
-        const val VERSION = "2.9.0"
+        private const val VERSION = "2.9.0"
         const val CORE = "com.squareup.retrofit2:retrofit:${VERSION}"
         const val MOSHI = "com.squareup.retrofit2:converter-moshi:${VERSION}"
         const val SCALARS = "com.squareup.retrofit2:converter-scalars:${VERSION}"

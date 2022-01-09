@@ -32,68 +32,68 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class LullabiesUiState(
-    val lullabies: List<LullabySectionModel> = emptyList(),
-    val loading: Boolean = false,
+  val lullabies: List<LullabySectionModel> = emptyList(),
+  val loading: Boolean = false,
 )
 
 class HomeViewModel(
-    private val lullabyRepository: LullabyRepository
+  private val lullabyRepository: LullabyRepository
 ) : ViewModel() {
 
-    // UI state exposed to the UI
-    private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
-    val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
+  // UI state exposed to the UI
+  private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
+  val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
-    private val _play = MutableStateFlow(false)
-    val play: StateFlow<Boolean> = _play
+  private val _play = MutableStateFlow(false)
+  val play: StateFlow<Boolean> = _play
 
-    val selectedLullaby =
-        lullabyRepository.observeSelected().stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptySet()
+  val selectedLullaby =
+    lullabyRepository.observeSelected().stateIn(
+      scope = viewModelScope,
+      started = SharingStarted.WhileSubscribed(5000),
+      initialValue = emptySet()
+    )
+
+  init {
+    refreshAll()
+  }
+
+  fun toggleSelection(model: LullabyModel) {
+    viewModelScope.launch {
+      lullabyRepository.toggleSelection(model)
+      _play.emit(_play.value.not())
+    }
+  }
+
+  private fun refreshAll() {
+    _uiState.update { it.copy(loading = true) }
+
+    viewModelScope.launch {
+      // Trigger repository requests in parallel
+      val lullabiesDeferred = async { lullabyRepository.getLullabies() }
+
+      // Wait for all requests to finish
+      val lullabies = lullabiesDeferred.await().successOr(emptyList())
+      _uiState.update {
+        it.copy(
+          loading = false,
+          lullabies = lullabies,
         )
-
-    init {
-        refreshAll()
+      }
     }
+  }
 
-    fun toggleSelection(model: LullabyModel) {
-        viewModelScope.launch {
-            lullabyRepository.toggleSelection(model)
-            _play.emit(_play.value.not())
-        }
+  /**
+   * Factory for InterestsViewModel that takes PostsRepository as a dependency
+   */
+  companion object {
+    fun provideFactory(
+      lullabyRepository: LullabyRepository,
+    ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+      @Suppress("UNCHECKED_CAST")
+      override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return HomeViewModel(lullabyRepository) as T
+      }
     }
-
-    private fun refreshAll() {
-        _uiState.update { it.copy(loading = true) }
-
-        viewModelScope.launch {
-            // Trigger repository requests in parallel
-            val lullabiesDeferred = async { lullabyRepository.getLullabies() }
-
-            // Wait for all requests to finish
-            val lullabies = lullabiesDeferred.await().successOr(emptyList())
-            _uiState.update {
-                it.copy(
-                    loading = false,
-                    lullabies = lullabies,
-                )
-            }
-        }
-    }
-
-    /**
-     * Factory for InterestsViewModel that takes PostsRepository as a dependency
-     */
-    companion object {
-        fun provideFactory(
-            lullabyRepository: LullabyRepository,
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(lullabyRepository) as T
-            }
-        }
-    }
+  }
 }
