@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Android Open Source Project
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.ovso.lullaby.ui.utils
 
 import androidx.compose.material.ContentAlpha
@@ -52,7 +51,8 @@ fun BookmarkButton(
             }
         ) {
             Icon(
-                imageVector = if (isBookmarked) Icons.Filled.Bookmark else Icons.Filled.BookmarkBorder,
+                imageVector = if (isBookmarked) Icons.Filled.Bookmark
+                else Icons.Filled.BookmarkBorder,
                 contentDescription = null // handled by click label of parent
             )
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Android Open Source Project
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.ovso.lullaby.ui.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -42,7 +41,8 @@ fun SelectButton(
     val icon = if (selected) Icons.Filled.Stop else Icons.Filled.PlayArrow
     val iconColor = if (selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
     val borderColor =
-        if (selected) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
+        if (selected) MaterialTheme.colors.primary
+        else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
     val backgroundColor = if (selected) {
         MaterialTheme.colors.primary
     } else {
