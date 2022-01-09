@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Android Open Source Project
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.ovso.lullaby.ui.home
 
 import androidx.lifecycle.ViewModel
@@ -24,7 +23,12 @@ import io.github.ovso.lullaby.data.lullaby.LullabyRepository
 import io.github.ovso.lullaby.data.lullaby.LullabySectionModel
 import io.github.ovso.lullaby.data.successOr
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class LullabiesUiState(
@@ -41,7 +45,7 @@ class HomeViewModel(
     val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
     private val _play = MutableStateFlow(false)
-    val play:StateFlow<Boolean> = _play
+    val play: StateFlow<Boolean> = _play
 
     val selectedLullaby =
         lullabyRepository.observeSelected().stateIn(
@@ -49,7 +53,6 @@ class HomeViewModel(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptySet()
         )
-
 
     init {
         refreshAll()
