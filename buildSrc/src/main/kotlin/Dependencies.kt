@@ -162,7 +162,9 @@ object Dependencies {
   }
 
   fun DependencyHandlerScope.implementationTest() {
-    Dependencies.testImplementation(Test.JUNIT)
+    testImplementation(Test.JUNIT)
+    androidTestImplementation(Test.ANDROID_EXT_JUNIT)
+    androidTestImplementation(Test.ANDROID_ESPRESSO_CORE)
   }
 
   object Hilt {
