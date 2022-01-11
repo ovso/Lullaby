@@ -1,3 +1,4 @@
+import Dependencies.implementationKotlin
 import Dependencies.implementationTest
 
 /*
@@ -52,5 +53,6 @@ dependencies {
   implementation(Dependencies.AndroidX.CORE)
   implementation(Dependencies.AndroidX.APPCOMPAT)
   implementation(Dependencies.Google.MATERIAL)
+  implementationKotlin()
   implementationTest()
 }

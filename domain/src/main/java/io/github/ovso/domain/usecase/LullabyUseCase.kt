@@ -2,7 +2,10 @@ package io.github.ovso.domain.usecase
 
 import io.github.ovso.domain.repository.LullabyRepository
 
-class LullabyUseCase(
+interface LullabyUseCase
+
+class LullabyUseCaseImpl(
   private val repository: LullabyRepository
-) {
+) : LullabyUseCase {
+
 }
