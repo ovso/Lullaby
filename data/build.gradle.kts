@@ -1,3 +1,4 @@
+import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
 import Dependencies.implementationTest
 
@@ -18,7 +19,8 @@ import Dependencies.implementationTest
  */
 plugins {
   id("com.android.library")
-  id("kotlin-android")
+  kotlin("android")
+  kotlin("kapt")
 }
 
 android {
@@ -54,5 +56,6 @@ dependencies {
   implementation(Dependencies.AndroidX.APPCOMPAT)
   implementation(Dependencies.Google.MATERIAL)
   implementationKotlin()
+  implementationHilt()
   implementationTest()
 }

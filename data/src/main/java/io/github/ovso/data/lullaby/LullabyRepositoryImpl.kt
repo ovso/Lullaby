@@ -3,12 +3,18 @@ package io.github.ovso.data.lullaby
 import io.github.ovso.domain.LullabyItem
 import io.github.ovso.domain.LullabySection
 import io.github.ovso.domain.repository.LullabyRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class LullabyRepositoryImpl (
-  private val mapper: LullabyMapper
+class LullabyRepositoryImpl(
+  private val mapper: LullabyMapper,
+  private val resProvider: ResProvider,
 ) : LullabyRepository {
   override suspend fun getLullabies(): List<LullabySection> {
-    TODO("Not yet implemented")
+    return withContext(Dispatchers.Default) {
+
+      emptyList()
+    }
   }
 
   override suspend fun toggleSelection(model: LullabyItem) {
