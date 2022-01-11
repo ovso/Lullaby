@@ -17,8 +17,9 @@ package io.github.ovso.data.lullaby
 
 import io.github.ovso.domain.LullabyItem
 import io.github.ovso.domain.LullabySection
+import javax.inject.Inject
 
-class LullabyMapper : EntityMapper<LullabySectionResponse, LullabySection> {
+class LullabyMapper @Inject constructor() : EntityMapper<LullabySectionResponse, LullabySection> {
   override fun mapFromEntity(entity: LullabySectionResponse): LullabySection =
     LullabySection(
       section = entity.section,
