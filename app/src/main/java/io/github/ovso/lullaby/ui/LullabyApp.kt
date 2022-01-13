@@ -1,18 +1,3 @@
-/*
- * Copyright 2022 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.github.ovso.lullaby.ui
 
 import android.content.Context
@@ -32,41 +17,44 @@ import io.github.ovso.lullaby.service.LullabyService
 import io.github.ovso.lullaby.ui.home.HomeScreen
 import io.github.ovso.lullaby.ui.home.HomeViewModel
 import io.github.ovso.lullaby.ui.home.rememberHomeContent
+import io.github.ovso.lullaby.utils.ARGS
 
 @Composable
 fun LullabyApp(
-    appContainer: AppContainer,
-    context: Context,
+  appContainer: AppContainer,
+  context: Context,
 ) {
-    LullabyTheme {
-        ProvideWindowInsets {
-            val systemUiController = rememberSystemUiController()
-            val darkIcons = MaterialTheme.colors.isLight
-            SideEffect {
-                systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = darkIcons)
-            }
+  LullabyTheme {
+    ProvideWindowInsets {
+      val systemUiController = rememberSystemUiController()
+      val darkIcons = MaterialTheme.colors.isLight
+      SideEffect {
+        systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = darkIcons)
+      }
 
-            val homeViewModel: HomeViewModel = viewModel(
-                factory = HomeViewModel.provideFactory(
-                    appContainer.lullabyRepository
-                )
-            )
+      val homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.provideFactory(
+          appContainer.lullabyRepository
+        )
+      )
 
-            val content = rememberHomeContent(homeViewModel)
-            HomeScreen(
-                content = content,
-            )
+      val content = rememberHomeContent(homeViewModel)
+      HomeScreen(
+        content = content,
+      )
 
-            val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
-            if (selectedLullabies.isNotEmpty()) {
-                context.also {
-                    val intent = Intent(context, LullabyService::class.java)
-                    it.stopService(intent)
-                    it.startService(intent)
-                }
-            } else {
-                context.stopService(Intent(context, LullabyService::class.java))
-            }
+      val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
+      if (selectedLullabies.isNotEmpty()) {
+        context.also {
+          val intent = Intent(context, LullabyService::class.java).apply {
+            putExtra(ARGS, selectedLullabies.first().resName)
+          }
+          it.stopService(intent)
+          it.startService(intent)
         }
+      } else {
+        context.stopService(Intent(context, LullabyService::class.java))
+      }
     }
+  }
 }
