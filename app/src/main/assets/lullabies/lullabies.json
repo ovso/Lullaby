@@ -1,92 +1,68 @@
 {
-  "lullabies": [
+  "items": [
     {
-      "section": "자장가",
-      "items": [
-        {
-          "name": "브람스",
-          "id": "lu_1"
-        },
-        {
-          "name": "모짜르트",
-          "id": "lu_2"
-        },
-        {
-          "name": "바흐",
-          "id": "lu_3"
-        },
-        {
-          "name": "클래식",
-          "id": "lu_4"
-        },
-        {
-          "name": "베토벤",
-          "id": "lu_4"
-        }
-      ]
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
     },
     {
-      "section": "자연",
-      "items": [
-        {
-          "name": "파도",
-          "id": "na_1"
-        },
-        {
-          "name": "냇물",
-          "id": "na_2"
-        },
-        {
-          "name": "비",
-          "id": "na_3"
-        },
-        {
-          "name": "천둥",
-          "id": "na_4"
-        },
-        {
-          "name": "새",
-          "id": "na_5"
-        }
-      ]
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
     },
     {
-      "section": "도시",
-      "items": [
-        {
-          "name": "자동차",
-          "id": "ci_1"
-        },
-        {
-          "name": "카페",
-          "id": "ci_2"
-        }
-      ]
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
     },
     {
-      "section": "가정",
-      "items": [
-        {
-          "name": "라디오",
-          "id": "ho_1"
-        },
-        {
-          "name": "물끓는",
-          "id": "ho_2"
-        },
-        {
-          "name": "청소기",
-          "id": "ho_3"
-        },
-        {
-          "name": "믹서기",
-          "id": "ho_4"
-        },
-        {
-          "name": "TV",
-          "id": "ho_5"
-        }
-      ]
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
+    },
+    {
+      "title": "Blender",
+      "resName": "blender_10min_64kbps"
     }
   ]
 }

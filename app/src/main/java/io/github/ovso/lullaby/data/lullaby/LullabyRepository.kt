@@ -19,8 +19,6 @@ import io.github.ovso.lullaby.data.LullabyModel
 import io.github.ovso.lullaby.data.Result
 import kotlinx.coroutines.flow.Flow
 
-data class LullabySectionModel(val section: String, val items: List<LullabyModel>)
-
 /**
  * Interface to the Interests data layer.
  */
@@ -29,7 +27,7 @@ interface LullabyRepository {
     /**
      * Get relevant topics to the user.
      */
-    suspend fun getLullabies(): Result<List<LullabySectionModel>>
+    suspend fun getLullabies(): Result<List<LullabyModel>>
 
     /**
      * Toggle between selected and unselected

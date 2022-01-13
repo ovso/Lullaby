@@ -1,40 +1,19 @@
-/*
- * Copyright 2022 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.github.ovso.lullaby.data.mapper
 
 import io.github.ovso.lullaby.data.LullabyModel
-import io.github.ovso.lullaby.data.lullaby.LullabySectionModel
-import io.github.ovso.lullaby.data.response.LullabySectionResponse
+import io.github.ovso.lullaby.data.response.LullabyResponse
 
-class LullabyMapper : EntityMapper<LullabySectionResponse, LullabySectionModel> {
-    override fun mapFromEntity(entity: LullabySectionResponse): LullabySectionModel =
-        LullabySectionModel(
-            section = entity.section,
-            items = entity.items.map {
-                LullabyModel(
-                    name = it.name,
-                    id = it.id
-                )
-            }
+class LullabyMapper : EntityMapper<LullabyResponse, LullabyModel> {
+    override fun mapFromEntity(entity: LullabyResponse): LullabyModel =
+        LullabyModel(
+          title = entity.title,
+          resName = entity.resName
         )
 
-    override fun mapToEntity(domainModel: LullabySectionModel) =
+    override fun mapToEntity(domainModel: LullabyModel) =
         throw UnsupportedOperationException("")
 
-    fun mapFromList(entities: List<LullabySectionResponse>): List<LullabySectionModel> =
+    fun mapFromList(entities: List<LullabyResponse>): List<LullabyModel> =
         entities.map {
             mapFromEntity(it)
         }

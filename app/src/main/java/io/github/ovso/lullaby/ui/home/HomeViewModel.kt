@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import io.github.ovso.lullaby.data.LullabyModel
 import io.github.ovso.lullaby.data.lullaby.LullabyRepository
-import io.github.ovso.lullaby.data.lullaby.LullabySectionModel
 import io.github.ovso.lullaby.data.successOr
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,7 +31,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class LullabiesUiState(
-    val lullabies: List<LullabySectionModel> = emptyList(),
+    val lullabies: List<LullabyModel> = emptyList(),
     val loading: Boolean = false,
 )
 
@@ -43,9 +42,6 @@ class HomeViewModel(
     // UI state exposed to the UI
     private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
     val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
-
-    private val _play = MutableStateFlow(false)
-    val play: StateFlow<Boolean> = _play
 
     val selectedLullaby =
         lullabyRepository.observeSelected().stateIn(
@@ -61,7 +57,6 @@ class HomeViewModel(
     fun toggleSelection(model: LullabyModel) {
         viewModelScope.launch {
             lullabyRepository.toggleSelection(model)
-            _play.emit(_play.value.not())
         }
     }
 

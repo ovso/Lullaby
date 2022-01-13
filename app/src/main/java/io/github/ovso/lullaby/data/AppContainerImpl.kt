@@ -17,7 +17,7 @@ package io.github.ovso.lullaby.data
 
 import android.content.Context
 import io.github.ovso.lullaby.data.lullaby.LullabyRepository
-import io.github.ovso.lullaby.data.lullaby.impl.FakeLullabyRepository
+import io.github.ovso.lullaby.data.lullaby.impl.LullabyRepositoryImpl
 import io.github.ovso.lullaby.data.mapper.LullabyMapper
 
 /**
@@ -35,6 +35,6 @@ interface AppContainer {
 class AppContainerImpl(private val applicationContext: Context) : AppContainer {
 
     override val lullabyRepository: LullabyRepository by lazy {
-        FakeLullabyRepository(context = applicationContext, mapper = LullabyMapper())
+        LullabyRepositoryImpl(context = applicationContext, mapper = LullabyMapper())
     }
 }
