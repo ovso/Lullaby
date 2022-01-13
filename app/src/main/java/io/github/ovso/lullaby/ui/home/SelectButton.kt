@@ -1,18 +1,3 @@
-/*
- * Copyright 2022 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.github.ovso.lullaby.ui.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -35,62 +20,62 @@ import com.example.jetnews.ui.theme.LullabyTheme
 
 @Composable
 fun SelectButton(
-    modifier: Modifier = Modifier,
-    selected: Boolean = false
+  modifier: Modifier = Modifier,
+  selected: Boolean = false
 ) {
-    val icon = if (selected) Icons.Filled.Stop else Icons.Filled.PlayArrow
-    val iconColor = if (selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
-    val borderColor =
-        if (selected) MaterialTheme.colors.primary
-        else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
-    val backgroundColor = if (selected) {
-        MaterialTheme.colors.primary
-    } else {
-        MaterialTheme.colors.onPrimary
-    }
-    Surface(
-        color = backgroundColor,
-        shape = CircleShape,
-        border = BorderStroke(1.dp, borderColor),
-        modifier = modifier.size(36.dp, 36.dp)
-    ) {
-        Image(
-            imageVector = icon,
-            colorFilter = ColorFilter.tint(iconColor),
-            modifier = Modifier.padding(8.dp),
-            contentDescription = null // toggleable at higher level
-        )
-    }
+  val icon = if (selected) Icons.Filled.Stop else Icons.Filled.PlayArrow
+  val iconColor = if (selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
+  val borderColor =
+    if (selected) MaterialTheme.colors.primary
+    else MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
+  val backgroundColor = if (selected) {
+    MaterialTheme.colors.primary
+  } else {
+    MaterialTheme.colors.onPrimary
+  }
+  Surface(
+    color = backgroundColor,
+    shape = CircleShape,
+    border = BorderStroke(1.dp, borderColor),
+    modifier = modifier.size(36.dp, 36.dp)
+  ) {
+    Image(
+      imageVector = icon,
+      colorFilter = ColorFilter.tint(iconColor),
+      modifier = Modifier.padding(8.dp),
+      contentDescription = null // toggleable at higher level
+    )
+  }
 }
 
 @Preview("Off")
 @Preview("Off (dark)", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SelectTopicButtonPreviewOff() {
-    SelectTopicButtonPreviewTemplate(
-        selected = false
-    )
+  SelectTopicButtonPreviewTemplate(
+    selected = false
+  )
 }
 
 @Preview("On")
 @Preview("On (dark)", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SelectTopicButtonPreviewOn() {
-    SelectTopicButtonPreviewTemplate(
-        selected = true
-    )
+  SelectTopicButtonPreviewTemplate(
+    selected = true
+  )
 }
 
 @Composable
 private fun SelectTopicButtonPreviewTemplate(
-    selected: Boolean
+  selected: Boolean
 ) {
-    LullabyTheme {
-        Surface {
-            SelectButton(
-                modifier = Modifier.padding(32.dp),
-                selected = selected
-            )
-        }
+  LullabyTheme {
+    Surface {
+      SelectButton(
+        modifier = Modifier.padding(32.dp),
+        selected = selected
+      )
     }
+  }
 }
