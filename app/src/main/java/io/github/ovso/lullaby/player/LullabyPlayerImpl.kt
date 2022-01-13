@@ -15,7 +15,7 @@ class LullabyPlayerImpl(
   private var player: MediaPlayer? = null
   override fun play(resName: String) {
     val resId = context.resources.getIdentifier(resName, "raw", context.packageName)
-    player = MediaPlayer.create(context, resId)
+    player = MediaPlayer.create(context, resId).apply { isLooping = true }
     player?.start()
   }
 
