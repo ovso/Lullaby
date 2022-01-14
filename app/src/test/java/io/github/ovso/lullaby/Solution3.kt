@@ -15,14 +15,13 @@
  */
 package io.github.ovso.lullaby
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.test.assertTrue
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
+/*
+that, given an array A of N integers, returns the sum of the largest odd integer and the largest
+even integer in A.If there are no odd or no even integers in A, you can assume that the largest
+one in the corresponding group is 0(look at examples 3 and 4 for comparison).
  */
 class Solution3 {
   @Test
