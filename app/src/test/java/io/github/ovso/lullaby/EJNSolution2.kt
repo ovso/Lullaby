@@ -15,21 +15,22 @@
  */
 package io.github.ovso.lullaby
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.test.assertTrue
 
-/*
-정수 배열에서 홀수 최대값 + 짝수 최대값 구하기
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
  */
-class Solution1 {
+class EJNSolution2 {
   @Test
   fun main() {
-    assertTrue {
-      solution(intArrayOf(7, 13, 15, 13)) == 15
-    }
+    solution()
   }
 
-  fun solution(A: IntArray): Int {
-    return 0
+  private fun solution() {
+
   }
+
 }

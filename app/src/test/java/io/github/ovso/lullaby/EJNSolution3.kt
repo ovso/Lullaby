@@ -23,7 +23,7 @@ that, given an array A of N integers, returns the sum of the largest odd integer
 even integer in A.If there are no odd or no even integers in A, you can assume that the largest
 one in the corresponding group is 0(look at examples 3 and 4 for comparison).
  */
-class Solution3 {
+class EJNSolution3 {
   @Test
   fun main() {
     assertTrue {
