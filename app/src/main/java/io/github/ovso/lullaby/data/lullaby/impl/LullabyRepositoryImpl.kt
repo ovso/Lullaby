@@ -35,7 +35,7 @@ class LullabyRepositoryImpl(
         withContext(Dispatchers.Default) {
             try {
                 // 로컬라이제이션 할 부분이다.
-                val inputStream = context.assets.open("lullabies/lullabies.json")
+                val inputStream = context.assets.open("lullabies/data.json")
                 val stringJson = inputStream.bufferedReader().use(BufferedReader::readText)
                 val response = Json.decodeFromString<Response>(stringJson)
                 val result = mapper.mapFromList(response.items)
