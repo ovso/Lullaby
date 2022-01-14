@@ -11,4 +11,5 @@ data class Response(
 data class LullabyResponse(
   val resName: String,
   val title: String,
+  val author: String? = null
 )

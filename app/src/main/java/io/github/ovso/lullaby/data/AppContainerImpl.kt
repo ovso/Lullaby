@@ -17,7 +17,7 @@ package io.github.ovso.lullaby.data
 
 import android.content.Context
 import io.github.ovso.lullaby.data.lullaby.LullabyRepository
-import io.github.ovso.lullaby.data.lullaby.impl.LullabyRepositoryImpl
+import io.github.ovso.lullaby.data.lullaby.LullabyRepositoryImpl
 import io.github.ovso.lullaby.data.mapper.LullabyMapper
 
 /**

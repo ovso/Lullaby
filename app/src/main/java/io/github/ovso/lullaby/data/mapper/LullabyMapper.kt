@@ -7,7 +7,8 @@ class LullabyMapper : EntityMapper<LullabyResponse, LullabyModel> {
     override fun mapFromEntity(entity: LullabyResponse): LullabyModel =
         LullabyModel(
           title = entity.title,
-          resName = entity.resName
+          resName = entity.resName,
+          author = entity.author
         )
 
     override fun mapToEntity(domainModel: LullabyModel) =
