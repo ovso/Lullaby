@@ -50,7 +50,7 @@ fun LullabyApp(
             putExtra(ARGS, selectedLullabies.first().resName)
           }
           it.stopService(intent)
-          it.startService(intent)
+          it.startForegroundService(intent)
         }
       } else {
         context.stopService(Intent(context, LullabyService::class.java))
