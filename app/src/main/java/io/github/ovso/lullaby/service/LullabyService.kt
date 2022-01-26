@@ -44,13 +44,13 @@ class LullabyService : Service() {
   private fun createNotificationChannel() {
     val notificationChannel = NotificationChannel(
       CHANNEL_ID,
-      "MyApp notification",
+      "Lullaby Channel",
       NotificationManager.IMPORTANCE_HIGH
-    )
-    notificationChannel.enableLights(true)
-    notificationChannel.lightColor = Color.RED
-    notificationChannel.enableVibration(true)
-    notificationChannel.description = "AppApp Tests"
+    ).apply {
+      enableLights(true)
+      lightColor = Color.RED
+//      enableVibration(true)
+    }
 
     val notificationManager = applicationContext.getSystemService(
       Context.NOTIFICATION_SERVICE
