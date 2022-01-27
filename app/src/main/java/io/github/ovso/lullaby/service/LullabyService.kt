@@ -45,11 +45,10 @@ class LullabyService : Service() {
     val notificationChannel = NotificationChannel(
       CHANNEL_ID,
       "Lullaby Channel",
-      NotificationManager.IMPORTANCE_HIGH
+      NotificationManager.IMPORTANCE_LOW
     ).apply {
       enableLights(true)
       lightColor = Color.RED
-//      enableVibration(true)
     }
 
     val notificationManager = applicationContext.getSystemService(
