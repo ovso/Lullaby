@@ -178,11 +178,11 @@ private fun LullabyItem(
       verticalAlignment = Alignment.CenterVertically
     ) {
       Image(
-        painter = painterResource(R.drawable.lullaby),
+        painter = painterResource(R.drawable.musical_note),
         contentDescription = null, // decorative
         modifier = Modifier
-          .size(72.dp)
-          .padding(8.dp)
+          .size(52.dp)
+          .padding(10.dp)
       )
       Text(
         text = title,
