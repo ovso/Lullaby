@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import io.github.ovso.lullaby.R
 import io.github.ovso.lullaby.player.LullabyPlayerImpl
 import io.github.ovso.lullaby.utils.ARGS
 
@@ -21,8 +22,7 @@ class LullabyService : Service() {
     super.onCreate()
     createNotificationChannel()
     NotificationCompat.Builder(this, CHANNEL_ID)
-      .setContentTitle("Lullaby")
-      .setContentText("자장가가 재생중입니다.")
+      .setSmallIcon(R.drawable.ic_notification)
       .build().also { startForeground(NOTIFICATION_ID, it) }
   }
 
