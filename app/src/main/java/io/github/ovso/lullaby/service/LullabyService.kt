@@ -58,4 +58,10 @@ class LullabyService : Service() {
       notificationChannel
     )
   }
+
+  override fun onTaskRemoved(rootIntent: Intent?) {
+    super.onTaskRemoved(rootIntent)
+    mediaPlayer.stop()
+    this.stopSelf()
+  }
 }
