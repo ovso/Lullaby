@@ -195,7 +195,7 @@ private fun LullabyItem(
       SelectButton(selected = selected)
     }
     Divider(
-      modifier = modifier.padding(start = 72.dp),
+      modifier = modifier.padding(),
       color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)
     )
   }
