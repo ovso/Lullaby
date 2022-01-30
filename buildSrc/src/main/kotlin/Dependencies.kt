@@ -193,5 +193,14 @@ object Dependencies {
     kaptAndroidTest(Hilt.ANDROID_TESTING_COMPILER)
   }
 
+  fun DependencyHandlerScope.implementationAds() {
+    // firebase
+    implementation(platform("com.google.firebase:firebase-bom:28.4.1"))
+//    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
+    implementation("com.google.firebase:firebase-ads:20.5.0")
+    implementation("com.google.android.gms:play-services-ads:20.5.0")
+  }
 
 }

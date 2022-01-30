@@ -1,4 +1,5 @@
 import Dependencies.implementationAccompanist
+import Dependencies.implementationAds
 import Dependencies.implementationAndroidX
 import Dependencies.implementationCompose
 import Dependencies.implementationGoogle
@@ -82,5 +83,6 @@ dependencies {
   implementationAccompanist()
   implementationKotlin()
   implementationHilt()
+  implementationAds()
   implementationTest()
 }
