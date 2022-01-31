@@ -34,7 +34,8 @@ android {
 
   buildTypes {
     release {
-      isMinifyEnabled = false
+      isMinifyEnabled = true
+      isShrinkResources = true
       isDebuggable = false
       proguardFile(getDefaultProguardFile("proguard-android.txt"))
       // global proguard settings
