@@ -3,11 +3,9 @@ package io.github.ovso.lullaby.exts
 import android.app.Activity
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.appopen.AppOpenAd
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import io.github.ovso.lullaby.utils.AppOpenManager
 
-fun Activity.showOpeningAds(callback: FullScreenContentCallback) {
+fun Activity.showOpeningAds(callback: FullScreenContentCallback? = null) {
   val manager = AppOpenManager(this.application)
   manager.loadCallback = object : AppOpenAd.AppOpenAdLoadCallback() {
     override fun onAdLoaded(appOpenAd: AppOpenAd) {
@@ -20,12 +18,13 @@ fun Activity.showOpeningAds(callback: FullScreenContentCallback) {
 
     override fun onAdFailedToLoad(p0: LoadAdError) {
       super.onAdFailedToLoad(p0)
-      callback.onAdFailedToShowFullScreenContent(p0)
+      callback?.onAdFailedToShowFullScreenContent(p0)
     }
   }
   manager.fetchAd()
 }
 
+/*
 fun Activity.loadInterstitialAd(
   onAdFailedToLoad: () -> Unit,
   onAdLoaded: (InterstitialAd) -> Unit,
@@ -46,12 +45,4 @@ fun Activity.loadInterstitialAd(
         onAdLoaded.invoke(interstitialAd)
       }
     })
-}
-
-/*
-fun Activity.showInterstitialAds() {
-  val ad = object : InterstitialAd() {
-
-  }
-}
-*/
+}*/

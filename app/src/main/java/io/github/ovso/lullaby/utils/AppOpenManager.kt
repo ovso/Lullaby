@@ -3,6 +3,7 @@ package io.github.ovso.lullaby.utils
 import android.app.Application
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.appopen.AppOpenAd
+import io.github.ovso.lullaby.R
 
 class AppOpenManager(app: Application) {
     private var appOpenAd: AppOpenAd? = null
