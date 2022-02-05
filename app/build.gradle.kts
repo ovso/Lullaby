@@ -62,7 +62,7 @@ android {
     }
     create("ko") {
       dimension = countryDimension
-      applicationIdSuffix = ".en"
+      applicationIdSuffix = ".ko"
     }
   }
 
@@ -97,6 +97,7 @@ dependencies {
   implementationAccompanist()
   implementationKotlin()
   implementationHilt()
+  implementation("com.google.dagger:dagger-lint-aar:2.40.5")
   implementationAds()
   implementationTest()
 }
