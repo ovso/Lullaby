@@ -53,6 +53,19 @@ android {
       isDebuggable = true
     }
   }
+
+  val countryDimension = "country"
+  flavorDimensions.add(countryDimension)
+  productFlavors {
+    create("en") {
+      dimension = countryDimension
+    }
+    create("ko") {
+      dimension = countryDimension
+      applicationIdSuffix = ".en"
+    }
+  }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
