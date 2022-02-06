@@ -8,6 +8,9 @@ import Dependencies.implementationKotlin
 import Dependencies.implementationLifecycle
 import Dependencies.implementationTest
 
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
+
 plugins {
   id("com.android.application")
   id("kotlin-android")
@@ -15,6 +18,10 @@ plugins {
   id("kotlinx-serialization")
   id("kotlin-parcelize")
 }
+
+val keystorePropertiesFile = rootProject.file("../jks/keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
   compileSdk = Dependencies.COMPILE_SDK
@@ -32,11 +39,33 @@ android {
     }
   }
 
+  signingConfigs {
+    getByName("debug") {
+      keyAlias = keystoreProperties.getProperty("dKeyAlias")
+      keyPassword = keystoreProperties.getProperty("dKeyPassword")
+      storeFile = file(keystoreProperties.getProperty("dStoreFile"))
+      storePassword = keystoreProperties.getProperty("dStorePassword")
+    }
+
+    create("release") {
+      keyAlias = keystoreProperties.getProperty("keyAlias")
+      keyPassword = keystoreProperties.getProperty("keyPassword")
+      storeFile = file(keystoreProperties.getProperty("storeFile"))
+      storePassword = keystoreProperties.getProperty("storePassword")
+    }
+  }
+
+
   buildTypes {
+    debug {
+      isDebuggable = true
+    }
+
     release {
       isMinifyEnabled = false
       isShrinkResources = false
       isDebuggable = false
+      signingConfig = signingConfigs.getByName("release")
       proguardFile(getDefaultProguardFile("proguard-android.txt"))
       // global proguard settings
       proguardFile(file("proguard-rules.pro"))
@@ -47,10 +76,6 @@ android {
         ?.toTypedArray() ?: arrayOf()
 
       proguardFiles(*files)
-    }
-
-    debug {
-      isDebuggable = true
     }
   }
 
@@ -70,13 +95,16 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+
   kotlinOptions {
     jvmTarget = "11"
   }
+
   buildFeatures {
     compose = true
     viewBinding = true
   }
+
   composeOptions {
     kotlinCompilerExtensionVersion = "1.0.5"
   }
@@ -87,6 +115,7 @@ android {
       }
     }
   }
+
 }
 
 dependencies {
@@ -97,7 +126,6 @@ dependencies {
   implementationAccompanist()
   implementationKotlin()
   implementationHilt()
-  implementation("com.google.dagger:dagger-lint-aar:2.40.5")
   implementationAds()
   implementationTest()
 }

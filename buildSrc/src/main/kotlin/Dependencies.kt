@@ -180,6 +180,8 @@ object Dependencies {
     // For local unit tests
     const val LOCAL_TESTING = "com.google.dagger:hilt-android-testing:$VERSION"
     const val LOCAL_TESTING_COMPILER = "com.google.dagger:hilt-compiler:$VERSION"
+
+    const val LINT_AAR = "com.google.dagger:dagger-lint-aar:2.40.5"
   }
 
   fun DependencyHandlerScope.implementationHilt() {
@@ -191,6 +193,8 @@ object Dependencies {
 
     androidTestImplementation(Hilt.ANDROID_TESTING)
     kaptAndroidTest(Hilt.ANDROID_TESTING_COMPILER)
+
+    implementation(Hilt.LINT_AAR)
   }
 
   fun DependencyHandlerScope.implementationAds() {
