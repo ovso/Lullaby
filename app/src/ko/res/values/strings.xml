@@ -1,6 +1,6 @@
 <resources>
-  <string name="app_name">자장가</string>
-  <string name="app_title">자장가</string>
+  <string name="app_name">심플 자장가</string>
+  <string name="app_title">심플 자장가</string>
   <item name="ads_app_id" type="string">ca-app-pub-8679189423397017~2006188991</item>
   <item name="ads_unit_id_open" type="string">ca-app-pub-8679189423397017/3277046248</item>
 </resources>
