@@ -35,24 +35,8 @@ import io.github.ovso.lullaby.R
 import io.github.ovso.lullaby.data.LullabyModel
 import kotlin.math.max
 
-/**
- * TabContent for a single tab of the screen.
- *
- * This is intended to encapsulate a tab & it's content as a single object. It was added to avoid
- * passing several parameters per-tab from the stateful composable to the composable that displays
- * the current tab.
- *
- * @param content content of the tab, a composable that describes the content
- */
 class HomeContent(val content: @Composable () -> Unit)
 
-/**
- * Stateless interest screen displays the tabs specified in [content] adapting the UI to
- * different screen sizes.
- *
- * @param content (slot) the tabs and their content to display on this screen, must be a
- * non-empty list, tabs are displayed in the order specified by this list
- */
 @Composable
 fun HomeScreen(
   content: HomeContent
@@ -80,10 +64,6 @@ fun HomeScreen(
   }
 }
 
-/**
- * Remembers the content for each tab on the Interests screen
- * gathering application data from [HomeViewModel]
- */
 @Composable
 fun rememberHomeContent(
   homeViewModel: HomeViewModel,
@@ -104,10 +84,6 @@ fun rememberHomeContent(
   return homeContent
 }
 
-/**
- * @param homeContent (slot) tabs and their content to display, must be a non-empty list, tabs are
- * displayed in the order of this list
- */
 @Composable
 private fun HomeScreenContent(
   homeContent: HomeContent,
@@ -124,21 +100,11 @@ private fun HomeScreenContent(
   }
 }
 
-/**
- * Modifier for UI containers that show interests items
- */
 private val homeContainerModifier = Modifier
   .fillMaxWidth()
   .wrapContentWidth(Alignment.CenterHorizontally)
   .navigationBarsPadding(start = false, end = false)
 
-/**
- * Display a sectioned list of topics
- *
- * @param items (state) topics to display, grouped by sections
- * @param selectedLullabies (state) currently selected topics
- * @param onLullabySelect (event) request a topic+section selection be changed
- */
 @Composable
 private fun Items(
   items: List<LullabyModel>,
@@ -201,15 +167,6 @@ private fun LullabyItem(
   }
 }
 
-/**
- * Custom layout for the Interests screen that places items on the screen given the available size.
- *
- * For example: Given a list of items (A, B, C, D, E) and a screen size that allows 2 columns,
- * the items will be displayed on the screen as follows:
- *     A B
- *     C D
- *     E
- */
 @Composable
 private fun HomeAdaptiveContentLayout(
   modifier: Modifier = Modifier,
