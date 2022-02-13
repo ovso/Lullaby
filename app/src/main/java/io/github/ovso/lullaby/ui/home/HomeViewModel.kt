@@ -7,12 +7,7 @@ import io.github.ovso.lullaby.data.LullabyModel
 import io.github.ovso.lullaby.data.lullaby.LullabyRepository
 import io.github.ovso.lullaby.data.successOr
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 data class LullabiesUiState(
@@ -28,7 +23,7 @@ class HomeViewModel(
   private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
   val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
-  val selectedLullaby =
+  val selectedLullaby: StateFlow<Set<LullabyModel>> =
     lullabyRepository.observeSelected().stateIn(
       scope = viewModelScope,
       started = SharingStarted.WhileSubscribed(5000),
