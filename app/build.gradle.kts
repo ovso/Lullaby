@@ -5,6 +5,7 @@ import Dependencies.implementationCompose
 import Dependencies.implementationGoogle
 import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
+import Dependencies.implementationKotlinX
 import Dependencies.implementationLifecycle
 import Dependencies.implementationTest
 
@@ -17,6 +18,7 @@ plugins {
   id("kotlin-kapt")
   id("kotlinx-serialization")
   id("kotlin-parcelize")
+  id("dagger.hilt.android.plugin")
 }
 
 val keystorePropertiesFile = rootProject.file("../jks/keystore.properties")
@@ -102,11 +104,10 @@ android {
 
   buildFeatures {
     compose = true
-    viewBinding = true
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion = "1.0.5"
+    kotlinCompilerExtensionVersion = Dependencies.Compose.VERSION
   }
   packagingOptions {
     resources {
@@ -125,6 +126,7 @@ dependencies {
   implementationLifecycle()
   implementationAccompanist()
   implementationKotlin()
+  implementationKotlinX()
   implementationHilt()
   implementationAds()
   implementationTest()

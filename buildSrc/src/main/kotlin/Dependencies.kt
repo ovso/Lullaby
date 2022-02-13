@@ -20,26 +20,33 @@ object Dependencies {
   private const val kaptTest = "kaptTest"
   private const val kaptAndroidTest = "kaptAndroidTest"
 
+  object KotlinX {
+    const val COROUTINE_VERSION = "1.6.0"
+    const val COROUTINE_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION"
+    const val COROUTINE_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$COROUTINE_VERSION"
+    const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE_VERSION"
 
+    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+  }
+
+  fun DependencyHandlerScope.implementationKotlinX() {
+    implementation(KotlinX.COROUTINE_ANDROID)
+    implementation(KotlinX.COROUTINE_CORE)
+    implementation(KotlinX.COROUTINE_TEST)
+    implementation(KotlinX.SERIALIZATION)
+  }
   object Kotlin {
-    private const val VERSION = "1.6.0"
+    private const val VERSION = "1.6.10"
     const val STD_LIB = "org.jetbrains.kotlin:kotlin-stdlib:$VERSION"
     const val TEST_JUNIT = "org.jetbrains.kotlin:kotlin-test-junit:$VERSION"
 
-    const val COROUTINE_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$VERSION"
-    const val COROUTINE_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
-    const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$VERSION"
-
-    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+    const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
+    const val SERIALIZATION = "org.jetbrains.kotlin:kotlin-serialization:$VERSION"
   }
 
   fun DependencyHandlerScope.implementationKotlin() {
     implementation(Kotlin.STD_LIB)
     implementation(Kotlin.TEST_JUNIT)
-    implementation(Kotlin.COROUTINE_ANDROID)
-    implementation(Kotlin.COROUTINE_CORE)
-    implementation(Kotlin.COROUTINE_TEST)
-    implementation(Kotlin.SERIALIZATION)
   }
 
   object Google {
@@ -84,7 +91,7 @@ object Dependencies {
   }
 
   object Compose {
-    private const val VERSION = "1.0.5"
+    const val VERSION = "1.1.0-rc03"
 
     const val UI = "androidx.compose.ui:ui:$VERSION"
     const val PREVIEW = "androidx.compose.ui:ui-tooling-preview:$VERSION"
@@ -182,6 +189,8 @@ object Dependencies {
     const val LOCAL_TESTING_COMPILER = "com.google.dagger:hilt-compiler:$VERSION"
 
     const val LINT_AAR = "com.google.dagger:dagger-lint-aar:2.40.5"
+
+    const val ANDROID_GRADLE_PLUGIN = "com.google.dagger:hilt-android-gradle-plugin:$VERSION"
   }
 
   fun DependencyHandlerScope.implementationHilt() {

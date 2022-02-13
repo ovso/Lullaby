@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.lullaby.LullabyApplication
 import io.github.ovso.lullaby.exts.showOpeningAds
 import io.github.ovso.lullaby.service.LullabyService
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
