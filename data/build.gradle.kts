@@ -1,5 +1,6 @@
 import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
+import Dependencies.implementationKotlinX
 import Dependencies.implementationTest
 
 plugins {
@@ -41,6 +42,7 @@ dependencies {
   implementation(Dependencies.AndroidX.APPCOMPAT)
   implementation(Dependencies.Google.MATERIAL)
   implementationKotlin()
+  implementationKotlinX()
   implementationHilt()
   implementationTest()
 }
