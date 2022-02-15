@@ -60,8 +60,6 @@ object Dependencies {
   object AndroidX {
     const val CORE = "androidx.core:core-ktx:1.7.0"
     const val APPCOMPAT = "androidx.appcompat:appcompat:1.4.0"
-    const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:1.4.0"
-    const val NAVIGATION_COMPOSE = "androidx.navigation:navigation-compose:2.4.0-rc01"
     const val WINDOW = "androidx.window:window:1.0.0-rc01"
     const val TEST_EXT_JUNIT = "androidx.test.ext:junit:1.1.3"
     const val TEST_ESPRESSO_CORE = "androidx.test.espresso:espresso-core:3.4.0"
@@ -70,8 +68,6 @@ object Dependencies {
   fun DependencyHandlerScope.implementationAndroidX() {
     implementation(AndroidX.APPCOMPAT)
     implementation(AndroidX.CORE)
-    implementation(AndroidX.ACTIVITY_COMPOSE)
-    implementation(AndroidX.NAVIGATION_COMPOSE)
     implementation(AndroidX.WINDOW)
     androidTestImplementation(AndroidX.TEST_EXT_JUNIT)
     androidTestImplementation(AndroidX.TEST_ESPRESSO_CORE)
@@ -91,7 +87,7 @@ object Dependencies {
   }
 
   object Compose {
-    const val VERSION = "1.1.0-rc03"
+    const val VERSION = "1.1.0"
 
     const val UI = "androidx.compose.ui:ui:$VERSION"
     const val PREVIEW = "androidx.compose.ui:ui-tooling-preview:$VERSION"
@@ -99,9 +95,16 @@ object Dependencies {
     const val MATERIAL_ICONS = "androidx.compose.material:material-icons-extended:$VERSION"
     const val UI_TEST_JUNIT4 = "androidx.compose.ui:ui-test-junit4:$VERSION"
     const val UI_TOOLING = "androidx.compose.ui:ui-tooling:$VERSION"
+
+    const val ACTIVITY = "androidx.activity:activity-compose:1.4.0"
+    const val NAVIGATION = "androidx.navigation:navigation-compose:2.4.1"
+    const val VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
   }
 
   fun DependencyHandlerScope.implementationCompose() {
+    implementation(Compose.ACTIVITY)
+    implementation(Compose.NAVIGATION)
+    implementation(Compose.VIEWMODEL)
     implementation(Compose.UI)
     implementation(Compose.PREVIEW)
     implementation(Compose.MATERIAL)
