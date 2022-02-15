@@ -1,6 +1,7 @@
 package io.github.ovso.data.di
 
 import android.content.Context
+import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -10,6 +11,7 @@ import io.github.ovso.data.lullaby.ResProvider
 import io.github.ovso.data.lullaby.ResProviderImpl
 import javax.inject.Singleton
 
+@Module
 @InstallIn(SingletonComponent::class)
 object DataModule {
 
