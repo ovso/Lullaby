@@ -1,27 +1,44 @@
 package io.github.ovso.data.lullaby
 
-import io.github.ovso.domain.LullabyItem
-import io.github.ovso.domain.LullabySection
+import io.github.ovso.domain.Lullaby
 import io.github.ovso.domain.repository.LullabyRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LullabyRepositoryImpl(
+class LullabyRepositoryImpl @Inject constructor(
   private val mapper: LullabyMapper,
   private val resProvider: ResProvider,
 ) : LullabyRepository {
-  override suspend fun getLullabies(): List<LullabySection> {
-    return withContext(Dispatchers.Default) {
 
-      emptyList()
+  private val selected = MutableStateFlow(setOf<Lullaby>())
+
+  // Used to make suspend functions that read and update state safe to call from any thread
+  private val mutex = Mutex()
+
+
+  override suspend fun getLullabies(): List<Lullaby> {
+    return withContext(Dispatchers.Default) {
+      resProvider.getLullabies("lullabies", "data.json")
     }
   }
 
-  override suspend fun toggleSelection(model: LullabyItem) {
-    TODO("Not yet implemented")
-  }
+  override suspend fun toggleSelection(model: Lullaby) =
+    withContext(Dispatchers.Default) {
+      mutex.withLock {
+        val set = selected.value.toMutableSet().apply {
+          removeAll {
+            model != it
+          }
+        }
+        set.addOrRemove(model)
+        selected.value = set
+      }
+    }
 
-  override fun observeSelected(): Set<LullabyItem> {
-    TODO("Not yet implemented")
-  }
+  override fun observeSelected(): Flow<Set<Lullaby>> = selected
 }

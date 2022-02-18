@@ -9,4 +9,5 @@ java {
 }
 
 dependencies {
+  implementation(Dependencies.KotlinX.COROUTINE_CORE)
 }

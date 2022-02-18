@@ -1,7 +1,8 @@
 package io.github.ovso.data.lullaby
 
 import android.content.Context
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.ovso.domain.Lullaby
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.BufferedReader
@@ -12,20 +13,20 @@ interface ResProvider {
   suspend fun getLullabies(
     path: String,
     name: String
-  ): List<LullabySectionResponse>
+  ): List<Lullaby>
 }
 
 class ResProviderImpl @Inject constructor(
-  @ActivityContext private val context: Context,
+  @ApplicationContext private val context: Context,
 ) : ResProvider {
   override suspend fun getLullabies(
     path: String,
     name: String,
-  ): List<LullabySectionResponse> {
+  ): List<Lullaby> {
     return try {
       val inputStream = context.assets.open("$path/$name")
       val use = inputStream.bufferedReader().use(BufferedReader::readText)
-      Json.decodeFromString<Response>(use).lullabies
+      Json.decodeFromString<Response>(use).items
     } catch (e: IOException) {
       emptyList()
     }

@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
+import io.github.ovso.domain.Lullaby
 import io.github.ovso.lullaby.R
-import io.github.ovso.lullaby.data.LullabyModel
 import kotlin.math.max
 
 class HomeContent(val content: @Composable () -> Unit)
@@ -68,11 +68,8 @@ fun HomeScreen(
 fun rememberHomeContent(
   homeViewModel: HomeViewModel,
 ): HomeContent {
-  // UiState of the InterestsScreen
   val uiState by homeViewModel.uiState.collectAsState()
 
-  // Describe the screen sections here since each section needs 2 states and 1 event.
-  // Pass them to the stateless InterestsScreen using a tabContent.
   val homeContent = HomeContent {
     val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
     Items(
@@ -107,15 +104,15 @@ private val homeContainerModifier = Modifier
 
 @Composable
 private fun Items(
-  items: List<LullabyModel>,
-  selectedLullabies: Set<LullabyModel>,
-  onLullabySelect: (LullabyModel) -> Unit,
+  items: List<Lullaby>,
+  selectedLullabies: Set<Lullaby>,
+  onLullabySelect: (Lullaby) -> Unit,
 ) {
   Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
     HomeAdaptiveContentLayout {
       items.forEach { item ->
         LullabyItem(
-          title = item.title,
+          title = item.name,
           selected = selectedLullabies.contains(item),
           onToggle = {
             onLullabySelect(item)

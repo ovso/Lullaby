@@ -1,10 +1,10 @@
 package io.github.ovso.domain.repository
 
-import io.github.ovso.domain.LullabyItem
-import io.github.ovso.domain.LullabySection
+import io.github.ovso.domain.Lullaby
+import kotlinx.coroutines.flow.Flow
 
 interface LullabyRepository {
-  suspend fun getLullabies(): List<LullabySection>
-  suspend fun toggleSelection(model: LullabyItem)
-  fun observeSelected(): Set<LullabyItem>
+  suspend fun getLullabies(): List<Lullaby>
+  suspend fun toggleSelection(model: Lullaby)
+  fun observeSelected(): Flow<Set<Lullaby>>
 }

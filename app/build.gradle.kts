@@ -7,6 +7,7 @@ import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
 import Dependencies.implementationKotlinX
 import Dependencies.implementationLifecycle
+import Dependencies.implementationLogger
 import Dependencies.implementationTest
 
 import org.jetbrains.kotlin.konan.properties.Properties
@@ -131,5 +132,6 @@ dependencies {
   implementationKotlinX()
   implementationHilt()
   implementationAds()
+  implementationLogger()
   implementationTest()
 }

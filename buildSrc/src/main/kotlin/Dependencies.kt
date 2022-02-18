@@ -22,7 +22,8 @@ object Dependencies {
 
   object KotlinX {
     const val COROUTINE_VERSION = "1.6.0"
-    const val COROUTINE_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION"
+    const val COROUTINE_ANDROID =
+      "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION"
     const val COROUTINE_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$COROUTINE_VERSION"
     const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE_VERSION"
 
@@ -35,6 +36,7 @@ object Dependencies {
     implementation(KotlinX.COROUTINE_TEST)
     implementation(KotlinX.SERIALIZATION)
   }
+
   object Kotlin {
     private const val VERSION = "1.6.10"
     const val STD_LIB = "org.jetbrains.kotlin:kotlin-stdlib:$VERSION"
@@ -219,4 +221,11 @@ object Dependencies {
     implementation("com.google.android.gms:play-services-ads:20.5.0")
   }
 
+  object Logger {
+    const val LOGGER = "com.orhanobut:logger:2.2.0"
+  }
+
+  fun DependencyHandlerScope.implementationLogger() {
+    implementation(Logger.LOGGER)
+  }
 }
