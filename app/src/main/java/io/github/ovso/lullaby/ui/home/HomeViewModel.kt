@@ -19,7 +19,6 @@ class HomeViewModel(
   private val lullabyRepository: LullabyRepository
 ) : ViewModel() {
 
-  // UI state exposed to the UI
   private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
   val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
