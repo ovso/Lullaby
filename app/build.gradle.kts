@@ -82,18 +82,6 @@ android {
     }
   }
 
-  val countryDimension = "country"
-  flavorDimensions.add(countryDimension)
-  productFlavors {
-    create("en") {
-      dimension = countryDimension
-    }
-    create("ko") {
-      dimension = countryDimension
-      applicationIdSuffix = ".ko"
-    }
-  }
-
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
