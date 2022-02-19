@@ -7,6 +7,7 @@ plugins {
   id("com.android.library")
   kotlin("android")
   kotlin("kapt")
+  id("kotlinx-serialization")
 }
 
 android {
