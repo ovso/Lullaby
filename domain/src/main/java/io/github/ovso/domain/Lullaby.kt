@@ -1,6 +1,10 @@
 package io.github.ovso.domain
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Lullaby(
-  val name:String,
-  val id:String
+  val title:String,
+  val resName:String,
+  val author:String? = null,
 )

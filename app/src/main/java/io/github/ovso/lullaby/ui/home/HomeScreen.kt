@@ -112,7 +112,7 @@ private fun Items(
     HomeAdaptiveContentLayout {
       items.forEach { item ->
         LullabyItem(
-          title = item.name,
+          title = item.title,
           selected = selectedLullabies.contains(item),
           onToggle = {
             onLullabySelect(item)

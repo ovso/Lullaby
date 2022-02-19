@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Response(
-    val items: List<Lullaby>,
+  val items: List<Lullaby>,
 )
 
 @Serializable
@@ -16,6 +16,6 @@ data class LullabyItemResponse(
 
 @Serializable
 data class LullabySectionResponse(
-  val section:String?,
+  val section: String?,
   val items: List<LullabyItemResponse>,
 )

@@ -40,7 +40,7 @@ fun LullabyApp(
       if (selectedLullabies.isNotEmpty()) {
         context.also {
           val intent = Intent(context, LullabyService::class.java).apply {
-            putExtra(ARGS, selectedLullabies.first().name)
+            putExtra(ARGS, selectedLullabies.first().title)
           }
           it.stopService(intent)
           it.startForegroundService(intent)
