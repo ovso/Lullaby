@@ -3,7 +3,7 @@ package io.github.ovso.lullaby.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.LullabyEntity
 import io.github.ovso.domain.usecase.LullabyUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class LullabiesUiState(
-  val lullabies: List<Lullaby> = emptyList(),
+  val lullabies: List<LullabyEntity> = emptyList(),
   val loading: Boolean = false,
 )
 
@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
   private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
   val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
-  val selectedLullaby: StateFlow<Set<Lullaby>> =
+  val selectedLullaby: StateFlow<Set<LullabyEntity>> =
     useCase.observeSelected().stateIn(
       scope = viewModelScope,
       started = SharingStarted.WhileSubscribed(5000),
@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
     refreshAll()
   }
 
-  fun toggleSelection(model: Lullaby) {
+  fun toggleSelection(model: LullabyEntity) {
     viewModelScope.launch {
       useCase.toggleSelection(model)
     }

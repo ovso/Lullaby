@@ -1,6 +1,6 @@
 package io.github.ovso.data.lullaby
 
-import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.LullabyEntity
 import io.github.ovso.domain.repository.LullabyRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,23 +11,22 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LullabyRepositoryImpl @Inject constructor(
-  private val mapper: LullabyMapper,
   private val resProvider: ResProvider,
 ) : LullabyRepository {
 
-  private val selected = MutableStateFlow(setOf<Lullaby>())
+  private val selected = MutableStateFlow(setOf<LullabyEntity>())
 
   // Used to make suspend functions that read and update state safe to call from any thread
   private val mutex = Mutex()
 
 
-  override suspend fun getLullabies(): List<Lullaby> {
+  override suspend fun getLullabies(): List<LullabyEntity> {
     return withContext(Dispatchers.Default) {
       resProvider.getLullabies("lullabies", "data.json")
     }
   }
 
-  override suspend fun toggleSelection(model: Lullaby) =
+  override suspend fun toggleSelection(model: LullabyEntity) =
     withContext(Dispatchers.Default) {
       mutex.withLock {
         val set = selected.value.toMutableSet().apply {
@@ -40,5 +39,5 @@ class LullabyRepositoryImpl @Inject constructor(
       }
     }
 
-  override fun observeSelected(): Flow<Set<Lullaby>> = selected
+  override fun observeSelected(): Flow<Set<LullabyEntity>> = selected
 }

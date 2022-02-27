@@ -1,11 +1,11 @@
 package io.github.ovso.data.lullaby
 
-import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.LullabyEntity
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Response(
-  val items: List<Lullaby>,
+  val items: List<LullabyEntity>,
 )
 
 @Serializable
