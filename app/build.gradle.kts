@@ -7,6 +7,7 @@ import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
 import Dependencies.implementationKotlinX
 import Dependencies.implementationLifecycle
+import Dependencies.implementationLogger
 import Dependencies.implementationTest
 
 import org.jetbrains.kotlin.konan.properties.Properties
@@ -81,18 +82,6 @@ android {
     }
   }
 
-  val countryDimension = "country"
-  flavorDimensions.add(countryDimension)
-  productFlavors {
-    create("en") {
-      dimension = countryDimension
-    }
-    create("ko") {
-      dimension = countryDimension
-      applicationIdSuffix = ".ko"
-    }
-  }
-
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
@@ -131,5 +120,6 @@ dependencies {
   implementationKotlinX()
   implementationHilt()
   implementationAds()
+  implementationLogger()
   implementationTest()
 }

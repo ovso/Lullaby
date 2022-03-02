@@ -1,6 +1,7 @@
 plugins {
   id("java-library")
   id("kotlin")
+  id("kotlinx-serialization")
 }
 
 java {
@@ -9,4 +10,6 @@ java {
 }
 
 dependencies {
+  implementation(Dependencies.KotlinX.COROUTINE_CORE)
+  implementation(Dependencies.KotlinX.SERIALIZATION_JSON)
 }

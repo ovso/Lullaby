@@ -1,29 +1,30 @@
 package io.github.ovso.lullaby.ui.home
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import io.github.ovso.lullaby.data.LullabyModel
-import io.github.ovso.lullaby.data.lullaby.LullabyRepository
-import io.github.ovso.lullaby.data.successOr
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.ovso.domain.LullabyEntity
+import io.github.ovso.domain.usecase.LullabyUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class LullabiesUiState(
-  val lullabies: List<LullabyModel> = emptyList(),
+  val lullabies: List<LullabyEntity> = emptyList(),
   val loading: Boolean = false,
 )
 
-class HomeViewModel(
-  private val lullabyRepository: LullabyRepository
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+  private val useCase: LullabyUseCase
 ) : ViewModel() {
 
   private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
   val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
-  val selectedLullaby: StateFlow<Set<LullabyModel>> =
-    lullabyRepository.observeSelected().stateIn(
+  val selectedLullaby: StateFlow<Set<LullabyEntity>> =
+    useCase.observeSelected().stateIn(
       scope = viewModelScope,
       started = SharingStarted.WhileSubscribed(5000),
       initialValue = emptySet()
@@ -33,9 +34,9 @@ class HomeViewModel(
     refreshAll()
   }
 
-  fun toggleSelection(model: LullabyModel) {
+  fun toggleSelection(model: LullabyEntity) {
     viewModelScope.launch {
-      lullabyRepository.toggleSelection(model)
+      useCase.toggleSelection(model)
     }
   }
 
@@ -44,10 +45,10 @@ class HomeViewModel(
 
     viewModelScope.launch {
       // Trigger repository requests in parallel
-      val lullabiesDeferred = async { lullabyRepository.getLullabies() }
+      val lullabiesDeferred = async { useCase.getLullabies() }
 
       // Wait for all requests to finish
-      val lullabies = lullabiesDeferred.await().successOr(emptyList())
+      val lullabies = lullabiesDeferred.await()
       _uiState.update {
         it.copy(
           loading = false,
@@ -57,14 +58,4 @@ class HomeViewModel(
     }
   }
 
-  companion object {
-    fun provideFactory(
-      lullabyRepository: LullabyRepository,
-    ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-      @Suppress("UNCHECKED_CAST")
-      override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeViewModel(lullabyRepository) as T
-      }
-    }
-  }
 }

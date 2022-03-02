@@ -1,10 +1,11 @@
 package io.github.ovso.data.lullaby
 
+import io.github.ovso.domain.LullabyEntity
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Response(
-    val lullabies: List<LullabySectionResponse>,
+  val items: List<LullabyEntity>,
 )
 
 @Serializable
@@ -15,6 +16,6 @@ data class LullabyItemResponse(
 
 @Serializable
 data class LullabySectionResponse(
-  val section:String?,
+  val section: String?,
   val items: List<LullabyItemResponse>,
 )
