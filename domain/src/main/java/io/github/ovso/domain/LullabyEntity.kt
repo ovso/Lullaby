@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class LullabyEntity(
   val title:String,
   val resName:String,
-  val author:String? = null,
+  val author:String,
 )

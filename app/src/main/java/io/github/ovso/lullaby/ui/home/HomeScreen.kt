@@ -104,15 +104,16 @@ private val homeContainerModifier = Modifier
 
 @Composable
 private fun Items(
-    items: List<LullabyEntity>,
-    selectedLullabies: Set<LullabyEntity>,
-    onLullabySelect: (LullabyEntity) -> Unit,
+  items: List<LullabyEntity>,
+  selectedLullabies: Set<LullabyEntity>,
+  onLullabySelect: (LullabyEntity) -> Unit,
 ) {
   Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
     HomeAdaptiveContentLayout {
       items.forEach { item ->
         LullabyItem(
           title = item.title,
+          author = item.author,
           selected = selectedLullabies.contains(item),
           onToggle = {
             onLullabySelect(item)
@@ -126,6 +127,7 @@ private fun Items(
 @Composable
 private fun LullabyItem(
   title: String,
+  author: String,
   selected: Boolean,
   onToggle: (Boolean) -> Unit,
   modifier: Modifier = Modifier,
@@ -147,13 +149,18 @@ private fun LullabyItem(
           .size(52.dp)
           .padding(10.dp)
       )
-      Text(
-        text = title,
-        modifier = Modifier
-          .padding(16.dp)
-          .weight(1f), // Break line if the title is too long
-        style = MaterialTheme.typography.subtitle1
-      )
+      Column(modifier = Modifier.weight(1F)) {
+        Text(
+          text = title,
+          modifier = Modifier,
+          style = MaterialTheme.typography.subtitle1
+        )
+        Text(
+          text = "- ".plus(author).plus(" -"),
+          modifier = Modifier.padding(5.dp),
+          style = MaterialTheme.typography.subtitle2
+        )
+      }
       Spacer(Modifier.weight(0.01f))
       SelectButton(selected = selected)
     }
