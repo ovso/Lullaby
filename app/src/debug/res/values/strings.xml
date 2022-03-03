@@ -2,4 +2,5 @@
 <resources>
   <item name="ads_app_id" type="string">ca-app-pub-3940256099942544~3347511713</item>
   <item name="ads_unit_id_open" type="string">ca-app-pub-3940256099942544/3419835294</item>
+  <item name="ads_unit_id_interstitial" type="string">ca-app-pub-3940256099942544/1033173712</item>
 </resources>

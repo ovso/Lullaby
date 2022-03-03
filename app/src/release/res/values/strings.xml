@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <item name="ads_app_id" type="string">ca-app-pub-8679189423397017~8106082542</item>
+  <item name="ads_app_id" type="string">ca-app-pub-8679189423397017~4163063561</item>
   <item name="ads_unit_id_open" type="string">ca-app-pub-8679189423397017/1367421987</item>
+  <item name="ads_unit_id_interstitial" type="string">ca-app-pub-8679189423397017/7482197753</item>
 </resources>
