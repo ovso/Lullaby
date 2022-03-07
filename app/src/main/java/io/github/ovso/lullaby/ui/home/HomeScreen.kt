@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
 import io.github.ovso.domain.LullabyEntity
 import io.github.ovso.lullaby.R
+import io.github.ovso.lullaby.data.LullabyModel
 import kotlin.math.max
 
 class HomeContent(val content: @Composable () -> Unit)
@@ -104,9 +105,9 @@ private val homeContainerModifier = Modifier
 
 @Composable
 private fun Items(
-  items: List<LullabyEntity>,
-  selectedLullabies: Set<LullabyEntity>,
-  onLullabySelect: (LullabyEntity) -> Unit,
+  items: List<LullabyModel>,
+  selectedLullabies: Set<LullabyModel>,
+  onLullabySelect: (LullabyModel) -> Unit,
 ) {
   Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
     HomeAdaptiveContentLayout {
