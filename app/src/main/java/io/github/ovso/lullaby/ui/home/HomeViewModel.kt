@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.ovso.domain.usecase.LullabyUseCase
 import io.github.ovso.lullaby.data.LullabyModel
-import io.github.ovso.lullaby.data.toLullabyEntity
+import io.github.ovso.lullaby.data.toLullaby
 import io.github.ovso.lullaby.data.toLullabyModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor(
 
   fun toggleSelection(model: LullabyModel) {
     viewModelScope.launch {
-      useCase.toggleSelection(model.toLullabyEntity())
+      useCase.toggleSelection(model.toLullaby())
     }
   }
 

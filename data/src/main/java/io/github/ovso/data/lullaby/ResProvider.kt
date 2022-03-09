@@ -2,7 +2,9 @@ package io.github.ovso.data.lullaby
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.github.ovso.domain.LullabyEntity
+import io.github.ovso.domain.Lullaby
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.BufferedReader
@@ -13,7 +15,7 @@ interface ResProvider {
   suspend fun getLullabies(
     path: String,
     name: String
-  ): List<LullabyEntity>
+  ): List<Lullaby>
 }
 
 class ResProviderImpl @Inject constructor(
@@ -22,13 +24,16 @@ class ResProviderImpl @Inject constructor(
   override suspend fun getLullabies(
     path: String,
     name: String,
-  ): List<LullabyEntity> {
-    return try {
-      val inputStream = context.assets.open("$path/$name")
-      val use = inputStream.bufferedReader().use(BufferedReader::readText)
-      Json.decodeFromString<Response>(use).items
-    } catch (e: IOException) {
-      emptyList()
+  ): List<Lullaby> {
+    return withContext(Dispatchers.IO) {
+      try {
+        val inputStream = context.assets.open("$path/$name")
+        val use = inputStream.bufferedReader().use(BufferedReader::readText)
+        Json.decodeFromString<Response>(use).items.map { it.toLullaby() }
+      } catch (e: IOException) {
+        emptyList()
+      }
     }
   }
+
 }
