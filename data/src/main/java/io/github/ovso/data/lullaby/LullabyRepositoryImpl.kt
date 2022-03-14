@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LullabyRepositoryImpl @Inject constructor(
-  private val resProvider: ResProvider,
+  private val service: LullabyService,
 ) : LullabyRepository {
 
   private val selected = MutableStateFlow(setOf<Lullaby>())
@@ -22,7 +22,7 @@ class LullabyRepositoryImpl @Inject constructor(
 
   override suspend fun getLullabies(): List<Lullaby> {
     return withContext(Dispatchers.IO) {
-      resProvider.getLullabies("lullabies", "data.json")
+      service.get().items.map { it.toLullaby() }
     }
   }
 

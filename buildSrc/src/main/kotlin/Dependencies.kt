@@ -77,15 +77,20 @@ object Dependencies {
 
   object Retrofit2 {
     private const val VERSION = "2.9.0"
-    const val CORE = "com.squareup.retrofit2:retrofit:${VERSION}"
-    const val MOSHI = "com.squareup.retrofit2:converter-moshi:${VERSION}"
-    const val SCALARS = "com.squareup.retrofit2:converter-scalars:${VERSION}"
+    const val CORE = "com.squareup.retrofit2:retrofit:$VERSION"
+    const val MOSHI = "com.squareup.retrofit2:converter-moshi:$VERSION"
+    const val SCALARS = "com.squareup.retrofit2:converter-scalars:$VERSION"
+    const val CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:$VERSION"
+    const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.3"
+      //implementation("com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}")
   }
 
   fun DependencyHandlerScope.implementationRetrofit2() {
     implementation(Retrofit2.CORE)
-    implementation(Retrofit2.MOSHI)
-    implementation(Retrofit2.SCALARS)
+    implementation(Retrofit2.LOGGING_INTERCEPTOR)
+    implementation(Retrofit2.CONVERTER_GSON)
+//    implementation(Retrofit2.MOSHI)
+//    implementation(Retrofit2.SCALARS)
   }
 
   object Compose {

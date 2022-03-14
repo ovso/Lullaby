@@ -1,6 +1,7 @@
 import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
 import Dependencies.implementationKotlinX
+import Dependencies.implementationRetrofit2
 import Dependencies.implementationTest
 
 plugins {
@@ -45,5 +46,6 @@ dependencies {
   implementationKotlin()
   implementationKotlinX()
   implementationHilt()
+  implementationRetrofit2()
   implementationTest()
 }
