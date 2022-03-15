@@ -53,6 +53,7 @@ object Dependencies {
 
   object Google {
     const val MATERIAL = "com.google.android.material:material:1.4.0"
+    const val GOOGLE_SERVICES = "com.google.gms:google-services:4.3.10"
   }
 
   fun DependencyHandlerScope.implementationGoogle() {
@@ -82,7 +83,7 @@ object Dependencies {
     const val SCALARS = "com.squareup.retrofit2:converter-scalars:$VERSION"
     const val CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:$VERSION"
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.3"
-      //implementation("com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}")
+    //implementation("com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}")
   }
 
   fun DependencyHandlerScope.implementationRetrofit2() {
@@ -218,7 +219,7 @@ object Dependencies {
 
   fun DependencyHandlerScope.implementationAds() {
     // firebase
-    implementation(platform("com.google.firebase:firebase-bom:28.4.1"))
+    implementation(platform("com.google.firebase:firebase-bom:29.2.0"))
 //    implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-config-ktx")

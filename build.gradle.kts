@@ -9,6 +9,7 @@ buildscript {
     classpath(Dependencies.Kotlin.GRADLE_PLUGIN)
     classpath(Dependencies.Kotlin.SERIALIZATION)
     classpath(Dependencies.Hilt.ANDROID_GRADLE_PLUGIN)
+    classpath(Dependencies.Google.GOOGLE_SERVICES)
 
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files

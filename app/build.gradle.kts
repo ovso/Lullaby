@@ -20,6 +20,8 @@ plugins {
   id("kotlinx-serialization")
   id("kotlin-parcelize")
   id("dagger.hilt.android.plugin")
+  id("com.google.gms.google-services")
+  //apply plugin: 'com.google.gms.google-services'
 }
 
 val keystorePropertiesFile = rootProject.file("../jks/keystore.properties")
