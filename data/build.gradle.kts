@@ -1,3 +1,4 @@
+import Dependencies.implementationAds
 import Dependencies.implementationHilt
 import Dependencies.implementationKotlin
 import Dependencies.implementationKotlinX
@@ -47,5 +48,6 @@ dependencies {
   implementationKotlinX()
   implementationHilt()
   implementationRetrofit2()
+  implementationAds()
   implementationTest()
 }

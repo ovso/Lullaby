@@ -39,7 +39,7 @@ fun LullabyApp(
       val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
       if (selectedLullabies.isNotEmpty()) {
         Intent(context, LullabyService::class.java).apply {
-          putExtra(ARGS, selectedLullabies.first().resName)
+          putExtra(ARGS, selectedLullabies.first().url)
         }.also {
           context.stopService(it)
           context.startForegroundService(it)

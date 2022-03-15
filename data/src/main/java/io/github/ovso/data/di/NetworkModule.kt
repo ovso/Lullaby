@@ -1,5 +1,10 @@
 package io.github.ovso.data.di
 
+import android.util.Log
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,5 +52,16 @@ object NetworkModule {
   @Provides
   fun providesLullabyService(retrofit: Retrofit): LullabyService {
     return retrofit.create()
+  }
+
+  @Provides
+  fun providesRemoteConfig(): FirebaseRemoteConfig {
+    return Firebase.remoteConfig.apply {
+      val configSettings = remoteConfigSettings {
+        minimumFetchIntervalInSeconds = 0
+      }
+      setConfigSettingsAsync(configSettings)
+      setDefaultsAsync(mapOf("lullaby" to "empty"))
+    }
   }
 }

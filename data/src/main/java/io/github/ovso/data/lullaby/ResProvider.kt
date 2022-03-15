@@ -29,7 +29,7 @@ class ResProviderImpl @Inject constructor(
       try {
         val inputStream = context.assets.open("$path/$name")
         val use = inputStream.bufferedReader().use(BufferedReader::readText)
-        Json.decodeFromString<Response>(use).items.map { it.toLullaby() }
+        Json.decodeFromString<List<LullabyResponse>>(use).map { it.toLullaby() }
       } catch (e: IOException) {
         emptyList()
       }

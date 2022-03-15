@@ -1,5 +1,8 @@
 package io.github.ovso.data.lullaby
 
+import android.util.Log
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
 import io.github.ovso.domain.Lullaby
 import io.github.ovso.domain.repository.LullabyRepository
 import kotlinx.coroutines.Dispatchers
@@ -8,10 +11,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class LullabyRepositoryImpl @Inject constructor(
-  private val service: LullabyService,
+  private val remoteConfig: FirebaseRemoteConfig,
 ) : LullabyRepository {
 
   private val selected = MutableStateFlow(setOf<Lullaby>())
@@ -22,8 +29,24 @@ class LullabyRepositoryImpl @Inject constructor(
 
   override suspend fun getLullabies(): List<Lullaby> {
     return withContext(Dispatchers.IO) {
-      service.get().items.map { it.toLullaby() }
+      fetchItems()
     }
+  }
+
+  private val json = Json { ignoreUnknownKeys = true }
+
+  private suspend fun fetchItems() = suspendCoroutine<List<Lullaby>> { continuation ->
+    remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
+      when (task.isSuccessful) {
+        true -> {
+          val jsonString = remoteConfig["lullaby"].asString(); Log.d("OJH", "jsonString: $jsonString")
+          json.decodeFromString<List<LullabyResponse>>(jsonString)
+            .map { it.toLullaby() }.also { continuation.resume(it) }
+        }
+        else -> continuation.resume(emptyList())
+      }
+    }
+
   }
 
   override suspend fun toggleSelection(item: Lullaby) =

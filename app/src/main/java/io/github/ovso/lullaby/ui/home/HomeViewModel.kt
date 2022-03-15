@@ -2,11 +2,19 @@ package io.github.ovso.lullaby.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.ovso.domain.usecase.LullabyUseCase
+import io.github.ovso.lullaby.R
 import io.github.ovso.lullaby.data.LullabyModel
 import io.github.ovso.lullaby.data.toLullaby
 import io.github.ovso.lullaby.data.toLullabyModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -47,7 +55,7 @@ class HomeViewModel @Inject constructor(
   private fun refreshAll() {
     _uiState.update { it.copy(loading = true) }
 
-    viewModelScope.launch {
+    viewModelScope.launch(Dispatchers.Default) {
       // Trigger repository requests in parallel
       val lullabiesDeferred = async {
         useCase.getLullabies()
