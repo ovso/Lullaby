@@ -17,13 +17,17 @@ import javax.inject.Singleton
 object NetworkModule {
 
   @Provides
-  fun providesRetrofit(client: OkHttpClient): Retrofit {
+  fun providesRetrofit(client: OkHttpClient, baseUrl: String): Retrofit {
     return Retrofit.Builder().apply {
-      baseUrl("https://blogattach.naver.com/0d9811a2b8efe93519fb99ad95750873df847e9a77/20220314_264_blogfile/ovso_1647262504720_rwobRr_json/")
+      baseUrl(baseUrl)
       client(client)
       addConverterFactory(GsonConverterFactory.create())
     }.build()
   }
+
+  @Provides
+  fun providesBaseUrl() =
+    "https://blogattach.naver.com/5bce47f7e5b9bf634fadcffbc3215e2388d32dcca6/20220315_281_blogfile/ovso_1647271814804_5V3fR3_json/"
 
   @Provides
   fun providesOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
