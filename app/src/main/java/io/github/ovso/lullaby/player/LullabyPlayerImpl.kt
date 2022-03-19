@@ -3,7 +3,6 @@ package io.github.ovso.lullaby.player
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.PowerManager
-import androidx.core.net.toUri
 
 interface LullabyPlayer {
   fun play(resName: String)
@@ -15,8 +14,9 @@ class LullabyPlayerImpl(
   private val context: Context,
 ) : LullabyPlayer {
   private var player: MediaPlayer? = null
-  override fun play(url: String) {
-    player = MediaPlayer.create(context, url.toUri()).apply {
+  override fun play(resName: String) {
+    val resId = context.resources.getIdentifier(resName, "raw", context.packageName)
+    player = MediaPlayer.create(context, resId).apply {
       isLooping = true
       setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
     }

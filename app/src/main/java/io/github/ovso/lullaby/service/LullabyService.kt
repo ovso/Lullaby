@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import io.github.ovso.lullaby.R
+import io.github.ovso.lullaby.player.LullabyPlayer
 import io.github.ovso.lullaby.player.LullabyPlayerImpl
 import io.github.ovso.lullaby.utils.ARGS
 
@@ -16,7 +17,7 @@ const val NOTIFICATION_ID = 10
 const val CHANNEL_ID = "primary_notification_channel"
 
 class LullabyService : Service() {
-  private val mediaPlayer by lazy { LullabyPlayerImpl(applicationContext) }
+  private val mediaPlayer:LullabyPlayer by lazy { LullabyPlayerImpl(applicationContext) }
 
   override fun onCreate() {
     super.onCreate()

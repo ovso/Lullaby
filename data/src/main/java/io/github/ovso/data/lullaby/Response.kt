@@ -10,6 +10,6 @@ data class Response(
 @Serializable
 data class LullabyResponse(
   val title:String,
-  val url:String,
+  val url:String?,
   val author:String,
 )
