@@ -3,7 +3,6 @@ package io.github.ovso.lullaby.player
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.PowerManager
-import androidx.core.net.toUri
 
 interface LullabyPlayer {
   fun play(url: String)
