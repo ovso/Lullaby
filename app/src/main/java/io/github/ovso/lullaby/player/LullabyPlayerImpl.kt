@@ -14,19 +14,31 @@ interface LullabyPlayer {
 
 class LullabyPlayerImpl(
   private val context: Context,
-) : LullabyPlayer {
+) : LullabyPlayer, MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener {
   private var player: MediaPlayer? = null
   override fun play(url: String) {
-    player = MediaPlayer.create(context, url.toUri()).apply {
+    player = MediaPlayer().apply {
       isLooping = true
       setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
+      setDataSource(url)
+      setOnPreparedListener(this@LullabyPlayerImpl)
+      setOnErrorListener(this@LullabyPlayerImpl)
+      prepareAsync()
     }
-    player?.start()
   }
 
   override fun stop() {
     player?.stop()
     player?.release()
     player = null
+  }
+
+  override fun onPrepared(mp: MediaPlayer) {
+    mp.start()
+  }
+
+  override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
+    stop()
+    return true
   }
 }
