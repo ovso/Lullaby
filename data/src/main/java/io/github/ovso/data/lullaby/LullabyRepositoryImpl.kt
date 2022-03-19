@@ -39,7 +39,7 @@ class LullabyRepositoryImpl @Inject constructor(
     remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
       when (task.isSuccessful) {
         true -> {
-          val jsonString = remoteConfig["lullaby"].asString(); Log.d("OJH", "jsonString: $jsonString")
+          val jsonString = remoteConfig["lullaby2"].asString();
           json.decodeFromString<List<LullabyResponse>>(jsonString)
             .map { it.toLullaby() }.also { continuation.resume(it) }
         }
