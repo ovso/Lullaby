@@ -28,8 +28,8 @@ class LullabyService : Service() {
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    val resName = intent?.getStringExtra(ARGS) ?: mediaPlayer.getDefaultResName()
-    mediaPlayer.play(resName)
+    val url = intent?.getStringExtra(ARGS) ?: mediaPlayer.getDefaultUrl()
+    mediaPlayer.play(url)
     return super.onStartCommand(intent, flags, startId)
   }
 
