@@ -8,8 +8,8 @@ object Dependencies {
   const val COMPILE_SDK = 31
   const val MIN_SDK = 26
   const val TARGET_SDK = 31
-  const val VERSION_CODE = 5
-  const val VERSION_NAME = "1.0.4"
+  const val VERSION_CODE = 6
+  const val VERSION_NAME = "1.0.5"
 
   private const val implementation = "implementation"
   private const val testImplementation = "testImplementation"
