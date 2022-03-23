@@ -1,6 +1,5 @@
 package io.github.ovso.data.lullaby
 
-import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.get
 import io.github.ovso.domain.Lullaby
@@ -39,7 +38,7 @@ class LullabyRepositoryImpl @Inject constructor(
     remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
       when (task.isSuccessful) {
         true -> {
-          val jsonString = remoteConfig["lullaby2"].asString();
+          val jsonString = remoteConfig["lullaby2"].asString()
           json.decodeFromString<List<LullabyResponse>>(jsonString)
             .map { it.toLullaby() }.also { continuation.resume(it) }
         }
