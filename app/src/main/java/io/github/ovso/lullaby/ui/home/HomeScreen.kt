@@ -31,8 +31,11 @@ import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
+import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.Result
 import io.github.ovso.lullaby.R
 import io.github.ovso.lullaby.data.LullabyModel
+import io.github.ovso.lullaby.data.toLullabyModel
 import kotlin.math.max
 
 class HomeContent(val content: @Composable () -> Unit)
@@ -73,7 +76,7 @@ fun rememberHomeContent(
   val homeContent = HomeContent {
     val selectedLullabies by homeViewModel.selectedLullaby.collectAsState()
     Items(
-      items = uiState.lullabies,
+      result = uiState.result,
       selectedLullabies = selectedLullabies,
       onLullabySelect = { homeViewModel.toggleSelection(it) },
     )
@@ -104,21 +107,31 @@ private val homeContainerModifier = Modifier
 
 @Composable
 private fun Items(
-  items: List<LullabyModel>,
+  result: Result<List<Lullaby>>,
   selectedLullabies: Set<LullabyModel>,
   onLullabySelect: (LullabyModel) -> Unit,
 ) {
   Column(homeContainerModifier.verticalScroll(rememberScrollState())) {
     HomeAdaptiveContentLayout {
-      items.forEach { item ->
-        LullabyItem(
-          title = item.title,
-          author = item.author,
-          selected = selectedLullabies.contains(item),
-          onToggle = {
-            onLullabySelect(item)
-          },
-        )
+      when (result) {
+        is Result.Error -> {
+
+        }
+        is Result.Loading -> {
+
+        }
+        is Result.Success -> {
+          result.data.forEach { item ->
+            LullabyItem(
+              title = item.title,
+              author = item.author,
+              selected = selectedLullabies.contains(item.toLullabyModel()),
+              onToggle = {
+                onLullabySelect(item.toLullabyModel())
+              },
+            )
+          }
+        }
       }
     }
   }

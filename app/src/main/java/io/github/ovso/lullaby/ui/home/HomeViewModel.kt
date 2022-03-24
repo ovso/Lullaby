@@ -2,15 +2,10 @@ package io.github.ovso.lullaby.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.ktx.get
-import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.Result
 import io.github.ovso.domain.usecase.LullabyUseCase
-import io.github.ovso.lullaby.R
 import io.github.ovso.lullaby.data.LullabyModel
 import io.github.ovso.lullaby.data.toLullaby
 import io.github.ovso.lullaby.data.toLullabyModel
@@ -21,8 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class LullabiesUiState(
-  val lullabies: List<LullabyModel> = emptyList(),
-  val loading: Boolean = false,
+  val result: Result<List<Lullaby>> = Result.Loading
 )
 
 @HiltViewModel
@@ -30,7 +24,7 @@ class HomeViewModel @Inject constructor(
   private val useCase: LullabyUseCase
 ) : ViewModel() {
 
-  private val _uiState = MutableStateFlow(LullabiesUiState(loading = true))
+  private val _uiState = MutableStateFlow(LullabiesUiState())
   val uiState: StateFlow<LullabiesUiState> = _uiState.asStateFlow()
 
   val selectedLullaby: StateFlow<Set<LullabyModel>> =
@@ -53,7 +47,7 @@ class HomeViewModel @Inject constructor(
   }
 
   private fun refreshAll() {
-    _uiState.update { it.copy(loading = true) }
+    _uiState.update { LullabiesUiState() }
 
     viewModelScope.launch(Dispatchers.Default) {
       // Trigger repository requests in parallel
@@ -65,10 +59,7 @@ class HomeViewModel @Inject constructor(
       val lullabies = lullabiesDeferred.await()
       _uiState.update {
         it.copy(
-          loading = false,
-          lullabies = lullabies.map { entity ->
-            entity.toLullabyModel()
-          },
+          result = lullabies
         )
       }
     }

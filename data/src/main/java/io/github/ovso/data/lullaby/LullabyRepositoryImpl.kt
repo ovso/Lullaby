@@ -3,6 +3,7 @@ package io.github.ovso.data.lullaby
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.get
 import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.Result
 import io.github.ovso.domain.repository.LullabyRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +27,7 @@ class LullabyRepositoryImpl @Inject constructor(
   private val mutex = Mutex()
 
 
-  override suspend fun getLullabies(): List<Lullaby> {
+  override suspend fun getLullabies(): Result<List<Lullaby>> {
     return withContext(Dispatchers.IO) {
       fetchItems()
     }
@@ -34,15 +35,15 @@ class LullabyRepositoryImpl @Inject constructor(
 
   private val json = Json { ignoreUnknownKeys = true }
 
-  private suspend fun fetchItems() = suspendCoroutine<List<Lullaby>> { continuation ->
+  private suspend fun fetchItems() = suspendCoroutine<Result<List<Lullaby>>> { continuation ->
     remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
       when (task.isSuccessful) {
         true -> {
           val jsonString = remoteConfig["lullaby2"].asString()
           json.decodeFromString<List<LullabyResponse>>(jsonString)
-            .map { it.toLullaby() }.also { continuation.resume(it) }
+            .map { it.toLullaby() }.also { continuation.resume(Result.Success(it)) }
         }
-        else -> continuation.resume(emptyList())
+        else -> continuation.resume(Result.Error(Exception("Empty list")))
       }
     }
 

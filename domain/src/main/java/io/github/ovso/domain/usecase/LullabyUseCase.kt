@@ -1,13 +1,14 @@
 package io.github.ovso.domain.usecase
 
 import io.github.ovso.domain.Lullaby
+import io.github.ovso.domain.Result
 import io.github.ovso.domain.repository.LullabyRepository
 import kotlinx.coroutines.flow.Flow
 
 class LullabyUseCase(
   private val repository: LullabyRepository
 ) {
-  suspend fun getLullabies(): List<Lullaby> {
+  suspend fun getLullabies(): Result<List<Lullaby>> {
     return repository.getLullabies()
   }
 
