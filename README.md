@@ -4,3 +4,5 @@
 - Clean Architecture
 - Compose
 - Flow
+- Kotlin
+- Coroutine
